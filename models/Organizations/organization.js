@@ -121,19 +121,21 @@ organizationSchema.statics.createProject = function (body, callback) {
     return callback(null, newProject);
   }
 
-  Organization.findById(body.creator, (err, organization) => {
-    if (err) return callback("organization_not_found");
+  Organization.findById(body.creator._id, (err, organization) => {
+    if (err || !organization) return callback("user_not_found");
+    if (organization) {
 
-    organization.projects_created.push(
-      {
-        name: newProject.name,
-        _id: newProject._id
-      }
-    );
-    organization.save();
-  })
+      const newProjectsArray = organization.projects_created.push({
+        name: body.project_name,
+        _id: body.project_id
+      });
 
-  return callback("project_couldn't_created");
+      Organization.updateOne(body.creator._id, {projects_created: newProjectsArray}, (err, organization) => {
+        if (err) return callback("update_failure");
+        return callback(null, organization);
+      })
+  }
+  });
 }
 
 organizationSchema.statics.editProject = function (body, callback) {

@@ -8,13 +8,17 @@ const profileGetController = require("../controllers/Volunteer/authVolunteer/pro
 
 const isVolunteerAuth = require("../middleware/isVolunteerLoggedIn");
 
+const projectJoinPostController = require("../controllers/Volunteer/project/join");
+const projectExitPostController = require("../controllers/Volunteer/project/exit");
+
+
 router.use(express.json());
 
 router.get(
   "/profile", 
   isVolunteerAuth,
   profileGetController
-)
+);
 
 router.post(
   "/register",
@@ -24,6 +28,18 @@ router.post(
 router.post(
   "/login",
   loginPostController
-)
+);
+
+router.post(
+  "/project/join",
+  isVolunteerAuth,
+  projectJoinPostController
+);
+
+router.post(
+  "/project/exit",
+  isVolunteerAuth,
+  projectExitPostController
+);
 
 module.exports = router;

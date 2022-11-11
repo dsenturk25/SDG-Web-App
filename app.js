@@ -12,8 +12,8 @@ const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
-const authVolunteerRouter = require("./Routes/authVolunteerRouter");
-const authOrganizationRouter = require("./Routes/authOrganizationRouter");
+const authVolunteerRouter = require("./Routes/volunteerRouter");
+const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
@@ -33,8 +33,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/authVolunteer", authVolunteerRouter);
-app.use("/authOrganization", authOrganizationRouter);
+app.use("/volunteer", authVolunteerRouter);
+app.use("/organization", authOrganizationRouter);
 app.use("/project", projectRouter);
 app.use("/admin", adminRouter);
 

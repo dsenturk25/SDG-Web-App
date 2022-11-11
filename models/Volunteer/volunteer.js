@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 const hashpassword = require("../../utils/hashPassword");
 const verifypassword = require("../../utils/verifyPassword");
+const Project = require("../Projects/project");
 
 const volunteerSchema = mongoose.Schema({
     name: {
@@ -36,7 +37,12 @@ const volunteerSchema = mongoose.Schema({
 
     projects: [
       project = {
-        type: mongoose.Schema.Types.ObjectId
+        name: {
+          type: String
+        },
+        _id: {
+          type: mongoose.Types.ObjectId
+        }
       }
     ],
 
@@ -95,6 +101,44 @@ volunteerSchema.statics.findVolunteerById = function (body, callback) {
     callback(null, volunteer);
   })
 
+}
+
+volunteerSchema.statics.joinProject = function (body, callback) {
+
+  
+  Volunteer.findById(body.volunteerId, (err, volunteer) => {
+    if (err || !volunteer) return callback("user_not_found");
+    if (volunteer) {
+
+      const newProjectsArray = volunteer.projects.push({
+        name: body.project_name,
+        _id: body.project_id
+      });
+
+      Volunteer.updateOne(body.volunteerId, {projects: newProjectsArray}, (err, volunteer) => {
+        if (err) return callback("update_failure");
+        return callback(null, volunteer);
+      })
+  }
+  });
+}
+
+volunteerSchema.statics.exitProject = function (body, callback) {
+  Volunteer.findById(body.volunteerId, (err, volunteer) => {
+    if (err) return callback("user_not_found");
+    if (volunteer) {
+
+      const newProjectsArray = volunteer.projects.filter(function(value) {
+        return value._id != body.project_id
+      })
+
+      Volunteer.updateOne(body.volunteer_id, {projects: newProjectsArray}, (err, volunteer) => {
+        if (err) return callback("update_failure");
+        return callback(null, volunteer);
+      })
+    }
+
+  });
 }
 
 volunteerSchema.pre('save', hashpassword);
