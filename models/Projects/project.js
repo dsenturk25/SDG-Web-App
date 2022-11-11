@@ -9,8 +9,14 @@ const projectsSchema = mongoose.Schema({
     trim: true
   },
 
-  creator: {
-    type: mongoose.Types.ObjectId
+  creator_id: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
+
+  creator_name: {
+    type: String,
+    required: true
   },
 
   sdg_goals: [
@@ -21,14 +27,41 @@ const projectsSchema = mongoose.Schema({
 
   photo: {
     type: Buffer,
-    required: true
   },
 
   attendants: [
     attendant = {
       type: mongoose.Types.ObjectId
     }
-  ]
+  ],
+
+  environment: {
+    type: String,
+    required: true,
+    enum: ["online", "face-to-face"]
+  },
+
+  link_to_online_environment: {
+   type: String,
+   trim: true 
+  },
+
+  address: {
+    type: String,
+    trim: true,
+  },
+
+  date: {
+    type: Object,
+    required:false,
+    default: {
+      day: "dd",
+      month: "mm",
+      year: "yy",
+      hour: "hh",
+      minute: "min"
+    }
+  }
 })
 
 const Project = mongoose.model("Projects", projectsSchema);

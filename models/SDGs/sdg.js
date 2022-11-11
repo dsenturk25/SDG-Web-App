@@ -15,7 +15,7 @@ const sdgSchema = mongoose.Schema({
 
   image: {
     type: Buffer,
-    required: true
+    required: false
   },
 
   projects: [

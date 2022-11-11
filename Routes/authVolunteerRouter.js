@@ -2,9 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
-const registerPostController = require("../controllers/authVolunteer/register/post");
-const loginPostController = require("../controllers/authVolunteer/login/post");
-const profileGetController = require("../controllers/authVolunteer/profile/get.js");
+const registerPostController = require("../controllers/Volunteer/authVolunteer/register/post");
+const loginPostController = require("../controllers/Volunteer/authVolunteer/login/post");
+const profileGetController = require("../controllers/Volunteer/authVolunteer/profile/get.js");
 
 const isVolunteerAuth = require("../middleware/isVolunteerLoggedIn");
 

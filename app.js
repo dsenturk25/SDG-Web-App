@@ -13,6 +13,9 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
 const authVolunteerRouter = require("./Routes/authVolunteerRouter");
+const authOrganizationRouter = require("./Routes/authOrganizationRouter");
+const projectRouter = require("./Routes/projectRouter");
+const adminRouter = require("./Routes/adminRouter");
 
 mongoose.connect("mongodb://localhost:27017/sdg-app-api", { useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -31,6 +34,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/authVolunteer", authVolunteerRouter);
+app.use("/authOrganization", authOrganizationRouter);
+app.use("/project", projectRouter);
+app.use("/admin", adminRouter);
 
 server.listen(PORT, () => {
   console.log("Server is listening on port", PORT);

@@ -1,8 +1,8 @@
 
 
 const mongoose = require("mongoose");
-const hashpassword = require("./functions/hashPassword");
-const verifypassword = require("./functions/verifyPassword");
+const hashpassword = require("../../utils/hashPassword");
+const verifypassword = require("../../utils/verifyPassword");
 
 const volunteerSchema = mongoose.Schema({
     name: {
@@ -26,7 +26,6 @@ const volunteerSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        minlength: 4,
     },
 
     school: {
@@ -49,19 +48,31 @@ const volunteerSchema = mongoose.Schema({
 
     birth_date: {
       type: Object,
-      required: true
+      required: true,
+      default: {
+        day: "dd",
+        month: "mm",
+        year: "yy"
+      }
     }
 
 })
 
 volunteerSchema.statics.createVolunteer = function(body, callback) {
-    const newVolunteer = new Volunteer(body);
-    if (newVolunteer) {
-      newVolunteer.save();
 
-      return callback(null, newVolunteer);
-    }
-    return callback("bad_request");
+  Volunteer.findOne({email: body.email}).then(volunteer => {
+    if (volunteer) return callback("email_not_unique", null);
+  });
+
+  const newVolunteer = new Volunteer(body);
+
+  if (newVolunteer) {
+
+    newVolunteer.save();
+    return callback(null, newVolunteer);
+  }
+
+  return callback("bad_request");
 }
 
 volunteerSchema.statics.loginVolunteer = function (body, callback) {

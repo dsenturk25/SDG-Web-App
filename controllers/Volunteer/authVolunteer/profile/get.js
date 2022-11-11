@@ -1,5 +1,5 @@
 
-const Volunteer = require("../../../models/Volunteer/volunteer");
+const Volunteer = require("../../../../models/Volunteer/volunteer");
 
 module.exports = (req, res) => {
   Volunteer.findVolunteerById(req.session.volunteer, (err, volunteer) => {
