@@ -8,8 +8,8 @@ const profileGetController = require("../controllers/Volunteer/authVolunteer/pro
 
 const isVolunteerAuth = require("../middleware/isVolunteerLoggedIn");
 
-const projectJoinPostController = require("../controllers/Volunteer/project/join");
-const projectExitPostController = require("../controllers/Volunteer/project/exit");
+const projectJoinPostController = require("../controllers/Volunteer/project/join/post");
+const projectExitPostController = require("../controllers/Volunteer/project/exit/post");
 
 
 router.use(express.json());

@@ -26,12 +26,7 @@ const organizationSchema = mongoose.Schema({
 
   projects_created: [
     project = {
-      name: {
-        type: String
-      },
-      _id: {
-        type: mongoose.Types.ObjectId,
-      }
+      type: mongoose.Types.ObjectId,
     }
   ],
 
@@ -118,22 +113,15 @@ organizationSchema.statics.createProject = function (body, callback) {
   
   if (newProject) {
     newProject.save();
-    return callback(null, newProject);
   }
 
-  Organization.findById(body.creator._id, (err, organization) => {
+  Organization.findById(body.creator_id, (err, organization) => {
     if (err || !organization) return callback("user_not_found");
     if (organization) {
 
-      const newProjectsArray = organization.projects_created.push({
-        name: body.project_name,
-        _id: body.project_id
-      });
-
-      Organization.updateOne(body.creator._id, {projects_created: newProjectsArray}, (err, organization) => {
-        if (err) return callback("update_failure");
-        return callback(null, organization);
-      })
+      organization.projects_created.push((newProject._id).toString());
+      organization.save();
+      return callback(null, organization);
   }
   });
 }
@@ -149,8 +137,40 @@ organizationSchema.statics.editProject = function (body, callback) {
 organizationSchema.statics.deleteProject = function (body, callback) {
   
   Project.findByIdAndDelete(body._id, (err, project) => {
+    if (err || !project) return callback("delete_failed");
+  })
+
+  Organization.findById(body.creator_id, (err, organization) => {
     if (err) return callback("delete_failed");
+
+    const resArray = organization.projects_created.filter((val) => {
+      return val != body._id
+    })
+
+    organization.projects_created = resArray;
+
+    organization.save();
+    return callback(null, organization);
+  })
+}
+
+organizationSchema.statics.findProjectById = function (body, callback) {
+  Organization.findById(body.organization_id, (err, organization) => {
+    if (err) return callback("organization_not_found");
+    const project = organization.projects_created.find((val) => {
+      return val == body.project_id
+    })
+
     return callback(null, project);
+  })
+}
+
+
+organizationSchema.statics.findAllProjects = function (body, callback) {
+  Organization.findById(body.organization_id, (err, organization) => {
+    if (err) return callback("organization_not_found");
+
+    return callback(null, organization.projects_created);
   })
 }
 

@@ -37,24 +37,17 @@ const volunteerSchema = mongoose.Schema({
 
     projects: [
       project = {
-        name: {
-          type: String
-        },
-        _id: {
-          type: mongoose.Types.ObjectId
-        }
+        type: mongoose.Types.ObjectId
       }
     ],
 
     gender: {
         type: String,
         trim: true,
-        required: true
     },
 
     birth_date: {
       type: Object,
-      required: true,
       default: {
         day: "dd",
         month: "mm",
@@ -105,36 +98,46 @@ volunteerSchema.statics.findVolunteerById = function (body, callback) {
 
 volunteerSchema.statics.joinProject = function (body, callback) {
 
-  
-  Volunteer.findById(body.volunteerId, (err, volunteer) => {
+  Volunteer.findById(body.volunteer_id, (err, volunteer) => {
     if (err || !volunteer) return callback("user_not_found");
     if (volunteer) {
 
-      const newProjectsArray = volunteer.projects.push({
-        name: body.project_name,
-        _id: body.project_id
-      });
+      volunteer.projects.push(body.project_id);
+      volunteer.save();
 
-      Volunteer.updateOne(body.volunteerId, {projects: newProjectsArray}, (err, volunteer) => {
-        if (err) return callback("update_failure");
-        return callback(null, volunteer);
+      Project.findById(body.project_id, (err, project) => {
+        if (err) return callback("project_not_found");
+        project.attendants.push((volunteer._id).toString());
+        project.save();
+        return callback(null, project);
       })
-  }
+    }
   });
+
 }
 
 volunteerSchema.statics.exitProject = function (body, callback) {
-  Volunteer.findById(body.volunteerId, (err, volunteer) => {
+  Volunteer.findById(body.volunteer_id, (err, volunteer) => {
     if (err) return callback("user_not_found");
     if (volunteer) {
 
-      const newProjectsArray = volunteer.projects.filter(function(value) {
-        return value._id != body.project_id
+      const newProjectsArray = volunteer.projects.filter((value) => {
+        return value != body.project_id
       })
 
-      Volunteer.updateOne(body.volunteer_id, {projects: newProjectsArray}, (err, volunteer) => {
-        if (err) return callback("update_failure");
-        return callback(null, volunteer);
+      volunteer.projects = newProjectsArray;
+      volunteer.save();
+
+
+      Project.findById(body.project_id, (err, project) => {
+        if (err) return callback("project_not_found");
+        const newAttendantsArray = project.attendants.filter((value) => {
+          return value != body.volunteer_id;
+        })
+
+        project.attendants = newAttendantsArray;
+        project.save();
+        return callback(null, project);
       })
     }
 
