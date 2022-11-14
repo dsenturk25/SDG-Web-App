@@ -1,5 +1,5 @@
 
-const Organization = require("../../../models/Organizations");
+const Organization = require("../../../models/Organizations/organization");
 
 module.exports = (req, res) => {
   Organization.findProjectById(req.body, (err, project) => {

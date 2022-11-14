@@ -6,6 +6,7 @@ const session = require("express-session");
 const dotenv = require("dotenv");
 const path = require("path");
 const bodyParser = require("body-parser");
+const favicon = require("serve-favicon");
 
 const app = express();
 
@@ -17,7 +18,15 @@ const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
-mongoose.connect("mongodb://localhost:27017/sdg-app-api", { useNewUrlParser: true, useUnifiedTopology: true});
+const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/sdg-app-api";
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true});
+
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
@@ -30,6 +39,12 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+app.use( bodyParser.json({limit: '50mb'}) );
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  extended: true,
+  parameterLimit:50000
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

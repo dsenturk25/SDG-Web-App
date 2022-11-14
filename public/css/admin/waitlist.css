@@ -1,0 +1,50 @@
+
+.all-inner-wrapper {
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  width: 100%;
+}
+
+.each-organization-info-section {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.each-organization-info {
+  margin-right: 50px;
+}
+
+.each-organization-wrapper {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  padding: 0 2%;
+  margin-bottom: 20px;
+}
+
+.waitlist-button {
+  width: 15%;
+  background-color: rgb(30, 150, 255);
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6e6e6;
+  cursor: pointer;
+}
+
+.waitlist-button:hover {
+  background-color: rgb(0, 136, 255);
+}

@@ -1,0 +1,15 @@
+extends ../partials/head
+block content
+  .all-inner-wrapper 
+    .input-inner-wrapper 
+      .title-wrapper Welcome to SDG-App admin login!
+      label(for="email") Email
+      input(placeholder="email" name="email" id="email" required).email-input-wrapper
+      label(for="password") Password
+      input(placeholder="Password" name="password" id="password" type="password" required).password-input-wrapper
+      .submit-button#submit-button Login 
+      .res-text-wrapper#res-text-wrapper 
+      .login-proceed-wrapper 
+        .reminder-text Haven't registered as an admin yet?
+        .login-page-proceed
+          a(href="/admin/register")  Register page

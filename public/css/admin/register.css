@@ -1,0 +1,23 @@
+.input-inner-wrapper {
+  width: 30%; 
+  height: 80% !important;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  border-width:2px;
+  border-style: solid;
+  border-color: rgb(97, 97, 97);
+}
+
+select {
+  width: 25%;
+  height: 30px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  margin-left: 10px;
+  border: 0;
+}

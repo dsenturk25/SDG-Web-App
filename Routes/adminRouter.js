@@ -21,15 +21,77 @@ const sdgCreatePostController = require("../controllers/Admin/create/sdg/post");
 
 const organizationWaitlistPostController = require("../controllers/Admin/waitlist/organization/post");
 
+const registerGetController = require("../controllers/Admin/Auth/register/get");
+const loginGetController = require("../controllers/Admin/Auth/login/get");
+const indexGetController = require("../controllers/Admin/index/get");
+
+const waitlistGetController = require("../controllers/Admin/index/waitlist/get")
+const organizationGetController = require("../controllers/Admin/index/organization/get")
+const projectGetController = require("../controllers/Admin/index/project/get")
+const volunteerGetController = require("../controllers/Admin/index/volunteer/get")
+const sdgGetController = require("../controllers/Admin/index/sdg/get")
+
+
+router.get(
+  "/",
+  isAdminAuth,
+  indexGetController
+)
+
+router.get(
+  "/waitlist",
+  isAdminAuth,
+  waitlistGetController
+)
+
+
+router.get(
+  "/volunteer",
+  isAdminAuth,
+  volunteerGetController
+)
+
+
+router.get(
+  "/organization",
+  isAdminAuth,
+  organizationGetController
+)
+
+
+router.get(
+  "/project",
+  isAdminAuth,
+  projectGetController
+)
+
+
+router.get(
+  "/sdg",
+  isAdminAuth,
+  sdgGetController
+)
+
+
 router.post(
-  "/register",
+  "/authRegister",
   registerPostController
 );
 
+router.get(
+  "/register",
+  registerGetController
+)
+
 router.post(
-  "/login", 
+  "/authLogin", 
   loginPostController
 );
+
+router.get(
+  "/login",
+  loginGetController
+)
 
 router.get(
   "/volunteer/fetch",
@@ -74,7 +136,7 @@ router.post(
 )
 
 router.post(
-  "/organization/wait_list",
+  "/organization/waitlist",
   isAdminAuth,
   organizationWaitlistPostController
 )

@@ -1,0 +1,27 @@
+extends ../partials/head
+block content
+  .all-inner-wrapper 
+    .input-inner-wrapper 
+      .title-wrapper Welcome to SDG-App admin register!
+      label(for="email") Email
+      input(placeholder="email" name="email" id="email" required).text-input-wrapper
+      label(for="name-surname") Name and surname
+      input(placeholder="Name & surname" name="name-surname" id="name-surname" required).text-input-wrapper
+      label(for="root") Root admin password
+      input(placeholder="Root admin password" name="root" id="root-password" type="password" required).password-input-wrapper
+      label(for="password") Password
+      input(placeholder="Password" name="password" id="password" type="password" required).password-input-wrapper
+      label(for="re-password") Password again
+      input(placeholder="Re-enter password" name="re-password" id="re-password" type="password" required).password-input-wrapper
+      label(for="admin-type") Admin type
+      select#admin-type(name="admin-type" placeholder="choose" required)
+        option(value="" disabled selected) choose
+        option(value="student") Student
+        option(value="teacher") Teacher
+
+      .submit-button#submit-button Register 
+      .res-text-wrapper#res-text-wrapper
+      .login-proceed-wrapper 
+        .reminder-text Already have an admin account?
+        .login-page-proceed
+          a(href="/admin/login")  Login page

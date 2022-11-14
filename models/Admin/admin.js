@@ -23,29 +23,37 @@ const adminSchema = mongoose.Schema({
 
   name_surname: {
     type: String,
-    required: true,
-    trim: true
+    trim: true,
+    required: true
   },
 
   admin_type: {
     type: String,
-    enum: ["teacher", "student"]
+    enum: ["teacher", "student"],
+    required: true
   }
 
 })
 
 adminSchema.statics.createAdmin = function (body, callback) {
-  Admin.findOne({email: body.email}).then(admin => {
-    if (admin) return callback("email_not_unique", null);
-  });
+  
+  if (body.root_admin_password == process.env.ROOT_ADMIN_PASSWORD) {
+    Admin.findOne({email: body.email}).then(admin => {
+      if (admin) return callback("email_not_unique", null);
+    });
 
-  const newAdmin = new Admin(body);
-  if (newAdmin) {
-    newAdmin.save();
+    delete body.root_admin_password;
 
-    return callback(null, newAdmin);
+    const newAdmin = new Admin(body);
+    if (newAdmin) {
+      newAdmin.save();
+
+      return callback(null, newAdmin);
+    }
+    return callback("bad_request");
+  } else {
+    callback("root_admin_password_doesn't_match")
   }
-  return callback("bad_request");
 }
 
 adminSchema.statics.loginAdmin = function (body, callback) {
@@ -69,6 +77,8 @@ adminSchema.statics.findAdminById = function (body, callback) {
 }
 
 adminSchema.statics.createSdgGoal = function (body, callback) {
+  console.log("njnfjdnfjdnfjdn")
+  console.log(body)
   const newSdg = new Sdg(body);
   if (newSdg) {
     newSdg.save();

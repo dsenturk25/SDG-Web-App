@@ -65,6 +65,11 @@ const organizationSchema = mongoose.Schema({
   isOnWaitList: {
     type: Boolean,
     default: true
+  },
+
+  phone_number: {
+    type: String,
+    required: true
   }
 
 })

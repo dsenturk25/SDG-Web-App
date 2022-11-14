@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
       else if (admin) next();
     })
   } else {
-    return res.status(401).send("authentication_error");
+    return res.redirect("/admin/login");
   }
 }

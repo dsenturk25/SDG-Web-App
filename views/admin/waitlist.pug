@@ -1,0 +1,33 @@
+extends ../partials/head.pug
+block content
+  .all-inner-wrapper 
+    .header-content 
+      .admin-info-wrapper 
+        .admin-name-surname Welcome back #{admin.name_surname}!
+        .admin-type #{admin.admin_type}
+      .sdg-goal-image
+        img(src="/res/images/un.png", alt="United Nations")
+        img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
+    .main-content 
+      each organization in organizations
+        .each-organization-wrapper
+          .each-organization-info-section
+            .each-organization-info(style="display:none;")
+              span _id: 
+              span= organization._id 
+            .each-organization-info
+              span Name: 
+              span= organization.name 
+            .each-organization-info
+              span Email: 
+              span= organization.email
+            .each-organization-info
+              span Type: 
+              span= organization.organization_type
+            .each-organization-info
+              span Telephone number: 
+              span= organization.phone_number
+          .waitlist-button Accept Organization
+
+    .footer-content
+      .signature-text powered by Üsküdar American Academy

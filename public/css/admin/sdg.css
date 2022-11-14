@@ -1,0 +1,41 @@
+
+.all-inner-wrapper {
+  flex-direction: column;
+}
+
+.create-button {
+  width: 120px;
+  height: fit-content;
+  padding: 10px 10px;
+  background-color: rgb(30, 150, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: #e6e6e6;
+  cursor: pointer;
+}
+
+.create-button span {
+  margin-right: 10px;
+}
+
+
+.create-button:hover {
+  background-color: rgb(0, 136, 255);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-form {
+  width: 50%;
+  height: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: height 0.5s;
+}
