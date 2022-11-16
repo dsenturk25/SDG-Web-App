@@ -8,17 +8,22 @@ block content
       .sdg-goal-image
         img(src="/res/images/un.png", alt="United Nations")
         img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
-    .main-content
+    .main-content#main-content
       .create-button#create-button
         span Create 
         i(class="fa-solid fa-plus")
-      .create-form#create-form
+      form.create-form#create-form(method='POST' action='/admin/sdg/create' enctype='multipart/form-data')
         label(for="name") Name 
         input#name(type="text" name="name").sdg-name 
         label(for="number") Number (1-17) 
         input#number(type="number" min="1" max="17" name="number").sdg-number 
-        label(for="photo") Photo 
-        input#photo(type="file" name="photo" accept="image/png, image/jpeg, image/jpg").sdg-photo
-        .submit-button#submit-button Save
+        label(for="image") Photo 
+        input(type="file" name="image" accept="image/png, image/jpeg, image/jpg").sdg-photo
+        button.submit-button#submit-button(type="submit") Save
+      .sdg-goals-content#sdg-goals-content
+        each sdg in sdgs 
+          .sdg-content 
+            .sdg-img-content
+              img(src=`data:image/png;base64,${sdg.image}`)
     .footer-content
       .signature-text powered by Üsküdar American Academy

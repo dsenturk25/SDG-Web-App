@@ -31,6 +31,17 @@ const projectGetController = require("../controllers/Admin/index/project/get")
 const volunteerGetController = require("../controllers/Admin/index/volunteer/get")
 const sdgGetController = require("../controllers/Admin/index/sdg/get")
 
+const multer = require("multer");
+
+
+const upload = multer({
+  dest: "./uploads/",
+  limits: {
+      fileSize: 100000000
+  },
+})
+
+router.use(express.json());
 
 router.get(
   "/",
@@ -108,6 +119,7 @@ router.post(
 router.post(
   "/sdg/create",
   isAdminAuth,
+  upload.single("image"),
   sdgCreatePostController
 )
 

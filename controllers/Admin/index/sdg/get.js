@@ -1,5 +1,7 @@
 
+
 const Admin = require("../../../../models/Admin/admin");
+const Sdg = require("../../../../models/SDGs/sdg")
 
 module.exports = (req,res) => {
 
@@ -7,16 +9,28 @@ module.exports = (req,res) => {
 
     if (err) return res.redirect("/admin/login");
 
-    res.render("admin/sdg", {
-      page: "admin/sdg",
-      title: "Admin SDGs",
-      includes: {
-        external: {
-          css: ["page", "general"],
-          js: ["page", "functions"]
-        }
-      }, 
-      admin
+    Sdg.find({}, (err, sdgs) => {
+      if (err) {
+        return res.redirect("/admin/login");
+      }
+
+      for (let i = 0; i < sdgs.length; i++) {
+        const sdg = sdgs[i];
+        sdg.image = Buffer.from(sdg.image).toString('base64');
+      }
+
+      res.render("admin/sdg", {
+        page: "admin/sdg",
+        title: "Admin SDGs",
+        includes: {
+          external: {
+            css: ["page", "general"],
+            js: ["page", "functions"]
+          }
+        }, 
+        admin,
+        sdgs
+      })
     })
   })
 }

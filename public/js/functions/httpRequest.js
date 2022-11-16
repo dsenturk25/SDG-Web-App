@@ -10,6 +10,7 @@ function serverRequest (url, method, data, callback) {
   xhr.open(method, url);
   
   if (method == 'POST') {
+    
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.send(JSON.stringify(data));
   } else {

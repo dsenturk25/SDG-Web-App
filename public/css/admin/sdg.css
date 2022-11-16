@@ -28,6 +28,7 @@
 .main-content {
   display: flex;
   flex-direction: column;
+  overflow-x: scroll;
 }
 
 .create-form {
@@ -38,4 +39,30 @@
   flex-direction: column;
   overflow: hidden;
   transition: height 0.5s;
+}
+
+.sdg-img-content {
+  width: 150px;
+  height: 150px;
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  border: 0;
+}
+
+.sdg-goals-content {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sdg-content {
+  margin-right: 20px;
+  margin-bottom: 20px;
 }

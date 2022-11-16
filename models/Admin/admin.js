@@ -77,8 +77,6 @@ adminSchema.statics.findAdminById = function (body, callback) {
 }
 
 adminSchema.statics.createSdgGoal = function (body, callback) {
-  console.log("njnfjdnfjdnfjdn")
-  console.log(body)
   const newSdg = new Sdg(body);
   if (newSdg) {
     newSdg.save();
