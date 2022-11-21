@@ -65,4 +65,16 @@ button {
 .sdg-content {
   margin-right: 20px;
   margin-bottom: 20px;
+  height: fit-content;
+  padding: 10px;
+  background-color: #e6e6e6;
+  border-radius: 10px;
+}
+
+.sdg-info {
+  font-size: 14px;
+}
+
+.sdg-info::first-letter {
+  font-size: 20px;
 }

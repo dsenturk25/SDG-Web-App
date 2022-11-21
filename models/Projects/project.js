@@ -9,6 +9,11 @@ const projectsSchema = mongoose.Schema({
     trim: true
   },
 
+  description: {
+    type: String,
+    trim: true
+  },
+
   creator_id: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -61,6 +66,11 @@ const projectsSchema = mongoose.Schema({
       hour: "hh",
       minute: "min"
     }
+  },
+
+  duration: {
+    type: Number,
+    required: true,
   }
 })
 

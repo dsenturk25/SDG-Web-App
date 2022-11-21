@@ -22,7 +22,12 @@ const sdgSchema = mongoose.Schema({
     project = {
       type: mongoose.Types.ObjectId,
     }
-  ]
+  ],
+
+  total_hours: {
+    type: Number,
+    default: 0
+  }
 })
 
 const Sdg = mongoose.model("SDGs", sdgSchema);

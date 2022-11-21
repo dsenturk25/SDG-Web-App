@@ -1,0 +1,234 @@
+.all-inner-wrapper {
+  flex-direction: column;
+}
+
+.each-organization-info-section {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.each-organization-info {
+  margin-right: 50px;
+}
+
+.each-organization-wrapper {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  padding: 0 2%;
+  margin-bottom: 20px;
+  transition: height 0.5s;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.each-organization-projects-wrapper {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.each-organization-projects-wrapper span {
+  font-size: 24px;
+}
+
+.waitlist-button-accept {
+  width: 100%;
+  background-color: rgb(30, 150, 255);
+  height: 30px;
+  border-radius: 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6e6e6;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.waitlist-button-delete {
+  width: 100%;
+  background-color: rgb(223, 0, 0);
+  height: 30px;
+  border-radius: 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6e6e6;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.waitlist-button-accept:hover {
+  background-color: rgb(0, 136, 255);
+}
+
+.waitlist-button-delete:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.buttons-content {
+  width: 30%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.each-organization-main-info {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+}
+
+
+.each-organization-more-info {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+}
+
+.project-info-dates {
+  display: flex;
+  margin-left: 30px;
+}
+
+.each-organization-project-main-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.each-organization-project-main-content-info-section {
+ width: 75%;
+}
+
+.each-organization-project {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  margin-top: 15px;
+  padding: 0 2%;
+}
+
+.each-organization-project-main-content-info-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.each-organization-project-more-content {
+  position: absolute;
+  display: none;
+  width: 50%;
+  height: 500px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  border: 1px solid #727272;
+  padding: 20px;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  box-shadow: 0 0 10px 500px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.each-organization-project-more-content .project-info {
+  width: 50%;
+  height: fit-content;
+  margin-left: 0;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.each-organization-project-more-content .project-info-dates {
+  width: 50%;
+  height: fit-content;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-left: 0;
+}
+
+.each-organization-project-more-content .project-info-dates .project-info {
+  width: fit-content;
+  font-size: 14px;
+}
+
+.project-info-attendants {
+  width: 100%;
+  overflow-y: scroll;
+  background-color: #e6e6e6;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 20px;
+  padding: 2%;
+  font-size: 14px;
+}
+
+.project-info-attendant-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-info-attendant-wrapper .project-info {
+  width: auto;
+}
+
+.project-attendants-section {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  height: 95%;
+  margin-left: 2%;
+  position: relative;
+}
+
+.sdg-img-content {
+  width: 50px;
+  height: 50px;
+}
+
+img {
+  width: 100%;
+}
+
+.project-info-sdg-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.project-info-sdg-section .project-info {
+  width: fit-content;
+  height: 10px;
+}
+
+.project-sdg-section {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.project-sdg-section .project-info {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
