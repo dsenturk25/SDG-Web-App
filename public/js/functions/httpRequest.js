@@ -18,10 +18,12 @@ function serverRequest (url, method, data, callback) {
   }
 
   xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status != 200 && xhr.status != 201)
+    if (xhr.readyState == 4 && xhr.status != 200 && xhr.status != 201) {
       return callback({ success: false, error: 'network_error' })
-    else if (xhr.readyState == 4 && xhr.responseText)
+    }
+    else if (xhr.readyState == 4 && xhr.responseText) {
       return callback(JSON.parse(xhr.responseText));
+    }
   };
 }
 

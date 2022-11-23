@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const verifypassword = require("../../utils/verifyPassword");
 const hashpassword = require("../../utils/hashPassword");
 const Project = require("../Projects/project");
+const Sdg = require("../SDGs/sdg");
 
 const organizationSchema = mongoose.Schema({
 
@@ -126,8 +127,20 @@ organizationSchema.statics.createProject = function (body, callback) {
 
       organization.projects_created.push((newProject._id).toString());
       organization.save();
-      return callback(null, organization);
-  }
+    }
+
+    for (let i = 0; i < body.sdg_goals.length; i++) {
+      const sdgGoalId = body.sdg_goals[i];
+  
+      Sdg.findById(sdgGoalId, (err, sdg) => {
+        if (err) return callback("bad_request");
+
+        sdg.total_hours += body.duration;
+        sdg.projects.push((newProject._id).toString());
+        sdg.save();
+        return callback(null, organization);
+      })
+    }
   });
 }
 

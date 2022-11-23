@@ -27,6 +27,11 @@ const sdgSchema = mongoose.Schema({
   total_hours: {
     type: Number,
     default: 0
+  },
+
+  total_attendants: {
+    type: Number,
+    default: 0
   }
 })
 

@@ -54,7 +54,9 @@ window.onload = () => {
       const moreInfoSection = event.target.parentNode;
       window.getComputedStyle(moreInfoSection).opacity;
       moreInfoSection.style.opacity = 0;
-      moreInfoSection.style.display = "none";
+      setTimeout(() => {
+        moreInfoSection.style.display = "none";
+      }, 500);
     }
   })
 }

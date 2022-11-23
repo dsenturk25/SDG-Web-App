@@ -6,6 +6,7 @@ const Sdg = require("../SDGs/sdg");
 const Organization = require("../Organizations/organization");
 const Volunteer = require("../Volunteer/volunteer");
 const Project = require("../Projects/project");
+const async = require("async")
 
 const adminSchema = mongoose.Schema({
 
@@ -98,7 +99,14 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
 
   Organization.findByIdAndDelete(body._id, (err, organization) => {
     if (err) return callback("delete_failed");
-    return callback(null, organization);
+    
+    for (let i = 0; i < organization.projects_created.length; i++) {
+      const project_id = organization.projects_created[i];
+      Project.findByIdAndDelete(project_id, (err, project) => {
+        if (err || !project) return callback("delete_failed");
+        return callback(null, organization);
+      })
+    }
   })
 }
 
@@ -114,7 +122,24 @@ adminSchema.statics.deleteVolunteer = function (body, callback) {
 
   Volunteer.findByIdAndDelete(body._id, (err, volunteer) => {
     if (err) return callback("delete_failed");
-    return callback(null, volunteer);
+
+    async.timesSeries(volunteer.projects.length, (i, next) => {
+      const project_id = volunteer.projects[i];
+      Project.findById(project_id, (err, project) => {
+        if (err) return callback("delete_failed");
+
+        const newAttendantArray = project.attendants.filter((id) => {
+          return id != `${volunteer._id}`;
+        })
+
+        project.attendants = newAttendantArray;
+        project.save();
+        return callback(null, volunteer);
+      })
+    }, (err, project) => {
+      if (err) return callback("delete_failed");
+      callback(null, volunteer);
+    })
   })
 }
 

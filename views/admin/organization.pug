@@ -10,79 +10,80 @@ block content
         img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
     .main-content 
       each organization in organizations
-        .each-organization-wrapper
-          .each-organization-main-info
-            .each-organization-info-section
-              .each-organization-info(style="display:none;")
-                span _id: 
-                span= organization._id 
-              .each-organization-info
-                span Name: 
-                span= organization.name 
-              .each-organization-info
-                span Email: 
-                span= organization.email
-              .each-organization-info
-                span Type: 
-                span= organization.organization_type
-              .each-organization-info
-                span Telephone number: 
-                span= organization.phone_number
-            .buttons-content
-              .waitlist-button-accept#see-projects-button More info
-              .waitlist-button-delete Delete
-          .each-organization-more-info 
-            .each-organization-projects-wrapper 
-              span Projects:
-              each project_id in organization.projects_created
-                each project in projects
-                  if `${project_id}` === `${project._id}`
-                    .each-organization-project 
-                      .each-organization-project-main-content 
-                        .each-organization-project-main-content-info-section
-                          .project-info= project.name
-                          .project-info-dates
-                            .project-info #{project.date.day}/
-                            .project-info #{project.date.month}/
-                            .project-info #{project.date.year} &nbsp&nbsp
-                            .project-info #{project.date.hour}:
-                            .project-info #{project.date.minute}
-                        .waitlist-button-accept(style="width:15%") See details
-                      .each-organization-project-more-content
-                        .waitlist-button-delete(style="width:2%; height: 25px; margin-bottom: 30px; font-size: 12px; border-radius: 5px") Close
-                        .project-info Name: #{project.name}
-                        .project-info Description: #{project.description}
-                        .project-info Environment: #{project.environment}
-                        if `${project.environment}` === "face-to-face"
-                          .project-info Project address: #{project.address}
-                        if `${project.environment}` === "online"
-                          .project-info Project link for online: #{project.link_to_online_environment}
-                        .project-info-dates 
-                            .project-info Date and time: #{project.date.day}/
-                            .project-info #{project.date.month}/
-                            .project-info #{project.date.year} &nbsp&nbsp
-                            .project-info #{project.date.hour}:
-                            .project-info #{project.date.minute}
-                        .project-info Duration: #{project.duration} hours
-                        .project-sdg-section
-                          .project-info Completed SDGs:
-                          .project-info-sdg-section 
-                            each sdg in sdgs 
-                              each sdg_id in project.sdg_goals 
-                                if `${sdg_id}` === `${sdg._id}`
-                                  .sdg-content 
-                                    .sdg-img-content
-                                      img(src=`data:image/png;base64,${sdg.image}`)
-                        .project-attendants-section
-                          .attendant-list-title Attendants list: #{project.attendants.length} people
-                          .project-info-attendants
-                            each volunteer in volunteers 
-                              each attendant in project.attendants 
-                                if `${attendant}` === `${volunteer._id}`
-                                  .project-info-attendant-wrapper
-                                    .project-info #{volunteer.name} #{volunteer.surname} 
-                                    .project-info #{volunteer.email}
-                                
-            .each-organization-contact-info
+        if !organization.isOnWaitList
+          .each-organization-wrapper
+            .each-organization-main-info
+              .each-organization-info-section
+                .each-organization-info(style="display:none;")
+                  span _id: 
+                  span= organization._id 
+                .each-organization-info
+                  span Name: 
+                  span= organization.name 
+                .each-organization-info
+                  span Email: 
+                  span= organization.email
+                .each-organization-info
+                  span Type: 
+                  span= organization.organization_type
+                .each-organization-info
+                  span Telephone number: 
+                  span= organization.phone_number
+              .buttons-content
+                .waitlist-button-accept#see-projects-button More info
+                .waitlist-button-delete Delete
+            .each-organization-more-info 
+              .each-organization-projects-wrapper 
+                span Projects:
+                each project_id in organization.projects_created
+                  each project in projects
+                    if `${project_id}` === `${project._id}`
+                      .each-organization-project
+                        .each-organization-project-main-content 
+                          .each-organization-project-main-content-info-section
+                            .project-info= project.name
+                            .project-info-dates
+                              .project-info #{project.date.day}/
+                              .project-info #{project.date.month}/
+                              .project-info #{project.date.year} &nbsp&nbsp
+                              .project-info #{project.date.hour}:
+                              .project-info #{project.date.minute}
+                          .waitlist-button-accept(style="width:15%") See details
+                        .each-organization-project-more-content
+                          .waitlist-button-delete(style="width:2%; height: 25px; margin-bottom: 30px; font-size: 12px; border-radius: 5px") Close
+                          .project-info Name: #{project.name}
+                          .project-info Description: #{project.description}
+                          .project-info Environment: #{project.environment}
+                          if `${project.environment}` === "face-to-face"
+                            .project-info Project address: #{project.address}
+                          if `${project.environment}` === "online"
+                            .project-info Project link for online: #{project.link_to_online_environment}
+                          .project-info-dates 
+                              .project-info Date and time: #{project.date.day}/
+                              .project-info #{project.date.month}/
+                              .project-info #{project.date.year} &nbsp&nbsp
+                              .project-info #{project.date.hour}:
+                              .project-info #{project.date.minute}
+                          .project-info Duration: #{project.duration} hours
+                          .project-sdg-section
+                            .project-info Completed SDGs:
+                            .project-info-sdg-section 
+                              each sdg in sdgs 
+                                each sdg_id in project.sdg_goals 
+                                  if `${sdg_id}` === `${sdg._id}`
+                                    .sdg-content 
+                                      .sdg-img-content
+                                        img(src=`data:image/png;base64,${sdg.image}`)
+                          .project-attendants-section
+                            .attendant-list-title Attendants list: #{project.attendants.length} people
+                            .project-info-attendants
+                              each volunteer in volunteers 
+                                each attendant in project.attendants 
+                                  if `${attendant}` === `${volunteer._id}`
+                                    .project-info-attendant-wrapper
+                                      .project-info #{volunteer.name} #{volunteer.surname} 
+                                      .project-info #{volunteer.email}
+                                  
+              .each-organization-contact-info
     .footer-content
       .signature-text powered by Üsküdar American Academy

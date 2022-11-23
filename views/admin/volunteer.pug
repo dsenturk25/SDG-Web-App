@@ -1,0 +1,32 @@
+extends ../partials/head.pug
+block content 
+  .all-inner-wrapper
+    .header-content 
+      .admin-info-wrapper 
+        .admin-name-surname Welcome back #{admin.name_surname}!
+        .admin-type #{admin.admin_type}
+      .sdg-goal-image
+        img(src="/res/images/un.png", alt="United Nations")
+        img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
+    .main-content#main-content
+      .volunteers-main-wrapper 
+        each volunteer in volunteers 
+          .each-volunteer-content 
+            .each-volunteer-content-info-wrapper 
+              .each-volunteer-info(style="display:none") #{volunteer._id}
+              .each-volunteer-info Name: #{volunteer.name} #{volunteer.surname}
+              .each-volunteer-info Email: #{volunteer.email}
+              .each-volunteer-info Phone number: #{volunteer.phone_number}
+              .each-volunteer-info School: #{volunteer.school}
+              .each-volunteer-info Gender: #{volunteer.gender}
+              .each-volunteer-info-dates 
+                .each-volunteer-info Location: #{volunteer.city} /&nbsp
+                .each-volunteer-info #{volunteer.country}
+              .each-volunteer-info-dates 
+                .each-volunteer-info Birth date: &nbsp
+                .each-volunteer-info #{volunteer.birth_date.day}/
+                .each-volunteer-info #{volunteer.birth_date.month}/
+                .each-volunteer-info #{volunteer.birth_date.year}
+            .waitlist-button-delete Delete
+    .footer-content
+      .signature-text powered by Üsküdar American Academy

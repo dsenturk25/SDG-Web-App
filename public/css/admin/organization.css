@@ -13,6 +13,11 @@
   margin-right: 50px;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+}
+
 .each-organization-wrapper {
   width: 96%;
   height: 50px;
@@ -94,6 +99,7 @@
   width: 100%;
   height: 100%;
   align-items: flex-start;
+  overflow-y: scroll;
 }
 
 .project-info-dates {

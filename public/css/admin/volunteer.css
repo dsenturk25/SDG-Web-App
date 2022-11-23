@@ -1,0 +1,67 @@
+
+.all-inner-wrapper {
+  flex-direction: column;
+}
+
+.waitlist-button-delete {
+  width: 2%;
+  background-color: rgb(223, 0, 0);
+  height: 30px;
+  border-radius: 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6e6e6;
+  cursor: pointer;
+  margin-right: -10px;
+  font-size: 14px;
+}
+
+.waitlist-button-delete:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.volunteers-main-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.each-volunteer-content {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  padding: 0 2%;
+  margin-bottom: 20px;
+  transition: height 0.5s;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+.each-volunteer-content-info-wrapper {
+  width: fit-content;
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+
+.each-volunteer-info-dates {
+  display: flex;
+  margin-right: 20px;
+}
+
+.each-volunteer-info-dates .each-volunteer-info {
+  margin-right: 0;
+  font-size: 14px;
+}
+
+.each-volunteer-info {
+  margin-right: 20px;
+  font-size: 14px;
+}

@@ -1,5 +1,4 @@
 
-
 const mongoose = require("mongoose");
 const hashpassword = require("../../utils/hashPassword");
 const verifypassword = require("../../utils/verifyPassword");
@@ -53,8 +52,25 @@ const volunteerSchema = mongoose.Schema({
         month: "mm",
         year: "yy"
       }
-    }
+    },
 
+    phone_number: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    country: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    city: {
+      type: String,
+      required: true,
+      trim: true
+    },
 })
 
 volunteerSchema.statics.createVolunteer = function(body, callback) {
