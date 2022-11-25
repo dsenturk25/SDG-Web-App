@@ -25,11 +25,12 @@ const registerGetController = require("../controllers/Admin/Auth/register/get");
 const loginGetController = require("../controllers/Admin/Auth/login/get");
 const indexGetController = require("../controllers/Admin/index/get");
 
-const waitlistGetController = require("../controllers/Admin/index/waitlist/get")
-const organizationGetController = require("../controllers/Admin/index/organization/get")
-const projectGetController = require("../controllers/Admin/index/project/get")
-const volunteerGetController = require("../controllers/Admin/index/volunteer/get")
-const sdgGetController = require("../controllers/Admin/index/sdg/get")
+const waitlistGetController = require("../controllers/Admin/index/waitlist/get");
+const organizationGetController = require("../controllers/Admin/index/organization/get");
+const projectGetController = require("../controllers/Admin/index/project/get");
+const volunteerGetController = require("../controllers/Admin/index/volunteer/get");
+const sdgGetController = require("../controllers/Admin/index/sdg/get");
+const volunteerFetchFilterGetController = require("../controllers/Admin/fetch/filter/volunteer/get");
 
 const multer = require("multer");
 
@@ -108,6 +109,12 @@ router.get(
   "/volunteer/fetch",
   isAdminAuth,
   volunteerFetchGetController
+)
+
+router.post(
+  "/volunteer/filter/fetch",
+  isAdminAuth,
+  volunteerFetchFilterGetController
 )
 
 router.post(

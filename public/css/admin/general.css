@@ -93,8 +93,8 @@ input {
 
 .main-content {
   width: 90%;
-  height: 70%;
-  padding: 5%;
+  height: 76%;
+  padding: 2% 5%;
   display: flex;
   flex-wrap: wrap;
 }

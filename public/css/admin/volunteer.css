@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.main-content {
+  overflow-y: scroll;
+}
+
 .waitlist-button-delete {
   width: 2%;
   background-color: rgb(223, 0, 0);
@@ -64,4 +68,27 @@
 .each-volunteer-info {
   margin-right: 20px;
   font-size: 14px;
+}
+
+.search-tools-wrapper {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 50px;
+  align-items: baseline;
+}
+
+.search-tools-wrapper input {
+  width: 15%;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.search-tools-wrapper select {
+  width: 10%;
+  height: 40px;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  border: 0;
+  padding: 0 20px;
 }

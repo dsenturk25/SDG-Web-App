@@ -97,14 +97,34 @@ adminSchema.statics.approveOrganizationsWaitlist = function (body, callback) {
 
 adminSchema.statics.deleteOrganization = function (body, callback) {
 
-  Organization.findByIdAndDelete(body._id, (err, organization) => {
+  Organization.findById(body._id, (err, organization) => {
     if (err) return callback("delete_failed");
     
+    if (organization.projects_created[0] == null) return callback(null, organization);
+
     for (let i = 0; i < organization.projects_created.length; i++) {
       const project_id = organization.projects_created[i];
       Project.findByIdAndDelete(project_id, (err, project) => {
         if (err || !project) return callback("delete_failed");
-        return callback(null, organization);
+        
+        async.timesSeries(project.attendants.length, (j, next) => {
+
+          const volunteer_id = project.attendants[j];
+
+          Volunteer.findByIdAndDelete(volunteer_id, (err, volunteer) => {
+            if (err) return callback("delete_failed");
+
+            const newArray = volunteer.projects.filter((id) => {
+              return id != `${project._id}`;
+            })
+            volunteer.projects = newArray;
+            volunteer.save();
+            next();
+          })
+        }, (err, res) => {
+          if (err) return callback("delete_failed");
+          return callback(null, res);
+        })
       })
     }
   })
@@ -134,7 +154,7 @@ adminSchema.statics.deleteVolunteer = function (body, callback) {
 
         project.attendants = newAttendantArray;
         project.save();
-        return callback(null, volunteer);
+        next();
       })
     }, (err, project) => {
       if (err) return callback("delete_failed");
@@ -155,6 +175,61 @@ adminSchema.statics.fetchVolunteers = function (body, callback) {
   Volunteer.find(body, (err, volunteersArray) => {
     if (err) return callback("fetch_failed");
     return callback(null, volunteersArray)
+  })
+}
+
+adminSchema.statics.fetchVolunteersByFilter = function (body, callback) {
+
+  Volunteer.find({}, (err, volunteersArray) => {
+    if (err) return callback("fetch_failed");
+
+    const resArray = [];
+
+    async.timesSeries(volunteersArray.length, (i, next) => {
+      const volunteer = volunteersArray[i];
+
+      if (body.input == "") {
+        resArray.push(volunteer);
+        next();
+      }
+
+      else if (body.filter == "nameSurname") {
+
+        const nameSurname = (volunteer.name + " " + volunteer.surname).toLowerCase();
+
+        if (nameSurname.includes((body.input.toString()).toLowerCase())) {
+          resArray.push(volunteer);
+        }
+        next();
+      } else  if (body.filter == "gender") {
+        
+        if(body.input == volunteer.gender) {
+          resArray.push(volunteer);
+        }
+        next();
+      } else  if (body.filter == "school") {
+
+        if (volunteer.school.toLowerCase().includes(body.input.toLowerCase())) {
+          resArray.push(volunteer)
+        }
+        next();
+      } else  if (body.filter == "country") {
+        
+        if (volunteer.country.toLowerCase().includes(body.input.toLowerCase())) {
+          resArray.push(volunteer);
+        }
+        next();
+      } else  if (body.filter == "city") {
+        if (volunteer.city.toLowerCase().includes(body.input.toLowerCase())) {
+          resArray.push(volunteer);
+        }
+        next();
+      }
+    }, (err, res) => {
+      if (err) return callback("fetch_failed");
+      return callback(null, resArray);
+
+    })
   })
 }
 

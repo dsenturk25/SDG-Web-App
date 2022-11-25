@@ -9,7 +9,16 @@ block content
         img(src="/res/images/un.png", alt="United Nations")
         img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
     .main-content#main-content
-      .volunteers-main-wrapper 
+      .search-tools-wrapper 
+        input.search-bar#search-bar(type="text" placeholder="Search 🔎")
+        select#search-filter(name="filter")
+          option(value="nameSurname") Name surname 
+          option(value="gender") Gender 
+          option(value="birth-date") Birth date 
+          option(value="school") School 
+          option(value="country") Country 
+          option(value="city") City
+      .volunteers-main-wrapper#volunteers-main-wrapper
         each volunteer in volunteers 
           .each-volunteer-content 
             .each-volunteer-content-info-wrapper 
@@ -19,11 +28,9 @@ block content
               .each-volunteer-info Phone number: #{volunteer.phone_number}
               .each-volunteer-info School: #{volunteer.school}
               .each-volunteer-info Gender: #{volunteer.gender}
+              .each-volunteer-info Location: #{volunteer.city} / #{volunteer.country}
               .each-volunteer-info-dates 
-                .each-volunteer-info Location: #{volunteer.city} /&nbsp
-                .each-volunteer-info #{volunteer.country}
-              .each-volunteer-info-dates 
-                .each-volunteer-info Birth date: &nbsp
+                .each-volunteer-info Birth date:&nbsp
                 .each-volunteer-info #{volunteer.birth_date.day}/
                 .each-volunteer-info #{volunteer.birth_date.month}/
                 .each-volunteer-info #{volunteer.birth_date.year}

@@ -1,29 +1,21 @@
 
 window.onload = () => {
+  document.addEventListener("click", (event) => {
 
-  const seeProjectsButton = document.getElementById("see-projects-button");
-  const projects = document.querySelector("projects-content");
-
-  let cnt = 0;
-
-  seeProjectsButton.addEventListener("click", (event) => {
-    if (cnt % 2 == 0) {
-      seeProjectsButton.innerHTML = "Less info";
+    if (event.target.innerHTML == "More info") {
+      event.target.innerHTML = "Less info";
       event.target.parentNode.parentNode.parentNode.style.height = "300px";
-    } else {
-      seeProjectsButton.innerHTML = "More info";
+    }
+
+    else if (event.target.innerHTML == "Less info") {
+      event.target.innerHTML = "More info";
       event.target.parentNode.parentNode.parentNode.style.height = "50px";
     }
-    cnt++;
-  })
 
-  document.addEventListener("click", (event) => {
-    if (event.target.innerHTML == "Delete") {
-      
-      const flag = confirm("Do you really want to DELETE the organization?");
+    else if (event.target.innerHTML == "Delete") {
 
-      if (flag) {
-        const id = event.target.parentNode.children[0].children[0].children[1].innerHTML;
+      if (confirm("Do you really want to DELETE the organization?")) {
+        const id = event.target.parentNode.parentNode.children[0].children[0].children[1].innerHTML;
 
         const url = window.location.href.split("/admin")[0] + "/admin/organization/delete";
 
