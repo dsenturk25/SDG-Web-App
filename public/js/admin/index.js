@@ -5,6 +5,7 @@ window.onload = () => {
   const sdgButton = document.getElementById("sdg");
   const organizationsButton = document.getElementById("organizations");
   const projectsButton = document.getElementById("projects");
+  const comparisonsButton = document.getElementById("comparisons");
 
   waitlistButton.addEventListener("click", (event) => {
     window.location.href = "/admin/waitlist";
@@ -22,8 +23,8 @@ window.onload = () => {
     window.location.href = "/admin/sdg";
   });
 
-  projectsButton.addEventListener("click", (event) => {
-    window.location.href = "/admin/project";
-  });
+  comparisonsButton.addEventListener("click", (event) => {
+    window.location.href = "/admin/comparisons";
+  })
 
 }

@@ -11,6 +11,8 @@ const volunteerFetchGetController = require("../controllers/Admin/fetch/voluntee
 const sdgFetchGetController = require("../controllers/Admin/fetch/sdg/get");
 const organizationFetchGetController = require("../controllers/Admin/fetch/organization/get");
 const projectFetchGetController = require("../controllers/Admin/fetch/project/get");
+const volunteerFetchFilterGetController = require("../controllers/Admin/fetch/filter/volunteer/get");
+const comparisonsFetchPostController = require("../controllers/Admin/fetch/comparisons/post");
 
 const volunteerDeletePostController = require("../controllers/Admin/delete/volunteer/post");
 const sdgDeletePostController = require("../controllers/Admin/delete/sdg/post");
@@ -30,7 +32,7 @@ const organizationGetController = require("../controllers/Admin/index/organizati
 const projectGetController = require("../controllers/Admin/index/project/get");
 const volunteerGetController = require("../controllers/Admin/index/volunteer/get");
 const sdgGetController = require("../controllers/Admin/index/sdg/get");
-const volunteerFetchFilterGetController = require("../controllers/Admin/fetch/filter/volunteer/get");
+const comparisonsGetController = require("../controllers/Admin/index/comparisons/get");
 
 const multer = require("multer");
 
@@ -82,6 +84,18 @@ router.get(
   "/sdg",
   isAdminAuth,
   sdgGetController
+)
+
+router.get(
+  "/comparisons",
+  isAdminAuth,
+  comparisonsGetController
+)
+
+router.post(
+  "/comparisons/fetch",
+  isAdminAuth,
+  comparisonsFetchPostController
 )
 
 

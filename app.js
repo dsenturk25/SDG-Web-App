@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
+const mongodb = require("mongodb");
 
 const app = express();
 
@@ -18,8 +19,11 @@ const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
-const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/sdg-app-api";
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true});
+const mongoUri = "mongodb://127.0.0.1:27017/sdg-app-api";
+mongoose.connect(mongoUri, {   
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 
 app.set("views", path.join(__dirname, "views"));

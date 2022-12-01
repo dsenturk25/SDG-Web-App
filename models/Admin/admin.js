@@ -254,6 +254,98 @@ adminSchema.statics.fetchSdgs = function (body, callback) {
   })
 }
 
+adminSchema.statics.createStackedBarGraph = function (body, callback) {
+
+  const xAxisLabels = [];
+  const barStackLabels = [];
+  const yAxisLabel = body.y_axis_filter
+
+  Volunteer.find({}, (err, volunteersArray) => {
+    if (err) return callback("fetch_failed");
+
+    async.timesSeries(volunteersArray.length, (i, next) => {
+      const volunteer = volunteersArray[i];
+      let flag_x = 0;
+      xAxisLabels.forEach((val) => {
+        if (volunteer[body.x_axis_filter] == val) {
+          flag_x = 1;
+        }
+      })
+
+      if (!flag_x) {
+        xAxisLabels.push(volunteer[body.x_axis_filter]);
+      }
+
+      let flag_y = 0;
+
+      barStackLabels.forEach((val) => {
+        if (volunteer[body.bar_stack_filter] == val) {
+          flag_y = 1;
+        }
+      })
+
+      if (!flag_y) {
+        barStackLabels.push(volunteer[body.bar_stack_filter]);
+        return next();
+      }
+      return next();
+
+    }, (err) => {
+      if (err) return callback("fetch_failed");
+    });
+    
+    const xAxisFilter = body.x_axis_filter;
+    const barStackFilters = body.bar_stack_filter
+
+    const xAxisDocumentCountArray = [];
+    const barStackDocumentCountArray = [];
+
+    async.timesSeries(xAxisLabels.length, (j, next) => {
+
+      Volunteer.find({
+        [xAxisFilter]: xAxisLabels[j]
+      }).countDocuments()
+      .then(number => {
+        try {
+          xAxisDocumentCountArray.push(number);
+          barStackDocumentCountArray.push([]);
+        } catch (err) {
+          return callback("fetch_failed");
+        }
+      })
+
+      async.timesSeries(barStackLabels.length, (k, next) => {
+        Volunteer.find({
+          [xAxisFilter]: xAxisLabels[j],
+          [barStackFilters]: barStackLabels[k]
+        }).countDocuments()
+        .then(numberAssociatedwithBarStacks => {
+          try {
+            barStackDocumentCountArray[j].push(numberAssociatedwithBarStacks);
+          } catch (error) {
+            return callback("fetch_failed");
+          }
+          next();
+        })
+
+      }, (err) => {
+        if (err) return callback("fetch_failed");
+        next();
+      })
+
+    }, (err) => {
+      if (err) return callback("fetch_failed");
+      return callback(null, {
+        xAxisLabels,
+        barStackLabels,
+        yAxisLabel,
+        xAxisDocumentCountArray,
+        barStackDocumentCountArray
+      })
+    })
+  });
+}
+
 adminSchema.pre("save", hashpassword);
 
 const Admin = mongoose.model("Admin", adminSchema);

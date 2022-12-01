@@ -1,0 +1,29 @@
+extends ../partials/head.pug
+block content
+  .all-inner-wrapper
+    .header-content 
+      .admin-info-wrapper 
+        .admin-name-surname Welcome back #{admin.name_surname}!
+        .admin-type #{admin.admin_type}
+      .sdg-goal-image
+        img(src="/res/images/un.png", alt="United Nations")
+        img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
+    .main-content 
+      .input-wrapper 
+        label(for="x-column") X axis data filter
+        select#x-axis-filter(name="x-column") 
+          option(value="gender") Gender 
+          option(value="city") City 
+          option(value="country") Country 
+        label(for="x-column") Bar stacks filter 
+        select#bar-stack-filters(name="column-section-filter") 
+          option(value="gender") Gender 
+          option(value="city") City 
+          option(value="country") Country
+        label(for="hour-number-select") Y-axis data filter
+        select#y-axis-filter(name="hour-number-select") 
+          option(value="number-of-volunteers") Number of volunteers 
+          option(value="social-service-hours") Total social service hours
+        .submit-button(style="width:200px") Graph
+    .footer-content
+      .signature-text powered by Üsküdar American Academy
