@@ -4,7 +4,10 @@
 }
 
 .main-content {
+  height: 100%;
   overflow-y: scroll;
+  flex-direction: column;
+  flex-wrap: nowrap !important;
 }
 
 .waitlist-button-delete {
@@ -28,14 +31,15 @@
 
 .volunteers-main-wrapper {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .each-volunteer-content {
   width: 96%;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,7 +55,7 @@
 .each-volunteer-content-info-wrapper {
   width: fit-content;
   display: flex;
-  height: 50px;
+  height: 60px;
   align-items: center;
 }
 

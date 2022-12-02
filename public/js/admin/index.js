@@ -4,7 +4,6 @@ window.onload = () => {
   const volunteersButton = document.getElementById("volunteers");
   const sdgButton = document.getElementById("sdg");
   const organizationsButton = document.getElementById("organizations");
-  const projectsButton = document.getElementById("projects");
   const comparisonsButton = document.getElementById("comparisons");
 
   waitlistButton.addEventListener("click", (event) => {
@@ -26,5 +25,4 @@ window.onload = () => {
   comparisonsButton.addEventListener("click", (event) => {
     window.location.href = "/admin/comparisons";
   })
-
 }

@@ -105,6 +105,7 @@ label {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: 0 20px;
 }
 
 .each-bar-stack-value, .each-bar-stack-label {

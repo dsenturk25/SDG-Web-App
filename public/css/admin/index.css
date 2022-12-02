@@ -15,6 +15,7 @@
   align-items: end;
   margin-right: 2%;
   cursor: pointer;
+  transition: margin-top 0.5s;
 }
 
 .each-admin-feature:hover {
