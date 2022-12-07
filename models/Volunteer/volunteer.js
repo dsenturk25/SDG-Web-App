@@ -8,13 +8,11 @@ const volunteerSchema = mongoose.Schema({
 
     name: {
         type: String,
-        required: true,
         trim: true,
     },
 
     surname: {
         type: String,
-        required: true,
         trim: true,
     },
 
@@ -28,7 +26,6 @@ const volunteerSchema = mongoose.Schema({
 
     school_number: {
       type: Number,
-      required: true,
       trim: true
     },
 
@@ -41,7 +38,6 @@ const volunteerSchema = mongoose.Schema({
     school: {
       type: String,
       trim: true,
-      required: true,
     },
 
     projects: [
@@ -67,21 +63,28 @@ const volunteerSchema = mongoose.Schema({
 
     phone_number: {
       type: String,
-      required: true,
       trim: true
     },
 
     country: {
       type: String,
-      required: true,
       trim: true
     },
 
     city: {
       type: String,
-      required: true,
       trim: true
     },
+
+    isAccountCompleted: {
+      type: Boolean,
+      default: false
+    },
+
+    isEmailConfirmed: {
+      type: Boolean,
+      default: false
+    }
 })
 
 volunteerSchema.statics.createVolunteer = function(body, callback) {
@@ -167,7 +170,6 @@ volunteerSchema.statics.exitProject = function (body, callback) {
         return callback(null, project);
       })
     }
-
   });
 }
 

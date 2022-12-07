@@ -7,13 +7,13 @@ const dotenv = require("dotenv");
 const path = require("path");
 const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
-const mongodb = require("mongodb");
 
 const app = express();
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
+const indexRouter = require("./Routes/indexRouter");
 const authVolunteerRouter = require("./Routes/volunteerRouter");
 const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/", indexRouter);
 app.use("/volunteer", authVolunteerRouter);
 app.use("/organization", authOrganizationRouter);
 app.use("/project", projectRouter);

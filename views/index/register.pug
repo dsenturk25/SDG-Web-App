@@ -1,0 +1,26 @@
+extends ../partials/head.pug
+block content
+  .all-inner-wrapper
+    .form-main-wrapper
+      .form-each-left-column 
+        .each-row-title-section 
+          .each-row-title Sign Up
+          .each-row-social-media-content 
+            .each-social-media-icon 
+              i(class="fa fa-instagram")
+            .each-social-media-icon
+              i(class="fa fa-linkedin")
+        .inputs-main-wrapper 
+          label(for="email") Email
+          input.each-input(type="text" placeholder="Email")#email 
+          label(for="email") Password
+          input.each-input(type="password" placeholder="Password")#password
+          label(for="email") Confirm password
+          input.each-input(type="password" placeholder="Confirm password")#password-confirm
+          .res-info-wrapper#res-info-wrapper
+          .submit-button#submit Sign Up
+          .form-footer-text Uskudar American Academy - 2022
+      .form-each-right-column
+        .each-right-column-title Welcome to SDG Webapp 
+        .each-right-column-text Already have an account?
+        a(href="/login").each-right-column-button Sign In
