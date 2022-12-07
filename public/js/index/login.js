@@ -1,6 +1,10 @@
 
 window.onload = () => {
 
+  const form = document.getElementById("form");
+  form.style.opacity = "1";
+  form.style.marginBottom = "0";
+
   const submitButton = document.getElementById("submit");
 
   const email = document.getElementById("email");

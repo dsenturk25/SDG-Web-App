@@ -31,6 +31,9 @@ a {
   height: fit-content;
   display: flex;
   box-shadow: 0 10px 50px 10px #ccc;
+  opacity: 0;
+  transition: 1s;
+  margin-bottom: -100px;
 }
 
 .form-each-left-column {

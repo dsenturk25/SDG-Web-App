@@ -1,6 +1,10 @@
 
 window.onload = () => {
 
+  const form = document.getElementById("form");
+  form.style.opacity = "1";
+  form.style.marginBottom = "0";
+
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("password-confirm");

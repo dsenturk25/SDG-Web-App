@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const hashpassword = require("../../utils/hashPassword");
 const verifypassword = require("../../utils/verifyPassword");
 const Project = require("../Projects/project");
+const { sendConfirmationEmail } = require("../../utils/sendEmail");
 
 const volunteerSchema = mongoose.Schema({
 
@@ -98,6 +99,7 @@ volunteerSchema.statics.createVolunteer = function(body, callback) {
   if (newVolunteer) {
 
     newVolunteer.save();
+    sendConfirmationEmail(body.email);
     return callback(null, newVolunteer);
   }
 
