@@ -9,9 +9,14 @@ const projectsSchema = mongoose.Schema({
     trim: true
   },
 
-  description: {
+  short_description: {
     type: String,
     trim: true
+  },
+
+  long_description: {
+    type: String,
+    trim: false
   },
 
   creator_id: {
@@ -43,35 +48,84 @@ const projectsSchema = mongoose.Schema({
   environment: {
     type: String,
     required: true,
-    enum: ["online", "face-to-face"]
+    enum: ["online", "face-to-face", "hybrid"]
   },
 
-  link_to_online_environment: {
-   type: String,
-   trim: true 
-  },
-
-  address: {
-    type: String,
-    trim: true,
-  },
-
-  date: {
+  start_date: {
     type: Object,
     required:false,
     default: {
       day: "dd",
       month: "mm",
       year: "yy",
-      hour: "hh",
-      minute: "min"
     }
   },
 
-  duration: {
+  finish_date: {
+    type: Object,
+    required:false,
+    default: {
+      day: "dd",
+      month: "mm",
+      year: "yy",
+    }
+  },
+
+  number_of_sessions: {
     type: Number,
-    required: true,
+  },
+
+  start_time_of_each_session: {
+    type: Object,
+    default: {
+      day: "dd",
+      month: "mm",
+      year: "yy",
+    }
+  },
+
+  duration_of_each_session: {
+    type: String,
+  },
+
+  link_to_online_environment: {
+    type: String,
+    trim: true 
+   },
+ 
+   address: {
+     type: String,
+     trim: true,
+   },
+
+  sessions: [
+    session = {
+      start_time: {
+        type: String
+      },
+      duration: {
+        type: String
+      },
+      environment: {
+        type: String
+      },
+      link_to_online_environment: {
+        type: String,
+        trim: true 
+       },
+     
+       address: {
+         type: String,
+         trim: true,
+       },
+    }
+  ],
+
+  isCompleted: {
+    type: Boolean,
+    default: false
   }
+
 })
 
 const Project = mongoose.model("Projects", projectsSchema);

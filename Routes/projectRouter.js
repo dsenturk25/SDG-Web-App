@@ -1,6 +1,7 @@
 
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 
 const isOrganizationAuth = require("../middleware/isOrganizationAuth");
 
@@ -11,9 +12,18 @@ const deletePostController = require("../controllers/Project/delete/post");
 const findIdGetController = require("../controllers/Project/getById/get");
 const findAllGetController = require("../controllers/Project/getAll/get");
 
+
+const upload = multer({
+  dest: "./uploads/",
+  limits: {
+      fileSize: 100000000
+  },
+})
+
 router.post(
   "/create",
   isOrganizationAuth,
+  upload.single("photo"),
   createPostController
 );
 

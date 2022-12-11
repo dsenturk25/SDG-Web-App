@@ -1,0 +1,97 @@
+extends ../partials/head.pug
+block content
+  .create-project-wrapper#create-project-wrapper
+    .close-window-button 
+      i(class="fa-solid fa-close")
+    .create-form-title Create new project
+    .create-form-description Please fill all required fields and create the project to bring thousands of volunteers into action!
+    form.create-project-form-content(action="/project/create" method="post" enctype="multipart/form-data") 
+      hr
+      input.create-form-each-text-input(type="text" id="creator_id" name="creator_id" style="display:none" value=`${organization._id}`)
+      input.create-form-each-text-input(type="text" id="creator_name" name="creator_name" style="display:none" value=`${organization.name}`)
+      label.each-create-form-label(for="name") Project name
+      input.create-form-each-text-input(type="text" id="name" name="name" placeholder="name")
+      label.each-create-form-label(for="short_description") Project description (short)
+      input.create-form-each-text-input(type="text" id="short_description" name="short_description" placeholder="Short description")
+      label.each-create-form-label(for="long_description") Project description (long) 
+      textarea(name="long_description" id="long_description" cols="30" rows="10").create-form-each-text-input 
+      label.each-create-form-label(for="photo") Project image
+      input.create-form-image-input(type="file" accept="image/png, image/jpeg" id="photo" name="photo")
+      label.each-create-form-label(for="environment") Project environment
+      select#environment(name="environment") 
+        option(value="online") Online (virtual)
+        option(value="face-to-face") Face to face
+      label.each-create-form-label(for="link_to_online_environment") Link to online environment (zoom or Google meet)
+      input.create-form-each-text-input(type="text" id="link_to_online_environment" name="link_to_online_environment" placeholder="Link to online environment")
+      label.each-create-form-label(for="address") Project address (Where will the project take place?)
+      input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address")
+
+      label.each-create-form-label(for="start_date") Start date (When will the project start)
+      input.create-form-each-text-input(type="date" id="start_date" name="start_date")
+      label.each-create-form-label(for="finish_date") End date (When will the project finish)
+      input.create-form-each-text-input(type="date" id="finish_date" name="finish_date")
+      .each-form-session-checkbox-content
+        label.each-create-form-label(for="") Add sessions manually later
+        input.create-form-each-check-box(type="checkbox") 
+      label.each-create-form-label(for="number_of_sessions") Number of total sessions
+      input.create-form-each-text-input(type="number" id="number_of_sessions" name="number_of_sessions")
+      label.each-create-form-label(for="duration_of_each_session") Duration of each session
+      input.create-form-each-text-input(type="time" id="duration_of_each_session" name="duration_of_each_session" max="05:00" min="00:30")
+      label.each-create-form-label(for="start_time_of_each_session") Start time of each session
+      input.create-form-each-text-input(type="time" id="start_time_of_each_session" name="start_time_of_each_session")
+      label.each-create-form-label Which UN's Sustainable Developement Goals do you think this project promotes?
+      .create-form-sdg-goals-check-content
+        each sdg in sdgs
+          .each-sdg-content 
+            input(type="checkbox" id="sdg_goals" name="sdg_goals" value=`${sdg._id}`)
+            img(src=`data:image/png;base64,${sdg.image}`).sdg-image
+            .each-sdg-info #{sdg.name}
+
+      input.submit-button(type="submit" value="Save")
+  .all-inner-wrapper
+    .header-main-wrapper 
+      .header-first-section
+        .header-title-content Dashboard 
+        .header-search-bar-section 
+          input.header-search-bar(type="text" placeholder="Search") 
+          i(class="fa fa-search") 
+      .header-second-section 
+        .organization-image-content 
+        .organization-name-content= organization.name
+    .main-inner-wrapper 
+      .main-wrapper-sidebar#sidebar
+        .each-side-bar-icon#home
+          i(class="fa-solid fa-house")
+          .each-side-bar-icon-label Home
+        .each-side-bar-icon#create
+          i(class="fa-solid fa-plus")
+          .each-side-bar-icon-label Create new project
+        .each-side-bar-icon#graph
+          i(class="fa-solid fa-chart-pie")
+          .each-side-bar-icon-label Data science tool
+        .each-side-bar-icon#profile
+          i(class="fa-solid fa-user")
+          .each-side-bar-icon-label View profile
+      .main-wrapper-main-content#main-content
+        .main-content-title Projects 
+        .main-content-project-info-wrapper
+          .info-wrapper-each-info 
+            .info-wrapper-info-number= projects.length
+            .info-wrapper-info-description total
+          -var completed = 0
+          each project in projects 
+            if project.isCompleted 
+              - completed++
+          .info-wrapper-each-info 
+            .info-wrapper-info-number= completed
+            .info-wrapper-info-description completed
+          .info-wrapper-each-info 
+            .info-wrapper-info-number= projects.length - completed
+            .info-wrapper-info-description on progress
+              
+        hr
+        .main-content-projects-wrapper
+          each project in projects 
+            .each-project-wrapper
+              img.each-project-image(src=`data:image/png;base64,${project.photo}`)
+              .each-project-info #{project.name}

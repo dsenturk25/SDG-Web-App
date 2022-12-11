@@ -1,0 +1,81 @@
+
+.header-wrapper {
+  width: calc(100% - 100px);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  box-shadow: 0 0 10px 10px #ccc;
+  justify-content: center;
+}
+
+.logo-section {
+  width: 100px;
+}
+
+.logo-section img {
+  width: 100%;
+  height: 100%;
+}
+
+.header-search-bar-section {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+  margin: 0 100px;
+}
+
+.header-search-bar-section i {
+  position: absolute;
+  left:20px; 
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.header-search-bar-section input {
+  width: 100%;
+  font-size: 14px;
+  padding: 2%;
+  border: 1px solid rgba(0, 0, 0);
+  border-radius: 25px;
+  padding-left: 50px;
+}
+
+.auth-section {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.each-auth-operation-block {
+  height: 40%;
+  width: 100px;
+  margin-right: 20px;
+  font-size: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.each-auth-operation-block:hover {
+  background-color: #2948ff !important;
+  color: #fff !important;
+}
+
+.header-titles-section {
+  display: flex;
+}
+
+.each-header-title {
+  margin-right: 50px;
+  font-size: 16px;
+  width: 100px;
+}

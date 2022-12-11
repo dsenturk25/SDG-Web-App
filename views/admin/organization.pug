@@ -43,11 +43,6 @@ block content
                           .each-organization-project-main-content-info-section
                             .project-info= project.name
                             .project-info-dates
-                              .project-info #{project.date.day}/
-                              .project-info #{project.date.month}/
-                              .project-info #{project.date.year} &nbsp&nbsp
-                              .project-info #{project.date.hour}:
-                              .project-info #{project.date.minute}
                           .waitlist-button-accept(style="width:15%") See details
                         .each-organization-project-more-content
                           .waitlist-button-delete(style="width:2%; height: 25px; margin-bottom: 30px; font-size: 12px; border-radius: 5px") Close
@@ -59,11 +54,6 @@ block content
                           if `${project.environment}` === "online"
                             .project-info Project link for online: #{project.link_to_online_environment}
                           .project-info-dates 
-                              .project-info Date and time: #{project.date.day}/
-                              .project-info #{project.date.month}/
-                              .project-info #{project.date.year} &nbsp&nbsp
-                              .project-info #{project.date.hour}:
-                              .project-info #{project.date.minute}
                           .project-info Duration: #{project.duration} hours
                           .project-sdg-section
                             .project-info Completed SDGs:

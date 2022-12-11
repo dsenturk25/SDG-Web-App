@@ -127,19 +127,22 @@ organizationSchema.statics.createProject = function (body, callback) {
 
       organization.projects_created.push((newProject._id).toString());
       organization.save();
+      return callback(null, organization);
     }
 
-    for (let i = 0; i < body.sdg_goals.length; i++) {
-      const sdgGoalId = body.sdg_goals[i];
+    if (body.sdg_goals.length) {
+      for (let i = 0; i < body.sdg_goals.length; i++) {
+        const sdgGoalId = body.sdg_goals[i];
+    
+        Sdg.findById(sdgGoalId, (err, sdg) => {
+          if (err) return callback("bad_request");
   
-      Sdg.findById(sdgGoalId, (err, sdg) => {
-        if (err) return callback("bad_request");
-
-        sdg.total_hours += body.duration;
-        sdg.projects.push((newProject._id).toString());
-        sdg.save();
-        return callback(null, organization);
-      })
+          sdg.total_hours += body.duration;
+          sdg.projects.push((newProject._id).toString());
+          sdg.save();
+          return callback(null, organization);
+        })
+      }
     }
   });
 }

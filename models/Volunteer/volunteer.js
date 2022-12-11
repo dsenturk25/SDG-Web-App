@@ -99,7 +99,7 @@ volunteerSchema.statics.createVolunteer = function(body, callback) {
   if (newVolunteer) {
 
     newVolunteer.save();
-    sendConfirmationEmail(body.email);
+    // sendConfirmationEmail(body.email);
     return callback(null, newVolunteer);
   }
 

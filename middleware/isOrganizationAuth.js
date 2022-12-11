@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
       else if (organization) next();
     })
   } else {
-    return res.status(401).send("authentication_error");
+    return res.redirect("/organization/login");
   }
 }
