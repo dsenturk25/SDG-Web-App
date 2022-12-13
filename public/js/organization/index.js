@@ -1,34 +1,25 @@
 
 window.onload = () => {
 
-  const sideBar = document.getElementById("sidebar");
-  const mainContent = document.getElementById("main-content");
   const createProjectWrapper = document.getElementById("create-project-wrapper");
-
-  document.addEventListener("mouseover", (event) => {
-    if (event.target.parentNode.className == "each-side-bar-icon") {
-      sideBar.style.width = "15%";
-      mainContent.style.width = "85%";
-      setTimeout(() => {
-        event.target.parentNode.children[1].style.display = "flex";
-      }, 300);
-    } else {
-      for (let i = 0; i < sideBar.children.length; i++) {
-        const eachSideBarIcon = sideBar.children[i];
-        eachSideBarIcon.children[1].style.display = "none";
-        sideBar.style.width = "5%";
-        mainContent.style.width = "calc(95% - 100px)";
-      }
-    }
-  })
+  const projectMoreInfoWrappers = document.getElementsByClassName("each-project-more-info-wrapper");
 
   document.addEventListener("click", (event) => {
+
+    console.log(event.target)
 
     if (event.target.parentNode.id == "create") {
       createProjectWrapper.style.display = "block";
     }
     if (event.target.className == "close-window-button" || event.target.className == "fa-solid fa-close") {
       createProjectWrapper.style.display = "none";
+      for (let i = 0; i < projectMoreInfoWrappers.length; i++) {
+        const element = projectMoreInfoWrappers[i];
+        element.style.display = "none";
+      }
+    }
+    if (event.target.className == "each-project-image") {
+      event.target.parentNode.parentNode.childNodes[1].style.display = "block"
     }
   })
 }

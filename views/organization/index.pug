@@ -5,10 +5,10 @@ block content
       i(class="fa-solid fa-close")
     .create-form-title Create new project
     .create-form-description Please fill all required fields and create the project to bring thousands of volunteers into action!
-    form.create-project-form-content(action="/project/create" method="post" enctype="multipart/form-data") 
+    form.create-project-form-content(action="/project/create" method="post" enctype="multipart/form-data" autocomplete="off") 
       hr
       input.create-form-each-text-input(type="text" id="creator_id" name="creator_id" style="display:none" value=`${organization._id}`)
-      input.create-form-each-text-input(type="text" id="creator_name" name="creator_name" style="display:none" value=`${organization.name}`)
+      input.create-form-each-text-input(type="text" id="creator_name" name="creator_name" style="display:none" value=`${organization.name}` )
       label.each-create-form-label(for="name") Project name
       input.create-form-each-text-input(type="text" id="name" name="name" placeholder="name")
       label.each-create-form-label(for="short_description") Project description (short)
@@ -69,6 +69,9 @@ block content
         .each-side-bar-icon#graph
           i(class="fa-solid fa-chart-pie")
           .each-side-bar-icon-label Data science tool
+        .each-side-bar-icon#volunteers
+          i(class="fa-solid fa-users")
+          .each-side-bar-icon-label Your volunteers
         .each-side-bar-icon#profile
           i(class="fa-solid fa-user")
           .each-side-bar-icon-label View profile
@@ -93,5 +96,28 @@ block content
         .main-content-projects-wrapper
           each project in projects 
             .each-project-wrapper
-              img.each-project-image(src=`data:image/png;base64,${project.photo}`)
-              .each-project-info #{project.name}
+              .each-project-main-info-wrapper
+                img.each-project-image(src=`data:image/png;base64,${project.photo}`)
+                .each-project-info #{project.name}
+              .each-project-more-info-wrapper
+                .close-window-button
+                  i(class="fa-solid fa-close")
+                .each-project-more-info-wrapper-info-content 
+                  .each-project-info Name: #{project.name}
+                  .each-project-info Description: #{project.short_description}
+                  .each-project-info Long description: #{project.long_description}
+                  .each-project-info Name: #{project.name}
+                  form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off") 
+                    hr
+                    input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
+                    label.each-create-form-label(for="start_time") 
+                    input.create-form-each-text-input(type="time" id="start_time" name="start_time")
+                    label.each-create-form-label(for="duration") 
+                    input.create-form-each-text-input(type="time" id="duration" name="duration")
+                    label.each-create-form-label(for="environment") Project environment
+                    select(name="environment" id="environment") 
+                      option(value="online") Online (virtual)
+                      option(value="face-to-face") Face to face
+                    label.each-create-form-label(for="address") Project address (Where will the project take place?)
+                    input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address")
+                    input.submit-button(type="submit" value="Save")

@@ -74,7 +74,7 @@
 }
 
 .main-wrapper-main-content {
-  width: calc(95% - 100px);
+  width: calc(85% - 100px);
   height: calc(100% - 100px);
   background-color: rgb(250, 250, 250);
   border-radius: 20px;
@@ -83,7 +83,7 @@
 }
 
 .main-wrapper-sidebar {
-  width: 5%;
+  width: 15%;
   height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
@@ -108,9 +108,8 @@
 
 .each-side-bar-icon-label {
   width: 40%;
-  display: none;
   font-size: 16px;
-  margin-left: 5px;
+  margin-left: 10px;
   width: fit-content;
 }
 
@@ -129,14 +128,13 @@
 .each-project-wrapper {
   width: 160px;
   height: 160px;
-  background-color: red;
   margin-right: 20px;
   margin-bottom: 20px;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: end;
   padding: 20px;
+  cursor: pointer;
 }
 
 .each-project-info-dates {
@@ -145,7 +143,7 @@
 
 .each-project-info {
   font-size: 14px;
-  z-index: 1;
+  z-index: 200;
 }
 
 .each-project-wrapper img {
@@ -210,6 +208,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.close-window-button:hover {
+  background-color: rgb(255, 60, 60);
 }
 
 .create-project-form-content input, .create-project-form-content select, .create-project-form-content textarea {
@@ -264,4 +267,27 @@
   padding: 1% 0 !important;
   margin-left: 0 !important;
   margin-top: 50px !important;
+}
+
+.each-project-main-info-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+}
+
+.each-project-more-info-wrapper {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  left: calc(50% - 40% - 25px);
+  top: calc(50% - 40% - 50px);
+  z-index: 300;
+  background-color: white;
+  box-shadow: 0 0 10px 500px rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  padding: 50px;
+  cursor: default;
+  display: none;
 }

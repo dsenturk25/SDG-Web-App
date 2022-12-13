@@ -8,6 +8,7 @@ const isOrganizationAuth = require("../middleware/isOrganizationAuth");
 const createPostController = require("../controllers/Project/create/post");
 const editPostController = require("../controllers/Project/edit/post");
 const deletePostController = require("../controllers/Project/delete/post");
+const addSessionController = require("../controllers/Project/sessions/post");
 
 const findIdGetController = require("../controllers/Project/getById/get");
 const findAllGetController = require("../controllers/Project/getAll/get");
@@ -26,6 +27,12 @@ router.post(
   upload.single("photo"),
   createPostController
 );
+
+router.post(
+  "/add/session",
+  isOrganizationAuth,
+  addSessionController
+)
 
 router.post(
   "/edit",

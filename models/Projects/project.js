@@ -128,6 +128,25 @@ const projectsSchema = mongoose.Schema({
 
 })
 
+projectsSchema.statics.addSessionManual = function (body, callback) {
+  
+  const session = {
+    address: body.address,
+    environment: body.environment,
+    start_time: body.start_time,
+    duration: body.duration
+  }
+
+  Project.findById(body._id, (err, project) => {
+    
+    if (err) return callback("create_failed");
+
+    project.sessions.push(session);
+    project.save();
+    return callback(null, project);
+  })
+}
+
 const Project = mongoose.model("Projects", projectsSchema);
 
 module.exports = Project;
