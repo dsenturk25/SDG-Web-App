@@ -291,3 +291,38 @@
   cursor: default;
   display: none;
 }
+
+.project-sessions-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: fit-content;
+}
+
+.each-session-content {
+  display: flex;
+  width: 100%;
+  height: 40px;
+}
+
+.each-session-info {
+  margin-right: 10px;
+}
+
+.sdg-content {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.sdg-img-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.each-project-sdg-goals-content {
+  display: flex;
+}

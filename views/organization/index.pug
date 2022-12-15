@@ -107,7 +107,26 @@ block content
                   .each-project-info Description: #{project.short_description}
                   .each-project-info Long description: #{project.long_description}
                   .each-project-info Name: #{project.name}
-                  form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off") 
+                  .each-project-sdg-goals-content 
+                    each sdg in sdgs 
+                      each sdg_id in project.sdg_goals 
+                        if `${sdg_id}` === `${sdg._id}`
+                          .sdg-content 
+                            .sdg-img-content
+                              img(src=`data:image/png;base64,${sdg.image}`)
+
+                  .project-sessions-wrapper 
+                    each session in project.sessions 
+                      .each-session-content
+                        .each-session-info Start time: #{session.session_start_time}
+                        .each-session-info Duration: #{session.session_duration}
+                        .each-session-info Environment: #{session.session_environment}
+                        if `${session.session_address}` != ""
+                          .each-session-info Address: #{session.session_address}
+                        if `${session.session_link_to_online_environment}` != ""
+                          .each-session-info Link to online environment: #{session.session_link_to_online_environment}
+                  .submit-button#add-session-button Add new session
+                  form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
                     hr
                     input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
                     label.each-create-form-label(for="session_start_time") Start time of the session
@@ -123,3 +142,4 @@ block content
                     label.each-create-form-label(for="session_address" id="session_address_label" style="display:none") Project address (Where will the project take place?)
                     input.create-form-each-text-input(type="text" id="session_address" name="session_address" placeholder="Address" style="display:none")
                     input.submit-button(type="submit" value="Save")
+                    

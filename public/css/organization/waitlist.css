@@ -1,0 +1,38 @@
+.all-inner-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.waitlist-wrapper {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 50px 10px #ccc;
+  padding: 100px;
+  border-radius: 25px;
+}
+
+.waitlist-wrapper-title {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.waitlist-wrapper-subtitle {
+  font-size: 20px;
+  margin-bottom: 24px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.waitlist-wrapper-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.waitlist-img-content {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}

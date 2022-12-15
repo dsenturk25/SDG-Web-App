@@ -135,7 +135,7 @@ projectsSchema.statics.addSessionManual = function (body, callback) {
     session_environment: body.session_environment,
     session_start_time: body.session_start_time,
     session_duration: body.session_duration,
-    link_to_online_environment: body.link_to_online_environment
+    session_link_to_online_environment: body.session_link_to_online_environment
   }
 
   Project.findById(body._id, (err, project) => {

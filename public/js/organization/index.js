@@ -14,9 +14,23 @@ window.onload = () => {
   const sessionAdressLabel = document.getElementById("session_address_label");
   const sessionLinkToOnlineEnvironmentLabel = document.getElementById("session_link_to_online_environment_label");
 
+  const addSessionForm = document.getElementById("session-form");
+  const addSessionButton = document.getElementById("add-session-button");
+
+  let sessionCnt = 0;
+
   document.addEventListener("click", (event) => {
 
-    console.log(event.target)
+    if (event.target.id == "add-session-button") {
+      if (sessionCnt % 2 == 0) {
+        addSessionForm.style.display = "flex";
+        addSessionButton.innerHTML = "Cancel";
+      } else {
+        addSessionForm.style.display = "none";
+        addSessionButton.innerHTML = "Add new session";
+      }
+      sessionCnt++;
+    }
 
     if (event.target.parentNode.id == "create") {
       createProjectWrapper.style.display = "block";
