@@ -4,6 +4,7 @@ const hashpassword = require("../../utils/hashPassword");
 const verifypassword = require("../../utils/verifyPassword");
 const Project = require("../Projects/project");
 const { sendConfirmationEmail } = require("../../utils/sendEmail");
+const createConfirmationCode = require("../../utils/createConfirmationCode");
 
 const volunteerSchema = mongoose.Schema({
 
@@ -85,6 +86,10 @@ const volunteerSchema = mongoose.Schema({
     isEmailConfirmed: {
       type: Boolean,
       default: false
+    },
+
+    confirmation_code: {
+      type: Number,
     }
 })
 
@@ -98,8 +103,10 @@ volunteerSchema.statics.createVolunteer = function(body, callback) {
 
   if (newVolunteer) {
 
+    newVolunteer.confirmation_code = createConfirmationCode();
+
     newVolunteer.save();
-    // sendConfirmationEmail(body.email);
+    sendConfirmationEmail(newVolunteer);
     return callback(null, newVolunteer);
   }
 
@@ -173,6 +180,29 @@ volunteerSchema.statics.exitProject = function (body, callback) {
       })
     }
   });
+}
+
+volunteerSchema.statics.confirmEmail = function (body, callback) {
+
+  Volunteer.findById(body._id, (err, volunteer) => {
+    if (err || !volunteer) return callback("verify_error");
+    if (body.confirmation_code == volunteer.confirmation_code.toString()) {
+      volunteer.isEmailConfirmed = true;
+      volunteer.save();
+      return callback(null, volunteer);
+    } else return callback("verify_error");
+  })
+
+}
+
+volunteerSchema.statics.updateConfirmationCode = function (body, callback) {
+  Volunteer.findById(body._id, (err, volunteer) => {
+    if (err, !volunteer) return callback("bad_request");
+    volunteer.confirmation_code = createConfirmationCode();
+    volunteer.save();
+    sendConfirmationEmail(volunteer);
+    return callback(null, volunteer);
+  })
 }
 
 volunteerSchema.pre('save', hashpassword);

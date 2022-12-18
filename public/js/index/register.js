@@ -6,6 +6,8 @@ window.onload = () => {
   form.style.marginBottom = "0";
 
   const email = document.getElementById("email");
+  const name = document.getElementById("name");
+  const surname = document.getElementById("surname");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("password-confirm");
   const resInfoWrapper = document.getElementById("res-info-wrapper");
@@ -13,7 +15,7 @@ window.onload = () => {
 
   submitButton.addEventListener("click", (event) => {
 
-    if (email.value && password.value && confirmPassword.value && password.value == confirmPassword.value) {
+    if (email.value && name.value && surname.value && password.value && confirmPassword.value && password.value == confirmPassword.value) {
       const domain = email.value.split("@")[1];
 
       if (!domain) {
@@ -28,12 +30,14 @@ window.onload = () => {
 
         serverRequest(url, "POST", {
           email: email.value,
+          name: name.value,
+          surname: surname.value,
           password: password.value
         }, (res) => {
           if (res.error) {
             resInfoWrapper.innerHTML = "Something went wrong. Please try again later."
           } else {
-            alert("Account created");
+            window.location.href = "/volunteer";
           }
         })
       }

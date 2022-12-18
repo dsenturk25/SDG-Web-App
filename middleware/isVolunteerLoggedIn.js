@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
       else if (volunteer) next();
     })
   } else {
-    res.status(401).send("authentication_error");
+    return res.redirect("/login");
   }
 }
 

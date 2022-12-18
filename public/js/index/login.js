@@ -22,7 +22,7 @@ window.onload = () => {
       if (res.error) {
         resInfoWrapper.innerHTML = "Email or password is incorrect."
       } else {
-        alert("Success madıfakı")
+        window.location.href = "/volunteer";
       }
     })
   })

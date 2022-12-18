@@ -1,0 +1,60 @@
+.all-inner-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.waitlist-wrapper {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 50px 10px #ccc;
+  padding: 100px;
+  border-radius: 25px;
+}
+
+.waitlist-wrapper-title {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.waitlist-wrapper-subtitle {
+  font-size: 20px;
+  margin-bottom: 24px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.waitlist-wrapper-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.waitlist-img-content {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.confirmation-input-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.each-confirmation-input {
+  width: 50px;
+  height: 80px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px 5px #ccc;
+  border: 0;
+  margin-right: 10px;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

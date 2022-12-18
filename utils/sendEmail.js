@@ -4,12 +4,12 @@ require("dotenv").config();
 
 sg.setApiKey(process.env.SENDGRID_API_KEY);
 
-const sendConfirmationEmail = (email) => {
+const sendConfirmationEmail = (body) => {
   sg.send({
-    to: email,
+    to: body.email,
     from: process.env.SENDER_EMAIL_ADDRESS,
     subject: "Welcome to SDG WebApp",
-    text: `Hello, welcome. Nice to meet you!`
+    text: `Hello ${body.name}, \n\n Welcome to SDG WebApp. Please confirm the email address for your account on SDG WebApp by entering the 6-digit code below. \n\n 6-digit code: ${body.confirmation_code}`
   });
 };
 
