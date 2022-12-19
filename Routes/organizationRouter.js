@@ -13,12 +13,36 @@ const registerGetController = require("../controllers/Organization/index/registe
 const loginGetController = require("../controllers/Organization/index/login/get");
 const indexGetController = require("../controllers/Organization/index/index/get");
 const waitlistGetController = require("../controllers/Organization/index/waitlist/get");
+const organizationVolunteersGetController = require("../controllers/Organization/index/volunteers/get");
+const comparisonsPostController = require("../controllers/Organization/create/comparisons/post");
+const graphGetController = require("../controllers/Organization/index/graph/get");
 
 router.get(
   "/",
   isOrganizationAuth,
   isOrganizationOnWaitlist,
   indexGetController
+)
+
+router.get(
+  "/volunteers",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  organizationVolunteersGetController
+)
+
+router.post(
+  "/comparisons",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  comparisonsPostController
+)
+
+router.get(
+  "/graph",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  graphGetController
 )
 
 router.post(

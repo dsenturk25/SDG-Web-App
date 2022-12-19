@@ -4,6 +4,7 @@ const verifypassword = require("../../utils/verifyPassword");
 const hashpassword = require("../../utils/hashPassword");
 const Project = require("../Projects/project");
 const Sdg = require("../SDGs/sdg");
+const async = require("async");
 
 const organizationSchema = mongoose.Schema({
 
@@ -71,7 +72,13 @@ const organizationSchema = mongoose.Schema({
   phone_number: {
     type: String,
     required: true
-  }
+  },
+
+  volunteers: [
+    volunteer = {
+      type: mongoose.Types.ObjectId
+    }
+  ]
 
 })
 

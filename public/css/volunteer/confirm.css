@@ -58,3 +58,8 @@
   justify-content: center;
   text-align: center;
 }
+
+.res-info-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+}

@@ -1,0 +1,20 @@
+extends ./general.pug
+block main
+  .main-content-title Graphing tool 
+  .input-wrapper 
+    label(for="x-column") X axis data filter
+    select#x-axis-filter(name="x-column") 
+      option(value="gender") Gender 
+      option(value="city") City 
+      option(value="country") Country 
+    label(for="x-column") Bar stacks filter 
+    select#bar-stack-filters(name="column-section-filter") 
+      option(value="gender") Gender 
+      option(value="city") City 
+      option(value="country") Country
+    label(for="hour-number-select") Y-axis data filter
+    select#y-axis-filter(name="hour-number-select") 
+      option(value="number-of-volunteers") Number of volunteers 
+      option(value="social-service-hours") Total social service hours
+    .submit-button(style="width:200px") Graph
+  .main-content#main-content

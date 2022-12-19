@@ -1,0 +1,34 @@
+
+.each-organization-volunteer-wrapper {
+  width: 88%;
+  padding: 2%;
+  background-color: #eee;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  padding-right: 10%;
+}
+
+.each-volunteer-info {
+  display: inline-flex;
+  margin-bottom: 5px;
+  margin-right: 20px;
+}
+
+.waitlist-button-delete {
+  position: absolute;
+  right: 10px;
+  padding: 1% 2%;
+  background-color: rgb(255, 0, 0);
+  border-radius: 20px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.waitlist-button-delete:hover {
+  background-color: rgb(255, 100, 100);
+}

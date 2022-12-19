@@ -13,6 +13,10 @@ window.onload = () => {
   document.addEventListener("click", (event) => {
     if (event.target == resendCodeButton) {
 
+      resendCodeButton.disabled = true;
+      resendCodeButton.style.background = "#ccc";
+      resendCodeButton.style.cursor = "default";
+
       const url = window.location.href.split("/volunteer")[0] + "/volunteer/auth/resend_code";
 
       serverRequest(url, "POST", {

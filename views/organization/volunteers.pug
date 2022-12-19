@@ -1,0 +1,17 @@
+extends ./general.pug
+block main
+  .main-content-title Volunteers 
+  .main-content-description Here you can view, search and interact with your volunteers. 
+  hr
+  .main-volunteers-wrapper 
+    each volunteer in volunteers 
+      .each-organization-volunteer-wrapper 
+        .each-volunteer-info(style="display:none") #{volunteer._id}
+        .each-volunteer-info Name: #{volunteer.name} #{volunteer.surname}
+        .each-volunteer-info Email: #{volunteer.email}
+        .each-volunteer-info Phone number: #{volunteer.phone_number}
+        .each-volunteer-info School: #{volunteer.school}
+        .each-volunteer-info Gender: #{volunteer.gender}
+        .each-volunteer-info Location: #{volunteer.city} / #{volunteer.country}
+        .each-volunteer-info Birth date: #{volunteer.birth_date.day}/#{volunteer.birth_date.month}/#{volunteer.birth_date.year}
+        .waitlist-button-delete Remove
