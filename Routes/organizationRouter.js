@@ -4,7 +4,7 @@ const router = express.Router();
 
 const registerPostController = require("../controllers/Organization/authOrganization/register/post");
 const loginPostController = require("../controllers/Organization/authOrganization/login/post");
-const profileGetController = require("../controllers/Organization/authOrganization/profile/get");
+const profileGetController = require("../controllers/Organization/index/profile/get");
 
 const isOrganizationAuth = require("../middleware/isOrganizationAuth");
 const isOrganizationOnWaitlist = require("../middleware/isOrganizationOnWaitlist");
@@ -16,6 +16,7 @@ const waitlistGetController = require("../controllers/Organization/index/waitlis
 const organizationVolunteersGetController = require("../controllers/Organization/index/volunteers/get");
 const comparisonsPostController = require("../controllers/Organization/create/comparisons/post");
 const graphGetController = require("../controllers/Organization/index/graph/get");
+const volunteersRemovePostController = require("../controllers/Organization/remove/volunteer/post");
 
 router.get(
   "/",
@@ -29,6 +30,13 @@ router.get(
   isOrganizationAuth,
   isOrganizationOnWaitlist,
   organizationVolunteersGetController
+)
+
+router.post(
+  "/volunteers/remove",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  volunteersRemovePostController
 )
 
 router.post(

@@ -149,13 +149,17 @@ volunteerSchema.statics.joinProject = function (body, callback) {
     if (err || !volunteer) return callback("user_not_found");
     if (volunteer) {
 
-      volunteer.projects.push(body.project_id);
+      if (!volunteer.projects.includes(body.project_id)) {
+        volunteer.projects.push(body.project_id);
+      }
       volunteer.save();
 
       Project.findById(body.project_id, (err, project) => {
         if (err) return callback("project_not_found");
 
-        project.attendants.push((volunteer._id).toString());
+        if (!project.attendants.includes((volunteer._id).toString())) {
+          project.attendants.push((volunteer._id).toString());
+        }
         project.save();
 
         Organization.findById(project.creator_id, (err, organization) => {
@@ -165,7 +169,7 @@ volunteerSchema.statics.joinProject = function (body, callback) {
 
           async.timesSeries(organization.volunteers.length, (i, next) => {
 
-            if (organization.volunteers[i] == volunteer._id) {
+            if (organization.volunteers[i].toString() == volunteer._id.toString()) {
               flag = 1;
               next();
             } else {
@@ -179,9 +183,11 @@ volunteerSchema.statics.joinProject = function (body, callback) {
             }
           })
 
+          flag = 0;
+
           async.timesSeries(volunteer.joined_organizations.length, (i, next) => {
 
-            if (volunteer.joined_organizations[i] == organization._id) {
+            if (volunteer.joined_organizations[i].toString() == organization._id.toString()) {
               flag = 1;
               next();
             } else {
@@ -345,6 +351,58 @@ volunteerSchema.statics.createStackedBarGraph = function (body, callback) {
       })
     })
   });
+}
+
+volunteerSchema.statics.removeVolunteerFromOrganization = function (body, callback) {
+
+  Organization.findById(body.organization_id, (err, organization) => {
+
+    if (err) return callback("organization_not_found");
+
+    if (organization) {
+    
+      Volunteer.findById(body.volunteer_id, (err, volunteer) => {
+        
+        if (err) return callback("volunteer_not_found");
+
+        async.timesSeries(organization.projects_created.length, (i, next) => {
+
+          const project_id = organization.projects_created[i].toString();
+          const volunteer_id = body.volunteer_id;
+  
+          if (volunteer.projects.includes(project_id.toString())) {
+            Volunteer.exitProject({
+              project_id: project_id, 
+              volunteer_id: volunteer_id
+            }, (err, project) => {
+              if (err) return callback("exit_project_failed");
+              if (project) return next();
+            })
+          } else {
+            next();
+          }
+        }, (err, res) => {
+          if (err) return callback("iterator_failed");
+  
+          const newVolunteersArray = organization.volunteers.filter((value) => {
+            return value != body.volunteer_id
+          })
+    
+          organization.volunteers = newVolunteersArray;
+          organization.save();
+
+          const newOrganizationsArray = volunteer.joined_organizations.filter((value) => {
+            return value != body.organization_id
+          })
+    
+          volunteer.joined_organizations = newOrganizationsArray;
+          volunteer.save();
+
+          return callback(null, volunteer);
+        })
+      })
+    }
+  })
 }
 
 volunteerSchema.pre('save', hashpassword);

@@ -184,4 +184,5 @@ input {
   padding: 2% 5%;
   display: flex;
   flex-wrap: wrap;
+  overflow: visible;
 }
