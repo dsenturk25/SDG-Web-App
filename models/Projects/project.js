@@ -53,7 +53,7 @@ const projectsSchema = mongoose.Schema({
 
   start_date: {
     type: Object,
-    required:false,
+    required: false,
     default: {
       day: "dd",
       month: "mm",
@@ -63,7 +63,7 @@ const projectsSchema = mongoose.Schema({
 
   finish_date: {
     type: Object,
-    required:false,
+    required: false,
     default: {
       day: "dd",
       month: "mm",
@@ -90,13 +90,13 @@ const projectsSchema = mongoose.Schema({
 
   link_to_online_environment: {
     type: String,
-    trim: true 
-   },
- 
-   address: {
-     type: String,
-     trim: true,
-   },
+    trim: true
+  },
+
+  address: {
+    type: String,
+    trim: true,
+  },
 
   sessions: [
     session = {
@@ -111,13 +111,16 @@ const projectsSchema = mongoose.Schema({
       },
       session_link_to_online_environment: {
         type: String,
-        trim: true 
-       },
-     
-       session_address: {
-         type: String,
-         trim: true,
-       },
+        trim: true
+      },
+      session_date: {
+        type: Object,
+        default: {
+          day: "dd",
+          month: "mm",
+          year: "yy",
+        }
+      },
     }
   ],
 
@@ -129,7 +132,7 @@ const projectsSchema = mongoose.Schema({
 })
 
 projectsSchema.statics.addSessionManual = function (body, callback) {
-  
+
   const session = {
     session_address: body.session_address,
     session_environment: body.session_environment,
@@ -139,7 +142,7 @@ projectsSchema.statics.addSessionManual = function (body, callback) {
   }
 
   Project.findById(body._id, (err, project) => {
-    
+
     if (err) return callback("create_failed");
 
     project.sessions.push(session);

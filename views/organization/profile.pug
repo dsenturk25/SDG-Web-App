@@ -1,2 +1,10 @@
 extends ./general.pug
 block main
+  .main-content-title Profile 
+  .main-content-description Edit your profile  
+  .main-content-project-info-wrapper
+    .info-wrapper-each-info 
+      .info-wrapper-info-number= projects.length
+      .info-wrapper-info-description total
+  hr
+  .organization-main-profile-wrapper #{organization.name}

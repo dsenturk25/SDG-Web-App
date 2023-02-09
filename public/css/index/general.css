@@ -4,7 +4,7 @@ html {
   font-size: 16px;
   width: 100%;
   height: 100%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -48,9 +48,12 @@ a {
 .form-each-right-column {
   width: 50%;
   height: auto;
-  background: #396afc;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2948ff, #396afc);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2948ff, #396afc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  background: #396afc;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2948ff, #396afc);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2948ff, #396afc);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,8 +165,8 @@ a {
 .submit-button {
   width: calc(100%);
   border-radius: 50px;
-  background: #396afc; 
-  background: -webkit-linear-gradient(to right, #2948ff, #396afc);  
+  background: #396afc;
+  background: -webkit-linear-gradient(to right, #2948ff, #396afc);
   background: linear-gradient(to right, #2948ff, #396afc);
   margin-left: 10px;
   border: 0;
@@ -180,8 +183,8 @@ a {
 }
 
 .submit-button:hover {
-  background: #396afc; 
-  background: -webkit-linear-gradient(to right, #3d5aff, #6d91fd);  
+  background: #396afc;
+  background: -webkit-linear-gradient(to right, #3d5aff, #6d91fd);
   background: linear-gradient(to right, #3d5aff, #6d91fd);
 }
 
@@ -195,4 +198,107 @@ a {
   height: 20px;
   color: red;
   font-size: 14px;
+}
+
+.header-wrapper {
+  width: calc(100% - 100px);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  box-shadow: 0 0 10px 10px #ccc;
+  justify-content: center;
+}
+
+.all-inner-wrapper {
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.logo-section {
+  width: 100px;
+}
+
+.logo-section img {
+  width: 100%;
+  height: 100%;
+}
+
+.header-search-bar-section {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+  margin: 0 100px;
+}
+
+.header-search-bar-section i {
+  position: absolute;
+  left: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.header-search-bar-section input {
+  width: 100%;
+  font-size: 14px;
+  padding: 2%;
+  border: 1px solid rgba(0, 0, 0);
+  border-radius: 25px;
+  padding-left: 50px;
+}
+
+.auth-section {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.each-auth-operation-block {
+  height: 40%;
+  width: 100px;
+  margin-right: 20px;
+  font-size: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.each-auth-operation-block:hover {
+  background-color: rgba(0, 115, 255, 1) !important;
+  color: #fff !important;
+}
+
+.header-titles-section {
+  display: flex;
+}
+
+.each-header-title {
+  margin-right: 50px;
+  font-size: 16px;
+  width: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.each-header-title span {
+  position: absolute;
+  font-size: 8px;
+  top: -5px;
+  right: 0;
+  color: rgb(200, 120, 0);
+}
+
+.footer-content {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 140, 255, 1);
 }

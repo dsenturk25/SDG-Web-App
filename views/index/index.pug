@@ -8,13 +8,180 @@ block content
         input(type="text" placeholder="Search for projects and organizations") 
         i(class="fa fa-search")
       .header-titles-section 
-        .each-header-title My projects
-        .each-header-title Leaderboard
-        .each-header-title Progress
+        .each-header-title 
+          div My projects
+        .each-header-title 
+          div Leaderboard
+          span soon
+        .each-header-title
+          div Progress
+          span soon
       .auth-section
         if userAuth 
           img(src="", alt="", srcset="")
         else 
-          .each-auth-operation-block Login 
-          .each-auth-operation-block(style="background-color:#2948ff; color: #ffffff") Sign Up 
+          a(href="/login").each-auth-operation-block Login 
+          a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
     .inner-main-wrapper 
+      .each-project-row-main-wrapper
+        h2.each-project-row-title Popular in your country
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
+            each project in projects
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+      .each-project-row-main-wrapper
+        h2.each-project-row-title Popular in your country
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
+            each project in projects
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
