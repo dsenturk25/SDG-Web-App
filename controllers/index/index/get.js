@@ -1,5 +1,6 @@
 
 const Projects = require("../../../models/Projects/project");
+const Volunteer = require("../../../models/Volunteer/volunteer");
 
 module.exports = (req, res) => {
 
@@ -11,16 +12,23 @@ module.exports = (req, res) => {
       project.photo = Buffer.from(project.photo).toString('base64');
     }
 
-    res.render("index/index", {
-      page: "index/index",
-      title: "Volunteer",
-      includes: {
-        external: {
-          css: ["page", "general"],
-          js: ["page", "functions"]
-        }
-      },
-      projects,
-    })
+    if (req.session.volunteer) {
+      Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
+        if (err) return res.redirect("/login");
+
+        res.render("index/index", {
+          page: "index/index",
+          title: "Volunteer",
+          includes: {
+            external: {
+              css: ["page", "general"],
+              js: ["page", "functions"]
+            }
+          },
+          projects,
+          volunteer
+        })
+      })
+    }
   })
 }

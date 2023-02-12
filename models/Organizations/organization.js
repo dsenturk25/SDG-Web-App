@@ -4,7 +4,6 @@ const verifypassword = require("../../utils/verifyPassword");
 const hashpassword = require("../../utils/hashPassword");
 const Project = require("../Projects/project");
 const Sdg = require("../SDGs/sdg");
-const async = require("async");
 
 const organizationSchema = mongoose.Schema({
 
@@ -48,7 +47,7 @@ const organizationSchema = mongoose.Schema({
   },
 
   associated_school: {
-    type: String, 
+    type: String,
     trim: true
   },
 
@@ -83,9 +82,9 @@ const organizationSchema = mongoose.Schema({
 })
 
 
-organizationSchema.statics.createOrganization = function(body, callback) {
+organizationSchema.statics.createOrganization = function (body, callback) {
 
-  Organization.findOne({email: body.email}).then(organization => {
+  Organization.findOne({ email: body.email }).then(organization => {
     if (organization) return callback("email_not_unique", null);
   });
 
@@ -100,12 +99,12 @@ organizationSchema.statics.createOrganization = function(body, callback) {
 
 organizationSchema.statics.loginOrganization = function (body, callback) {
 
-  Organization.findOne({email: body.email}).then(organization => {
-  if (!organization) return callback("user_not_found");
+  Organization.findOne({ email: body.email }).then(organization => {
+    if (!organization) return callback("user_not_found");
 
     verifypassword(body.password, organization.password, (res) => {
       if (res) return callback(null, organization);
-      
+
       return callback("verify_error", null);
     })
   });
@@ -113,7 +112,8 @@ organizationSchema.statics.loginOrganization = function (body, callback) {
 
 organizationSchema.statics.findOrganizationById = function (body, callback) {
 
-  Organization.findById(mongoose.Types.ObjectId(body._id), (err, organization) => {;
+  Organization.findById(mongoose.Types.ObjectId(body._id), (err, organization) => {
+    ;
     if (err || !organization) return callback("user_not_found");
     callback(null, organization);
   })
@@ -123,7 +123,7 @@ organizationSchema.statics.findOrganizationById = function (body, callback) {
 organizationSchema.statics.createProject = function (body, callback) {
 
   const newProject = new Project(body);
-  
+
   if (newProject) {
     newProject.save();
   }
@@ -140,10 +140,10 @@ organizationSchema.statics.createProject = function (body, callback) {
     if (body.sdg_goals.length) {
       for (let i = 0; i < body.sdg_goals.length; i++) {
         const sdgGoalId = body.sdg_goals[i];
-    
+
         Sdg.findById(sdgGoalId, (err, sdg) => {
           if (err) return callback("bad_request");
-  
+
           sdg.total_hours += body.duration;
           sdg.projects.push((newProject._id).toString());
           sdg.save();
@@ -155,7 +155,7 @@ organizationSchema.statics.createProject = function (body, callback) {
 }
 
 organizationSchema.statics.editProject = function (body, callback) {
-  
+
   Project.findByIdAndUpdate(body._id, body, (err, organization) => {
     if (err) return callback("update_failed");
     return callback(null, organization);
@@ -163,7 +163,7 @@ organizationSchema.statics.editProject = function (body, callback) {
 }
 
 organizationSchema.statics.deleteProject = function (body, callback) {
-  
+
   Project.findByIdAndDelete(body._id, (err, project) => {
     if (err || !project) return callback("delete_failed");
   })
@@ -200,6 +200,23 @@ organizationSchema.statics.findAllProjects = function (body, callback) {
 
     return callback(null, organization.projects_created);
   })
+}
+
+organizationSchema.statics.filterProjects = function (body, callback) {
+
+  /*
+  {
+    filterModel_filterField_condition
+    Organization_type_bigger: 5
+  }
+  */
+
+  const model = body.split("_")[0];
+  const filter = body.split("_")[1];
+  const condition = body.split("_")[2];
+
+  eval(model).findById
+
 }
 
 organizationSchema.pre('save', hashpassword);

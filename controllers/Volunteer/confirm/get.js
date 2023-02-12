@@ -4,7 +4,7 @@ const Volunteer = require("../../../models/Volunteer/volunteer");
 module.exports = (req, res) => {
 
   Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
-    if (volunteer.isEmailConfirmed) return res.redirect("/volunteer");
+    if (volunteer.isEmailConfirmed) return res.redirect("/");
     return res.render("volunteer/confirm", {
       page: "volunteer/confirm",
       title: "Confirm your email",
@@ -13,7 +13,7 @@ module.exports = (req, res) => {
           css: ["page", "general"],
           js: ["page", "functions"]
         }
-      }, 
+      },
     })
   })
 }

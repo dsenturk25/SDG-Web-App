@@ -2,7 +2,7 @@ extends ../partials/head.pug
 block content
   .all-inner-wrapper 
     .header-wrapper 
-      .logo-section 
+      a(href="/").logo-section 
         img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
       .header-search-bar-section 
         input(type="text" placeholder="Search for projects and organizations") 
@@ -17,14 +17,14 @@ block content
           div Progress
           span soon
       .auth-section
-        if userAuth 
-          img(src="", alt="", srcset="")
+        if volunteer 
+          .volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
         else 
           a(href="/login").each-auth-operation-block Login 
           a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
     .inner-main-wrapper 
       .each-project-row-main-wrapper
-        h2.each-project-row-title Popular in your country
+        h2.each-project-row-title Popular in #{volunteer.city}
         .each-project-slider-wrapper
           div(class="btn prev")
             i(class="fa-solid fa-angle-left")
@@ -32,51 +32,6 @@ block content
             i(class="fa-solid fa-angle-right")
           .each-project-row
             each project in projects
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
               .cards
                 div(style="display:none") #{project._id}
                 div(class="card-property card_image loading")
@@ -105,7 +60,7 @@ block content
                 div(class="card-property card_description loading") Start time: #{project.start_date}
                 div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
       .each-project-row-main-wrapper
-        h2.each-project-row-title Popular in your country
+        h2.each-project-row-title Popular in #{volunteer.city}
         .each-project-slider-wrapper
           div(class="btn prev")
             i(class="fa-solid fa-angle-left")
@@ -140,48 +95,4 @@ block content
                 div(class="card-property card_description loading") #{project.short_description}
                 div(class="card-property card_description loading") Start time: #{project.start_date}
                 div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+      footer

@@ -134,6 +134,7 @@ const projectsSchema = mongoose.Schema({
 projectsSchema.statics.addSessionManual = function (body, callback) {
 
   const session = {
+    session_date: body.session_date,
     session_address: body.session_address,
     session_environment: body.session_environment,
     session_start_time: body.session_start_time,

@@ -35,11 +35,11 @@ window.onload = () => {
   })
 
   document.addEventListener("keydown", (event) => {
-    if(event.keyCode == 37) {
+    if (event.keyCode == 37) {
       if (focusedInput.previousSibling) {
         focusedInput.previousSibling.focus();
       }
-    } else if(event.keyCode == 39) {
+    } else if (event.keyCode == 39) {
       if (focusedInput.nextSibling) {
         focusedInput.nextSibling.focus();
       }
@@ -47,7 +47,7 @@ window.onload = () => {
   })
 
   document.addEventListener("keyup", (event) => {
-    if (event.target.className == "each-confirmation-input" &&  event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
+    if (event.target.className == "each-confirmation-input" && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
       if (event.target.nextSibling) {
         event.target.nextSibling.focus();
       }
@@ -84,7 +84,7 @@ window.onload = () => {
           resInfoWrapper.style.color = "red";
           return resInfoWrapper.innerHTML = "The code you've entered appears to be incorrect. Please try again";
         }
-        else return window.location.href = "/volunteer";
+        else return window.location.href = "";
       })
     }
   })

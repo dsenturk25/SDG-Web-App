@@ -22,7 +22,7 @@ window.onload = () => {
       if (res.error) {
         resInfoWrapper.innerHTML = "Email or password is incorrect."
       } else {
-        window.location.href = "/volunteer";
+        window.location.href = "/";
       }
     })
   })

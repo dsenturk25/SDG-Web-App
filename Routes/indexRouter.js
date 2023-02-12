@@ -7,13 +7,17 @@ const registerGetController = require("../controllers/index/register/get");
 const loginGetController = require("../controllers/index/login/get");
 const projectGetController = require("../controllers/index/project/get");
 
+const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
+
 router.get(
   "/",
+  isVolunteerLoggedIn,
   indexGetController
 )
 
 router.get(
   "/project",
+  isVolunteerLoggedIn,
   projectGetController
 )
 

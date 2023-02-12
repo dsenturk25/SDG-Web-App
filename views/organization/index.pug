@@ -52,6 +52,8 @@ block main
             form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
               hr
               input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
+              label.each-create-form-label(for="session_date") Date of the session
+              input.create-form-each-text-input(type="date" id="session_date" name="session_date")
               label.each-create-form-label(for="session_start_time") Start time of the session
               input.create-form-each-text-input(type="time" id="session_start_time" name="session_start_time")
               label.each-create-form-label(for="session_duration") Session duration

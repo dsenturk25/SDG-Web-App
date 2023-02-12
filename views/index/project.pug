@@ -2,7 +2,7 @@ extends ../partials/head.pug
 block content
   .all-inner-wrapper 
     .header-wrapper 
-      .logo-section 
+      a(href="/").logo-section 
         img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
       .header-search-bar-section 
         input(type="text" placeholder="Search for projects and organizations") 
@@ -22,15 +22,21 @@ block content
         else 
           a(href="/login").each-auth-operation-block Login 
           a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
-    .inner-main-wrapper
+    .inner-main-wrapper#inner-main-wrapper
       .project-main-wrapper 
-        .project-image-title-button-main-wrapper 
+        .project-image-title-button-main-wrapper#project-image-title-button-main-wrapper
           .project-image 
             img.project-image-content(src=`data:image/png;base64,${project.photo}`, alt="")
           div
           .project-main-texts-wrapper 
             .project-title #{project.name}
             .project-creator #{project.creator_name}
+          .project-descriptions-texts-wrapper(style="display:none")
+            .project-info-label Aim of this Project
+            .project-info #{project.short_description}
+            .project-info(style="margin-left: 0; margin-top: 20px; color: rgb(255, 255,255, 0.8); text-align: center") 
+              div(style="color:white; font-size: 20px") #{project.attendants.length} 
+              div volunteers attending this projects
           .project-join-button 
             span Join the project
             div
@@ -71,7 +77,7 @@ block content
                   .sesssion-informations-wrapper
                     if `${session.session_environment}` == `online`
                       .session-information Organization will share the link with the attendants. 
-                    .session-information Date #{session.session_date}
+                    .session-information(class="session_date" style="font-weight:500") #{session.session_date}
                     .session-information Time #{session.session_start_time} (#{session.session_duration} hours duration)
                     .session-information(class=`card_environment ${session.session_environment}`) #{session.session_environment}
-        .footer-content
+        footer
