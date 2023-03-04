@@ -1,5 +1,8 @@
 extends ../partials/head.pug
 block content
+  - var socialGroup = ["1", "2", "3", "4", "5", "10", "16", "17"]
+  - var economicGroup = ["7", "8", "9", "11", "12"]
+  - var environmentalGroup = ["6", "13", "14", "15"]
   .all-inner-wrapper 
     .header-wrapper 
       a(href="/").logo-section 
@@ -9,12 +12,15 @@ block content
         i(class="fa fa-search")
       .header-titles-section 
         .each-header-title 
-          div My projects
+          a(href="/my-projects") My projects
         .each-header-title 
           div Leaderboard
           span soon
         .each-header-title
           div Progress
+          span soon
+        .each-header-title
+          div Learn
           span soon
       .auth-section
         if volunteer 
@@ -32,24 +38,7 @@ block content
             i(class="fa-solid fa-angle-right")
           .each-project-row
             each project in projects
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              if `${project.city}` == `${volunteer.city}`
               .cards
                 div(style="display:none") #{project._id}
                 div(class="card-property card_image loading")
@@ -60,7 +49,7 @@ block content
                 div(class="card-property card_description loading") Start time: #{project.start_date}
                 div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
       .each-project-row-main-wrapper
-        h2.each-project-row-title Popular in #{volunteer.city}
+        h2.each-project-row-title Projects For Social Impact
         .each-project-slider-wrapper
           div(class="btn prev")
             i(class="fa-solid fa-angle-left")
@@ -68,31 +57,61 @@ block content
             i(class="fa-solid fa-angle-right")
           .each-project-row
             each project in projects
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              each sdg_id in project.sdg_goals 
+                each sdg in sdgs 
+                  if `${sdg.id}` == `${sdg_id}` && socialGroup.includes(`${sdg.number}`)
+                    .cards
+                      div(style="display:none") #{project._id}
+                      div(class="card-property card_image loading")
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      div(class="card-property card_title loading") #{project.name}
+                      div(class="card-property card_creator loading") #{project.creator_name}
+                      div(class="card-property card_description loading") #{project.short_description}
+                      div(class="card-property card_description loading") Start time: #{project.start_date}
+                      div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+                  - break
+      .each-project-row-main-wrapper
+        h2.each-project-row-title Economic Equality
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
+            each project in projects
+              each sdg_id in project.sdg_goals 
+                each sdg in sdgs 
+                  if `${sdg.id}` == `${sdg_id}` && economicGroup.includes(`${sdg.number}`)
+                    .cards
+                      div(style="display:none") #{project._id}
+                      div(class="card-property card_image loading")
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      div(class="card-property card_title loading") #{project.name}
+                      div(class="card-property card_creator loading") #{project.creator_name}
+                      div(class="card-property card_description loading") #{project.short_description}
+                      div(class="card-property card_description loading") Start time: #{project.start_date}
+                      div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+                  - break
+      .each-project-row-main-wrapper
+        h2.each-project-row-title Take Action For The Environment 
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
+            each project in projects
+              each sdg_id in project.sdg_goals 
+                each sdg in sdgs 
+                  if `${sdg.id}` == `${sdg_id}` && environmentalGroup.includes(`${sdg.number}`)
+                    .cards
+                      div(style="display:none") #{project._id}
+                      div(class="card-property card_image loading")
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      div(class="card-property card_title loading") #{project.name}
+                      div(class="card-property card_creator loading") #{project.creator_name}
+                      div(class="card-property card_description loading") #{project.short_description}
+                      div(class="card-property card_description loading") Start time: #{project.start_date}
+                      div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+                  - break
       footer

@@ -18,12 +18,14 @@ window.onload = () => {
 
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("next")) {
-      clickCnt++;
+      if (event.target.nextSibling.offsetWidth > event.target.parentNode.offsetWidth) {
+        clickCnt++;
 
-      const left = window.getComputedStyle(event.target.parentNode.children[2]).getPropertyValue("left");
-      event.target.parentNode.children[2].style.left = parseInt(left.split("px")[0]) - 300 + "px";
-      event.target.parentNode.children[2].style.left = (event.target.parentNode.children[2].children.length * 300);
-      clone(event.target.parentNode.children[2], event.target.parentNode.children[2].children[clickCnt])
+        const left = window.getComputedStyle(event.target.parentNode.children[2]).getPropertyValue("left");
+        event.target.parentNode.children[2].style.left = parseInt(left.split("px")[0]) - 300 + "px";
+        event.target.parentNode.children[2].style.left = (event.target.parentNode.children[2].children.length * 300);
+        clone(event.target.parentNode.children[2], event.target.parentNode.children[2].children[clickCnt])
+      }
     }
     else if (event.target.classList.contains("prev")) {
       if (clickCnt > -1) {

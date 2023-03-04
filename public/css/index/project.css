@@ -79,7 +79,7 @@
 .project-join-button:hover {
   background-color: rgba(0, 140, 255, 1);
   color: #fff;
-  width: 25%;
+  padding: 20px 10px;
 }
 
 .project-title {
@@ -420,4 +420,38 @@
   color: rgb(255, 255, 255, 0.9);
   margin-bottom: 10px;
   font-weight: 500;
+}
+
+.project-exit-button {
+  z-index: 100;
+  color: rgb(240, 240, 240);
+  width: 75%;
+  padding: 15px 5px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: -20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.project-exit-button div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: all 0.5s;
+}
+
+.project-exit-button div:hover {
+  padding: 30px;
 }

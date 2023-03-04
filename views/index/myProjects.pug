@@ -1,0 +1,40 @@
+extends ../partials/head.pug
+block content 
+  .all-inner-wrapper 
+    .header-wrapper 
+      a(href="/").logo-section 
+        img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
+      .header-search-bar-section 
+        input(type="text" placeholder="Search for projects and organizations") 
+        i(class="fa fa-search")
+      .header-titles-section 
+        .each-header-title 
+          a(href="/my-projects") My projects
+        .each-header-title 
+          div Leaderboard
+          span soon
+        .each-header-title
+          div Progress
+          span soon
+        .each-header-title
+          div Learn
+          span soon
+      .auth-section
+        if volunteer 
+          .volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
+        else 
+          a(href="/login").each-auth-operation-block Login 
+          a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
+    .inner-main-wrapper
+      .projects-main-wrapper
+        each project in projectsArray
+          .each-project-wrapper 
+            div(style="display:none") #{project._id}
+            div(class="card-property card_image")
+              img(class="card-image-content" src=`data:image/png;base64,${project.photo}`)
+            div(class="card-property card_title") #{project.name}
+            div(class="card-property card_creator") #{project.creator_name}
+            div(class="card-property card_description") #{project.short_description}
+            div(class="card-property card_description") Start time: #{project.start_date}
+            a(href=`/project?_id=${project._id}`).project-view-button View
+      footer

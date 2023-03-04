@@ -6,6 +6,7 @@ const indexGetController = require("../controllers/index/index/get");
 const registerGetController = require("../controllers/index/register/get");
 const loginGetController = require("../controllers/index/login/get");
 const projectGetController = require("../controllers/index/project/get");
+const myProjectsGetController = require("../controllers/index/myProjects/get")
 
 const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
 
@@ -19,6 +20,12 @@ router.get(
   "/project",
   isVolunteerLoggedIn,
   projectGetController
+)
+
+router.get(
+  "/my-projects",
+  isVolunteerLoggedIn,
+  myProjectsGetController
 )
 
 router.get(

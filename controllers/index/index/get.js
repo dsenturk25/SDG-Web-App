@@ -1,6 +1,7 @@
 
 const Projects = require("../../../models/Projects/project");
 const Volunteer = require("../../../models/Volunteer/volunteer");
+const Sdgs = require("../../../models/SDGs/sdg");
 
 module.exports = (req, res) => {
 
@@ -16,17 +17,22 @@ module.exports = (req, res) => {
       Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
         if (err) return res.redirect("/login");
 
-        res.render("index/index", {
-          page: "index/index",
-          title: "Volunteer",
-          includes: {
-            external: {
-              css: ["page", "general"],
-              js: ["page", "functions"]
-            }
-          },
-          projects,
-          volunteer
+        Sdgs.find({}, (err, sdgs) => {
+          if (err) return res.redirect("/login");
+
+          res.render("index/index", {
+            page: "index/index",
+            title: "Volunteer",
+            includes: {
+              external: {
+                css: ["page", "general"],
+                js: ["page", "functions"]
+              }
+            },
+            projects,
+            volunteer,
+            sdgs
+          })
         })
       })
     }

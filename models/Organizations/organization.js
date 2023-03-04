@@ -202,23 +202,6 @@ organizationSchema.statics.findAllProjects = function (body, callback) {
   })
 }
 
-organizationSchema.statics.filterProjects = function (body, callback) {
-
-  /*
-  {
-    filterModel_filterField_condition
-    Organization_type_bigger: 5
-  }
-  */
-
-  const model = body.split("_")[0];
-  const filter = body.split("_")[1];
-  const condition = body.split("_")[2];
-
-  eval(model).findById
-
-}
-
 organizationSchema.pre('save', hashpassword);
 
 const Organization = mongoose.model("Organizations", organizationSchema);

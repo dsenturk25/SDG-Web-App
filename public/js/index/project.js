@@ -7,9 +7,47 @@ function clone(listToAppend, node) {
 
 window.onload = () => {
 
+  const volunteerId = document.getElementById("volunteer-id").innerHTML;
+  const projectId = document.getElementById("project-id").innerHTML;
+
   let clickCnt = -1;
 
   document.addEventListener("click", (event) => {
+
+    if (event.target.innerHTML == "Join the project") {
+      const url = "/volunteer/project/join";
+      serverRequest(url, "POST", {
+        volunteer_id: volunteerId,
+        project_id: projectId
+      }, (res) => {
+        if (!res.success && res.error) {
+          alert("An error occured please try again later");
+        } else {
+          window.location.reload()
+        }
+      })
+    }
+
+    if (event.target.innerHTML == "You are a participant. Click to view your projects.") {
+      window.location.href = "/my-projects";
+    }
+
+    if (event.target.innerHTML == "Exit project") {
+      if (confirm("Do you confirm that you want to exit the project?")) {
+        const url = "/volunteer/project/exit";
+        serverRequest(url, "POST", {
+          volunteer_id: volunteerId,
+          project_id: projectId
+        }, (res) => {
+          if (!res.success && res.error) {
+            alert("An error occured please try again later");
+          } else {
+            window.location.reload()
+          }
+        })
+      }
+    }
+
     if (event.target.classList.contains("next")) {
       clickCnt++;
 

@@ -10,100 +10,100 @@ const async = require("async");
 
 const volunteerSchema = mongoose.Schema({
 
-    name: {
-        type: String,
-        trim: true,
-    },
+  name: {
+    type: String,
+    trim: true,
+  },
 
-    surname: {
-        type: String,
-        trim: true,
-    },
+  surname: {
+    type: String,
+    trim: true,
+  },
 
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-    },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
 
-    school_number: {
-      type: Number,
-      trim: true
-    },
+  school_number: {
+    type: Number,
+    trim: true
+  },
 
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-    },
+  password: {
+    type: String,
+    trim: true,
+    required: true,
+  },
 
-    school: {
-      type: String,
-      trim: true,
-    },
+  school: {
+    type: String,
+    trim: true,
+  },
 
-    projects: [
-      project = {
-        type: mongoose.Types.ObjectId
-      }
-    ],
+  projects: [
+    project = {
+      type: mongoose.Types.ObjectId
+    }
+  ],
 
-    gender: {
-      type: String,
-      trim: true,
-      enum: ["m", "f"]
-    },
+  gender: {
+    type: String,
+    trim: true,
+    enum: ["m", "f"]
+  },
 
-    birth_date: {
-      type: Object,
-      default: {
-        day: "dd",
-        month: "mm",
-        year: "yy"
-      }
-    },
+  birth_date: {
+    type: Object,
+    default: {
+      day: "dd",
+      month: "mm",
+      year: "yy"
+    }
+  },
 
-    phone_number: {
-      type: String,
-      trim: true
-    },
+  phone_number: {
+    type: String,
+    trim: true
+  },
 
-    country: {
-      type: String,
-      trim: true
-    },
+  country: {
+    type: String,
+    trim: true
+  },
 
-    city: {
-      type: String,
-      trim: true
-    },
+  city: {
+    type: String,
+    trim: true
+  },
 
-    isAccountCompleted: {
-      type: Boolean,
-      default: false
-    },
+  isAccountCompleted: {
+    type: Boolean,
+    default: false
+  },
 
-    isEmailConfirmed: {
-      type: Boolean,
-      default: false
-    },
+  isEmailConfirmed: {
+    type: Boolean,
+    default: false
+  },
 
-    confirmation_code: {
-      type: Number,
-    },
+  confirmation_code: {
+    type: Number,
+  },
 
-    joined_organizations: [
-      {
-        type: mongoose.Types.ObjectId
-      }
-    ]
+  joined_organizations: [
+    {
+      type: mongoose.Types.ObjectId
+    }
+  ]
 })
 
-volunteerSchema.statics.createVolunteer = function(body, callback) {
+volunteerSchema.statics.createVolunteer = function (body, callback) {
 
-  Volunteer.findOne({email: body.email}).then(volunteer => {
+  Volunteer.findOne({ email: body.email }).then(volunteer => {
     if (volunteer) return callback("email_not_unique", null);
   });
 
@@ -123,20 +123,21 @@ volunteerSchema.statics.createVolunteer = function(body, callback) {
 
 volunteerSchema.statics.loginVolunteer = function (body, callback) {
 
-  Volunteer.findOne({email: body.email}).then(volunteer => {
+  Volunteer.findOne({ email: body.email }).then(volunteer => {
     if (!volunteer) return callback("user_not_found");
 
     verifypassword(body.password, volunteer.password, (res) => {
       if (res) return callback(null, volunteer);
-      
+
       return callback("verify_error", null);
     })
   });
 }
 
 volunteerSchema.statics.findVolunteerById = function (body, callback) {
-  
-  Volunteer.findById(mongoose.Types.ObjectId(body._id), (err, volunteer) => {;
+
+  Volunteer.findById(mongoose.Types.ObjectId(body._id), (err, volunteer) => {
+    ;
     if (err || !volunteer) return callback("user_not_found");
     callback(null, volunteer);
   })
@@ -177,7 +178,7 @@ volunteerSchema.statics.joinProject = function (body, callback) {
             }
           }, (err, res) => {
             if (err) return callback("volunteer_push_failed");
-            if (flag!=1) {
+            if (flag != 1) {
               organization.volunteers.push(volunteer._id);
               organization.save();
             }
@@ -195,7 +196,7 @@ volunteerSchema.statics.joinProject = function (body, callback) {
             }
           }, (err, res) => {
             if (err) return callback("volunteer_push_failed");
-            if (flag!=1) {
+            if (flag != 1) {
               volunteer.joined_organizations.push(organization._id);
               volunteer.save();
             }
@@ -298,7 +299,7 @@ volunteerSchema.statics.createStackedBarGraph = function (body, callback) {
     }, (err) => {
       if (err) return callback("fetch_failed");
     });
-    
+
     const xAxisFilter = body.x_axis_filter;
     const barStackFilters = body.bar_stack_filter
 
@@ -311,14 +312,14 @@ volunteerSchema.statics.createStackedBarGraph = function (body, callback) {
         [xAxisFilter]: xAxisLabels[j],
         joined_organizations: body._id.toString()
       }).countDocuments()
-      .then(number => {
-        try {
-          xAxisDocumentCountArray.push(number);
-          barStackDocumentCountArray.push([]);
-        } catch (err) {
-          return callback("fetch_failed");
-        }
-      })
+        .then(number => {
+          try {
+            xAxisDocumentCountArray.push(number);
+            barStackDocumentCountArray.push([]);
+          } catch (err) {
+            return callback("fetch_failed");
+          }
+        })
 
       async.timesSeries(barStackLabels.length, (k, next) => {
         Volunteer.find({
@@ -326,14 +327,14 @@ volunteerSchema.statics.createStackedBarGraph = function (body, callback) {
           [barStackFilters]: barStackLabels[k],
           joined_organizations: body._id.toString()
         }).countDocuments()
-        .then(numberAssociatedwithBarStacks => {
-          try {
-            barStackDocumentCountArray[j].push(numberAssociatedwithBarStacks);
-          } catch (error) {
-            return callback("fetch_failed");
-          }
-          next();
-        })
+          .then(numberAssociatedwithBarStacks => {
+            try {
+              barStackDocumentCountArray[j].push(numberAssociatedwithBarStacks);
+            } catch (error) {
+              return callback("fetch_failed");
+            }
+            next();
+          })
 
       }, (err) => {
         if (err) return callback("fetch_failed");
@@ -360,19 +361,19 @@ volunteerSchema.statics.removeVolunteerFromOrganization = function (body, callba
     if (err) return callback("organization_not_found");
 
     if (organization) {
-    
+
       Volunteer.findById(body.volunteer_id, (err, volunteer) => {
-        
+
         if (err) return callback("volunteer_not_found");
 
         async.timesSeries(organization.projects_created.length, (i, next) => {
 
           const project_id = organization.projects_created[i].toString();
           const volunteer_id = body.volunteer_id;
-  
+
           if (volunteer.projects.includes(project_id.toString())) {
             Volunteer.exitProject({
-              project_id: project_id, 
+              project_id: project_id,
               volunteer_id: volunteer_id
             }, (err, project) => {
               if (err) return callback("exit_project_failed");
@@ -383,18 +384,18 @@ volunteerSchema.statics.removeVolunteerFromOrganization = function (body, callba
           }
         }, (err, res) => {
           if (err) return callback("iterator_failed");
-  
+
           const newVolunteersArray = organization.volunteers.filter((value) => {
             return value != body.volunteer_id
           })
-    
+
           organization.volunteers = newVolunteersArray;
           organization.save();
 
           const newOrganizationsArray = volunteer.joined_organizations.filter((value) => {
             return value != body.organization_id
           })
-    
+
           volunteer.joined_organizations = newOrganizationsArray;
           volunteer.save();
 

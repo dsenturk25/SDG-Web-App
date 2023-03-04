@@ -93,7 +93,7 @@ const projectsSchema = mongoose.Schema({
     trim: true
   },
 
-  address: {
+  city: {
     type: String,
     trim: true,
   },
