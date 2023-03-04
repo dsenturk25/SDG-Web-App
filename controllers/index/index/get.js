@@ -20,6 +20,11 @@ module.exports = (req, res) => {
         Sdgs.find({}, (err, sdgs) => {
           if (err) return res.redirect("/login");
 
+          for (let i = 0; i < sdgs.length; i++) {
+            const sdg = sdgs[i];
+            sdg.image = Buffer.from(sdg.image).toString('base64');
+          }
+
           res.render("index/index", {
             page: "index/index",
             title: "Volunteer",

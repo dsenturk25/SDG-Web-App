@@ -29,6 +29,36 @@ block content
           a(href="/login").each-auth-operation-block Login 
           a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
     .inner-main-wrapper 
+      .main-wrapper-todays-picks#featured-projects-content
+        .featured-wrapper-main-title Today's Picks
+        .view-time-progress-bar#view-time-progress-bar
+          .view-time-progress-bar-inner-content
+        .feautred-inner-wrapper#featured-inner-wrapper
+          each project in projects
+            if project.isTodaysPick
+              .each-featured-project-content
+                .featured-project-image-content
+                  img(src=`data:image/png;base64,${project.photo}`, alt="")
+                .each-featured-project-content-info-wrapper 
+                  .each-featured-project-content-info-wrapper-texts
+                    h1 #{project.name}
+                    h2 #{project.creator_name}
+                    p #{project.short_description}
+                    a(href=`/project?_id=${project._id}`).join-project-button View More
+                  .each-featured-project-content-info-wrapper-sdgs
+                    each sdg in sdgs 
+                      each sdg_id in project.sdg_goals
+                        .featured-project-sdg-goal-content 
+                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                        .featured-project-sdg-goal-content 
+                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                        .featured-project-sdg-goal-content 
+                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                        .featured-project-sdg-goal-content 
+                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                        .featured-project-sdg-goal-content 
+                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                        -break
       .each-project-row-main-wrapper
         h2.each-project-row-title Popular in #{volunteer.city}
         .each-project-slider-wrapper

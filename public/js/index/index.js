@@ -46,6 +46,44 @@ window.onload = () => {
     }
   })
 
+  const featuredProjectsContent = document.getElementById("featured-projects-content");
+  const featuredInnerWrapper = document.getElementById("featured-inner-wrapper");
+
+  let featuredContentInterval;
+  let viewProgressBarInterval;
+
+  document.addEventListener("mouseover", (event) => {
+    clearInterval(featuredContentInterval);
+    clearInterval(viewProgressBarInterval);
+    if (event.target.parentNode.parentNode == featuredInnerWrapper.children[0] || event.target.parentNode.parentNode.parentNode == featuredInnerWrapper.children[1]) {
+      if (event.target.parentNode.parentNode == featuredInnerWrapper.children[0]) {
+        featuredInnerWrapper.style.left = "0"
+      } else {
+        featuredInnerWrapper.style.left = "-50%"
+      }
+    } else {
+      let featuredCnt = 0, viewProgressBar;
+      viewProgressBarInterval = setTimeout(() => {
+        viewProgressBar = document.getElementById("view-time-progress-bar");
+        if (featuredCnt % 2 == 0) {
+          viewProgressBar.children[0].style.width = "100%"
+        } else {
+          viewProgressBar.children[0].style.width = "0%"
+        }
+      }, 1)
+      featuredContentInterval = setInterval(() => {
+        if (featuredCnt % 2 == 0) {
+          featuredInnerWrapper.style.left = "-50%"
+          viewProgressBar.children[0].style.width = "100%"
+          featuredCnt++;
+        } else {
+          featuredInnerWrapper.style.left = "0%"
+          viewProgressBar.children[0].style.width = "0"
+          featuredCnt++;
+        }
+      }, 5000)
+    }
+  })
 }
 
 function clone(listToAppend, node) {

@@ -19,8 +19,10 @@ const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
+const scheduleUpdates = require("./utils/scheduleUpdates")
+
 const mongoUri = "mongodb://127.0.0.1:27017/sdg-app-api";
-mongoose.connect(mongoUri, {   
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -56,5 +58,6 @@ app.use("/project", projectRouter);
 app.use("/admin", adminRouter);
 
 server.listen(PORT, () => {
+  scheduleUpdates();
   console.log("Server is listening on port", PORT);
 })
