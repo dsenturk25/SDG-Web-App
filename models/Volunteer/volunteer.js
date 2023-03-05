@@ -20,6 +20,11 @@ const volunteerSchema = mongoose.Schema({
     trim: true,
   },
 
+  bio: {
+    type: String,
+    default: ""
+  },
+
   email: {
     type: String,
     required: true,
@@ -30,7 +35,8 @@ const volunteerSchema = mongoose.Schema({
 
   school_number: {
     type: Number,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   password: {
@@ -42,6 +48,7 @@ const volunteerSchema = mongoose.Schema({
   school: {
     type: String,
     trim: true,
+    default: ""
   },
 
   projects: [
@@ -53,31 +60,31 @@ const volunteerSchema = mongoose.Schema({
   gender: {
     type: String,
     trim: true,
-    enum: ["m", "f"]
+    enum: ["m", "f", "o"],
+    default: ""
   },
 
   birth_date: {
-    type: Object,
-    default: {
-      day: "dd",
-      month: "mm",
-      year: "yy"
-    }
+    type: String,
+    default: ""
   },
 
   phone_number: {
     type: String,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   country: {
     type: String,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   city: {
     type: String,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   isAccountCompleted: {

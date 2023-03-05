@@ -1,0 +1,68 @@
+extends ../partials/head.pug
+block content
+  .all-inner-wrapper 
+    .header-wrapper 
+      a(href="/").logo-section 
+        img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
+      .header-search-bar-section 
+        input(type="text" placeholder="Search for projects and organizations") 
+        i(class="fa fa-search")
+      .header-titles-section 
+        .each-header-title 
+          a(href="/my-projects") My projects
+        .each-header-title 
+          div Leaderboard
+          span soon
+        .each-header-title
+          div Progress
+          span soon
+        .each-header-title
+          div Learn
+          span soon
+      .auth-section
+        if volunteer 
+          a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
+        else 
+          a(href="/login").each-auth-operation-block Login 
+          a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
+    .inner-main-wrapper 
+
+      .main-profile-wrapper
+        .navbar-wrapper 
+          .profile-image-wrapper #{volunteer.name[0]}#{volunteer.surname[0]}
+          hr
+          .navbar-menu-item#information
+            div Information
+            i(class="fa-solid fa-arrow-right")
+          .navbar-menu-item#portfolio
+            div Portfolio
+            .soon-label soon
+          .navbar-menu-item#logout 
+            div Sign Out
+        .main-content-wrapper
+          form.profile-edit-form(method="post" action="/volunteer/edit-profile")
+            h2.profile-edit-heading Edit Profile
+            hr.profile-edit-separator
+            div.profile-edit-name-group
+              label.profile-edit-label(for="name") Name
+              input.profile-edit-input(type="text" name="name" value=`${volunteer.name}` required)
+              label.profile-edit-label(for="surname") Surname
+              input.profile-edit-input(type="text" name="surname" value=`${volunteer.surname}` required)
+            div.profile-edit-birthdate-group
+              label.profile-edit-label(for="birthdate") Birthdate
+              input.profile-edit-input(type="date" value=`${volunteer.birth_date}` name="birth_date" required)
+            div.profile-edit-school-group
+              label.profile-edit-label(for="school") School
+              input.profile-edit-input(type="text" value=`${volunteer.school}` name="school" required)
+              label.profile-edit-label(for="school-number") School Number
+              input.profile-edit-input(type="number" value=`${volunteer.school_number}` name="school_number" required)
+            div.profile-edit-bio-group
+              label.profile-edit-label(for="bio") Bio
+              textarea.profile-edit-textarea(name="bio" required) #{volunteer.bio}
+            div.profile-edit-location-group
+              label.profile-edit-label(for="country") Country
+              input.profile-edit-input(type="text" value=`${volunteer.country}` name="country" required)
+              label.profile-edit-label(for="city") City
+              input.profile-edit-input(type="text" value=`${volunteer.city}` name="city" required)
+            button.profile-edit-button(type="submit") Save Changes
+      footer

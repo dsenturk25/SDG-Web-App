@@ -1,0 +1,42 @@
+extends ../partials/head.pug
+block content
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js") 
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css")
+  .all-inner-wrapper 
+    .main-profile-wrapper
+      form.profile-edit-form(method="post" action="/volunteer/complete_account")
+        .profile-edit-heading 
+          h2 Complete Your Profile To Proceed
+          img(src="/res/images/logo.png")
+        hr.profile-edit-separator
+        div.profile-edit-name-group
+          label.profile-edit-label(for="name") Name
+          input.profile-edit-input(type="text" name="name" value=`${volunteer.name}` required)
+          label.profile-edit-label(for="surname") Surname
+          input.profile-edit-input(type="text" name="surname" value=`${volunteer.surname}` required)
+        div.profile-edit-birthdate-group
+          label.profile-edit-label(for="birthdate") Birthdate
+          input.profile-edit-input(type="date" value=`${volunteer.birth_date}` name="birth_date" required)
+        div.profile-edit-school-group
+          label.profile-edit-label(for="school") School
+          input.profile-edit-input(type="text" value=`${volunteer.school}` name="school" required)
+          label.profile-edit-label(for="school-number") School Number
+          input.profile-edit-input(type="number" value=`${volunteer.school_number}` name="school_number" required)
+        div.profile-edit-school-group
+          label.profile-edit-label(for="school") Phone Number
+          input.profile-edit-input(type="tel" value=`${volunteer.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)
+          label.profile-edit-label(for="gender") Gender
+          select.profile-edit-input(name="gender" required) 
+            option(value="") Choose
+            option(value="m") Male
+            option(value="f") Female
+            option(value="o") Don't Specify
+        div.profile-edit-bio-group
+          label.profile-edit-label(for="bio") Bio
+          textarea.profile-edit-textarea(name="bio" required) #{volunteer.bio}
+        div.profile-edit-location-group
+          label.profile-edit-label(for="country") Country
+          input.profile-edit-input(type="text" value=`${volunteer.country}` name="country" required)
+          label.profile-edit-label(for="city") City
+          input.profile-edit-input(type="text" value=`${volunteer.city}` name="city" required)
+        button.profile-edit-button(type="submit") Proceed

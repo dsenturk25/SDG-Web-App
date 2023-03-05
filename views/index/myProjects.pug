@@ -21,7 +21,7 @@ block content
           span soon
       .auth-section
         if volunteer 
-          .volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
+          a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
         else 
           a(href="/login").each-auth-operation-block Login 
           a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 

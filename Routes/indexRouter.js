@@ -9,22 +9,30 @@ const projectGetController = require("../controllers/index/project/get");
 const myProjectsGetController = require("../controllers/index/myProjects/get")
 
 const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
+const isEmailConfirmed = require("../middleware/isVolunteerEmailConfirmed");
+const isAccountCompleted = require("../middleware/isVolunteerCompleted");
 
 router.get(
   "/",
   isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
   indexGetController
 )
 
 router.get(
   "/project",
   isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
   projectGetController
 )
 
 router.get(
   "/my-projects",
   isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
   myProjectsGetController
 )
 
