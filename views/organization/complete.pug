@@ -1,0 +1,38 @@
+extends ../partials/head.pug
+block content
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js") 
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css")
+  .all-inner-wrapper 
+    .main-profile-wrapper
+      form.profile-edit-form(method="post" action="/organization/complete_account" enctype="multipart/form-data")
+        .profile-edit-heading 
+          h2 Complete Your Profile To Proceed
+          img(src="/res/images/logo.png")
+        hr.profile-edit-separator
+        div.profile-edit-birthdate-group
+          label.profile-edit-label(for="photo") Profile Photo
+          input.profile-edit-input(type="file" accept="image/png, image/jpeg" name="photo" required)
+        div.profile-edit-school-group
+          label.profile-edit-label(for="organization_type") Organization Type
+          select.profile-edit-input(name="organization_type" required)#organization_type
+            option(value="") Choose
+            option(value="school_based") School Based
+            option(value="ngo") NGO (Non-govermental Organization)
+            option(value="governmental") Governmental
+          label.profile-edit-label(for="associated_school") Associated School
+          input.profile-edit-input(type="text" value=`${organization.associated_school}` name="associated_school")#associated_school
+        div.profile-edit-school-group
+          label.profile-edit-label(for="school") Phone Number
+          input.profile-edit-input(type="tel" value=`${organization.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)
+        div.profile-edit-bio-group
+          label.profile-edit-label(for="description") Tell us about your Organization
+          textarea.profile-edit-textarea(name="description" required) #{organization.description}
+        div.profile-edit-bio-group
+          label.profile-edit-label(for="address") Corporate Address
+          textarea.profile-edit-textarea(name="address" required) #{organization.address}
+        div.profile-edit-location-group
+          label.profile-edit-label(for="city") City
+          input.profile-edit-input(type="text" value=`${organization.city}` name="city" required)
+          label.profile-edit-label(for="country") Country
+          input.profile-edit-input(type="text" value=`${organization.country}` name="country" required)
+        button.profile-edit-button(type="submit") Proceed

@@ -1,12 +1,11 @@
 
+const Organization = require("../../../../models/Organizations/organization");
 const Project = require("../../../../models/Projects/project");
 const Sdg = require("../../../../models/SDGs/sdg");
 
 module.exports = (req, res) => {
 
-  const organization = req.session.organization;
-
-  Project.find({creator_id: req.session.organization._id}, (err, projects) => {
+  Project.find({ creator_id: req.session.organization._id }, (err, projects) => {
 
     if (err) return res.redirect("/");
 
@@ -22,20 +21,25 @@ module.exports = (req, res) => {
       for (let i = 0; i < sdgs.length; i++) {
         const sdg = sdgs[i];
         sdg.image = Buffer.from(sdg.image).toString('base64');
-      }  
+      }
 
-      res.render("organization/profile", {
-        page: "organization/profile",
-        title: `${req.session.organization.name}`,
-        includes: {
-          external: {
-            css: ["page", "general", "index"],
-            js: ["page", "functions"]
-          }
-        }, 
-        organization,
-        projects,
-        sdgs
+      Organization.findById(req.session.organization._id, (err, organization) => {
+
+        organization.photo = Buffer.from(organization.photo).toString('base64');
+
+        res.render("organization/profile", {
+          page: "organization/profile",
+          title: `${req.session.organization.name}`,
+          includes: {
+            external: {
+              css: ["page", "general", "index"],
+              js: ["page", "functions"]
+            }
+          },
+          organization,
+          projects,
+          sdgs
+        })
       })
     })
   })

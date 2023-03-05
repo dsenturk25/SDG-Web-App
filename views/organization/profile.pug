@@ -2,9 +2,38 @@ extends ./general.pug
 block main
   .main-content-title Profile 
   .main-content-description Edit your profile  
-  .main-content-project-info-wrapper
-    .info-wrapper-each-info 
-      .info-wrapper-info-number= projects.length
-      .info-wrapper-info-description total
   hr
-  .organization-main-profile-wrapper #{organization.name}
+  .organization-main-profile-wrapper 
+    .main-profile-wrapper
+      .main-content-wrapper
+        form.profile-edit-form(method="post" action="/organization/edit-profile" enctype="multipart/form-data")
+          div.profile-image-wrapper
+            img(src=`data:image/png;base64,${organization.photo}`)
+          .profile-edit-heading 
+            div.profile-edit-birthdate-group
+              label.profile-edit-label(for="photo") Profile Photo
+              input.profile-edit-input(type="file" value=`data:application/octet-stream;base64,${Buffer.from(organization.photo).toString('base64')}` accept="image/png, image/jpeg" name="photo")
+            div.profile-edit-school-group
+              label.profile-edit-label(for="organization_type") Organization Type
+              select.profile-edit-input(name="organization_type" required)#organization_type
+                option(value="") Choose
+                option(value="school_based" selected=(`${organization.organization_type}` === `school_based`)) School Based
+                option(value="ngo" selected=(`${organization.organization_type}` === `ngo`)) NGO (Non-govermental Organization)
+                option(value="governmental" selected=(`${organization.organization_type}` === `governmental`)) Governmental
+              label.profile-edit-label(for="associated_school") Associated School
+              input.profile-edit-input(type="text" value=`${organization.associated_school}` name="associated_school")#associated_school
+            div.profile-edit-school-group
+              label.profile-edit-label(for="school") Phone Number
+              input.profile-edit-input(type="tel" value=`${organization.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)
+            div.profile-edit-bio-group
+              label.profile-edit-label(for="description") Tell us about your Organization
+              textarea.profile-edit-textarea(name="description" required) #{organization.description}
+            div.profile-edit-bio-group
+              label.profile-edit-label(for="address") Corporate Address
+              textarea.profile-edit-textarea(name="address" required) #{organization.address}
+            div.profile-edit-location-group
+              label.profile-edit-label(for="city") City
+              input.profile-edit-input(type="text" value=`${organization.city}` name="city" required)
+              label.profile-edit-label(for="country") Country
+              input.profile-edit-input(type="text" value=`${organization.country}` name="country" required)
+              button.profile-edit-button(type="submit") Save Changes

@@ -1,41 +1,42 @@
 
+const Organization = require("../../../../models/Organizations/organization");
 const Project = require("../../../../models/Projects/project");
 const Sdg = require("../../../../models/SDGs/sdg");
 
 module.exports = (req, res) => {
 
-  const organization = req.session.organization;
-
-  Project.find({creator_id: req.session.organization._id}, (err, projects) => {
-
-    if (err) return res.redirect("/");
-
-    for (let i = 0; i < projects.length; i++) {
-      const project = projects[i];
-      project.photo = Buffer.from(project.photo).toString('base64');
-    }
-
-    Sdg.find({}, (err, sdgs) => {
+  Organization.findById(req.session.organization._id, (err, organization) => {
+    Project.find({ creator_id: req.session.organization._id }, (err, projects) => {
 
       if (err) return res.redirect("/");
 
-      for (let i = 0; i < sdgs.length; i++) {
-        const sdg = sdgs[i];
-        sdg.image = Buffer.from(sdg.image).toString('base64');
-      }  
+      for (let i = 0; i < projects.length; i++) {
+        const project = projects[i];
+        project.photo = Buffer.from(project.photo).toString('base64');
+      }
 
-      res.render("organization/index", {
-        page: "organization/index",
-        title: `${req.session.organization.name}`,
-        includes: {
-          external: {
-            css: ["page", "general"],
-            js: ["page", "functions"]
-          }
-        }, 
-        organization,
-        projects,
-        sdgs
+      Sdg.find({}, (err, sdgs) => {
+
+        if (err) return res.redirect("/");
+
+        for (let i = 0; i < sdgs.length; i++) {
+          const sdg = sdgs[i];
+          sdg.image = Buffer.from(sdg.image).toString('base64');
+        }
+
+        res.render("organization/index", {
+          page: "organization/index",
+          title: `${req.session.organization.name}`,
+          includes: {
+            external: {
+              css: ["page", "general"],
+              js: ["page", "functions"]
+            }
+          },
+          organization,
+          projects,
+          sdgs
+        })
       })
     })
   })

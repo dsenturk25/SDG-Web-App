@@ -1,69 +1,42 @@
 
-hr {
-  width: 90%;
-  margin-left: 0;
+body {
+  overflow: scroll;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.inner-main-wrapper {
+.all-inner-wrapper {
   width: 100%;
   height: 95%;
   padding-top: 5%;
-  overflow: scroll;
 }
 
 .main-profile-wrapper {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-}
-
-
-.main-content-wrapper {
   width: 80%;
-  height: 100%;
+  padding: 20px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-}
-
-.profile-image-wrapper {
-  width: 20%;
-  aspect-ratio:  1 / 1;
-  height: fit-content;
-  background-color: rgb(40, 40, 40);
-  color: #fff;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size:36px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
-.profile-image-wrapper img {
-  width: 100%;
-  height: 100%;
-}
-
-#logout {
-  margin-top: 100%;
-  background-color: rgb(200, 0, 0);
-  color: white;
-  padding-left: 10px;
-  width: calc(90% - 10px);
-  font-weight: 500;
 }
 
 .profile-edit-form {
+  width: 100%;
+  height: fit-content;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
 }
 
 .profile-edit-heading {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-edit-heading h2 {
+  font-weight: 500;
   color: #333;
+}
+
+.profile-edit-heading img {
+  width: 75px;
 }
 
 .profile-edit-separator {
@@ -78,13 +51,16 @@ hr {
 .profile-edit-bio-group,
 .profile-edit-location-group {
   margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
 }
 
 .profile-edit-label {
-  font-weight: bold;
   display: block;
   margin-bottom: 5px;
   color: #333;
+  margin-right: 20px;
+  font-size: 14px;
 }
 
 .profile-edit-input,
@@ -97,6 +73,7 @@ hr {
   width: 100%;
   font-size: 16px;
   color: #333;
+  margin-right: 20px;
 }
 
 .profile-edit-input:focus,
@@ -127,4 +104,9 @@ hr {
 .soon-label {
   font-size: 12px;
   color: #ffa500;
+}
+
+#phone {
+  width: 32vw;
+  margin-right: 20px;
 }

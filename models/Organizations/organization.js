@@ -39,16 +39,19 @@ const organizationSchema = mongoose.Schema({
 
   description: {
     type: String,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   photo: {
-    type: Buffer
+    type: Buffer,
+    default: ""
   },
 
   associated_school: {
     type: String,
-    trim: true
+    trim: true,
+    default: ""
   },
 
   contact_infos: [
@@ -70,14 +73,35 @@ const organizationSchema = mongoose.Schema({
 
   phone_number: {
     type: String,
-    required: true
+    required: true,
+    default: ""
   },
 
   volunteers: [
     volunteer = {
       type: mongoose.Types.ObjectId
     }
-  ]
+  ],
+
+  isAccountCompleted: {
+    type: Boolean,
+    default: false
+  },
+
+  address: {
+    type: String,
+    default: ""
+  },
+
+  country: {
+    type: String,
+    default: ""
+  },
+
+  city: {
+    type: String,
+    default: ""
+  }
 
 })
 

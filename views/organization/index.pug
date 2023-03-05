@@ -37,7 +37,7 @@ block main
                   if `${sdg_id}` === `${sdg._id}`
                     .sdg-content 
                       .sdg-img-content
-                        img(src=`data:image/png;base64`,${sdg.image})
+                        img(src=`data:image/png;base64,${sdg.image}`)
             .project-sessions-wrapper 
               each session in project.sessions 
                 .each-session-content
