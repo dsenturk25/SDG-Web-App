@@ -6,7 +6,8 @@ const indexGetController = require("../controllers/index/index/get");
 const registerGetController = require("../controllers/index/register/get");
 const loginGetController = require("../controllers/index/login/get");
 const projectGetController = require("../controllers/index/project/get");
-const myProjectsGetController = require("../controllers/index/myProjects/get")
+const myProjectsGetController = require("../controllers/index/myProjects/get");
+const searchBarPostController = require("../controllers/index/search/post")
 
 const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
 const isEmailConfirmed = require("../middleware/isVolunteerEmailConfirmed");
@@ -34,6 +35,14 @@ router.get(
   isEmailConfirmed,
   isAccountCompleted,
   myProjectsGetController
+)
+
+router.post(
+  "/search-query",
+  isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
+  searchBarPostController
 )
 
 router.get(

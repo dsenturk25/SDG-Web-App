@@ -7,9 +7,12 @@ block content
     .header-wrapper 
       a(href="/").logo-section 
         img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
-      .header-search-bar-section 
-        input(type="text" placeholder="Search for projects and organizations") 
+      .header-search-bar-section
+        input#search(type="text" placeholder="Search for projects and organizations") 
         i(class="fa fa-search")
+        .search-bar-results-section#search-res
+          .search-results-entry-text 
+            div no results found
       .header-titles-section 
         .each-header-title 
           a(href="/my-projects") My projects
@@ -48,14 +51,6 @@ block content
                   .each-featured-project-content-info-wrapper-sdgs
                     each sdg in sdgs 
                       each sdg_id in project.sdg_goals
-                        .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
-                        .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
-                        .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
-                        .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
                         .featured-project-sdg-goal-content 
                           img(src=`data:image/png;base64,${sdg.image}`, alt="")
                         -break
