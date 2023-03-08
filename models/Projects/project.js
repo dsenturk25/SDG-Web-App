@@ -113,13 +113,11 @@ const projectsSchema = mongoose.Schema({
         type: String,
         trim: true
       },
+      session_address: {
+        type: String
+      },
       session_date: {
-        type: Object,
-        default: {
-          day: "dd",
-          month: "mm",
-          year: "yy",
-        }
+        type: String
       },
     }
   ],
