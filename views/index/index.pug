@@ -51,9 +51,10 @@ block content
                   .each-featured-project-content-info-wrapper-sdgs
                     each sdg in sdgs 
                       each sdg_id in project.sdg_goals
-                        .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
-                        -break
+                        if `${sdg_id}` == `${sdg._id}`
+                          .featured-project-sdg-goal-content 
+                            img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                          - break
       .each-project-row-main-wrapper
         h2.each-project-row-title Popular in #{volunteer.city}
         .each-project-slider-wrapper

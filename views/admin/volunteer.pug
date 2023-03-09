@@ -29,11 +29,7 @@ block content
               .each-volunteer-info School: #{volunteer.school}
               .each-volunteer-info Gender: #{volunteer.gender}
               .each-volunteer-info Location: #{volunteer.city} / #{volunteer.country}
-              .each-volunteer-info-dates 
-                .each-volunteer-info Birth date:&nbsp
-                .each-volunteer-info #{volunteer.birth_date.day}/
-                .each-volunteer-info #{volunteer.birth_date.month}/
-                .each-volunteer-info #{volunteer.birth_date.year}
+              .each-volunteer-info Birth date: #{volunteer.birth_date}
             .waitlist-button-delete Delete
     .footer-content
       .signature-text powered by Üsküdar American Academy

@@ -12,7 +12,7 @@ block content
       .create-button#create-button
         span Create 
         i(class="fa-solid fa-plus")
-      form.create-form#create-form(method='POST' action='/admin/sdg/create' enctype='multipart/form-data')
+      form.create-form#create-form(method='POST' action='/admin/sdg/create' autocomplete="off" enctype='multipart/form-data')
         label(for="name") Name 
         input#name(type="text" name="name").sdg-name 
         label(for="number") Number (1-17) 

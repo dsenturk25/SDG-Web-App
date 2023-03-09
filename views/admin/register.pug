@@ -4,15 +4,15 @@ block content
     .input-inner-wrapper 
       .title-wrapper Welcome to SDG-App admin register!
       label(for="email") Email
-      input(placeholder="email" name="email" id="email" required).text-input-wrapper
+      input(placeholder="email" name="email" id="email" autocomplete="off"  required).text-input-wrapper
       label(for="name-surname") Name and surname
-      input(placeholder="Name & surname" name="name-surname" id="name-surname" required).text-input-wrapper
+      input(placeholder="Name & surname" name="name-surname" id="name-surname" autocomplete="off"  required).text-input-wrapper
       label(for="root") Root admin password
-      input(placeholder="Root admin password" name="root" id="root-password" type="password" required).password-input-wrapper
+      input(placeholder="Root admin password" name="root" id="root-password" type="password" autocomplete="off" required).password-input-wrapper
       label(for="password") Password
-      input(placeholder="Password" name="password" id="password" type="password" required).password-input-wrapper
+      input(placeholder="Password" name="password" id="password" type="password" autocomplete="off" required).password-input-wrapper
       label(for="re-password") Password again
-      input(placeholder="Re-enter password" name="re-password" id="re-password" type="password" required).password-input-wrapper
+      input(placeholder="Re-enter password" name="re-password" id="re-password" type="password" autocomplete="off" required).password-input-wrapper
       label(for="admin-type") Admin type
       select#admin-type(name="admin-type" placeholder="choose" required)
         option(value="" disabled selected) choose

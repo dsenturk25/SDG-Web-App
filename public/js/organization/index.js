@@ -21,7 +21,7 @@ window.onload = () => {
 
   document.addEventListener("click", (event) => {
 
-    if (event.target.id == "add-session-button") {
+    if (event.target.classList.contains("add-session-button")) {
       if (sessionCnt % 2 == 0) {
         addSessionForm.style.display = "flex";
         addSessionButton.innerHTML = "Cancel";

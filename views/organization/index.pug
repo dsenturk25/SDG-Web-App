@@ -48,7 +48,7 @@ block main
                     .each-session-info Address: #{session.session_address}
                   if `${session.session_link_to_online_environment}` != ""
                     .each-session-info Link to online environment: #{session.session_link_to_online_environment}
-            .submit-button#add-session-button Add new session
+            .submit-button(class="add-session-button")#add-session-button Add new session
             form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
               hr
               input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)

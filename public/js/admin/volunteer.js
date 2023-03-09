@@ -15,14 +15,14 @@ window.onload = () => {
         const id = event.target.parentNode.children[0].children[0].innerHTML;
         const url = window.location.href.split("/admin")[0] + "/admin/volunteer/delete";
 
-        serverRequest(url, "POST", {_id: id}, (res) => {
-          if (res.error){
+        serverRequest(url, "POST", { _id: id }, (res) => {
+          if (res.error) {
             alert("An error occured on the server side. Please try again later.");
           } else {
             window.location.reload();
           }
         });
-      } 
+      }
     }
   });
 
@@ -58,7 +58,7 @@ window.onload = () => {
           alert("An error occured on the server side.")
         } else {
           volunteersMainWrapper.innerHTML = "";
-          
+
           for (let i = 0; i < res.length; i++) {
             const eachVolunteerContent = document.createElement("div");
             eachVolunteerContent.classList.add("each-volunteer-content");
@@ -100,22 +100,7 @@ window.onload = () => {
 
             const dates = document.createElement("div");
             dates.classList.add("each-volunteer-info-dates");
-
-            const day = document.createElement("div");
-            day.classList.add("each-volunteer-info");
-            day.innerHTML = "Birth date: " + res[i].birth_date.day + "/";
-
-            const month = document.createElement("div");
-            month.classList.add("each-volunteer-info");
-            month.innerHTML = res[i].birth_date.month + "/";
-
-            const year = document.createElement("div");
-            year.classList.add("each-volunteer-info");
-            year.innerHTML = res[i].birth_date.year;
-
-            dates.appendChild(day);
-            dates.appendChild(month);
-            dates.appendChild(year);
+            dates.innerHTML = res[i].birth_date
 
             eachVolunteerContentInfoWrapper.appendChild(id);
             eachVolunteerContentInfoWrapper.appendChild(name);
