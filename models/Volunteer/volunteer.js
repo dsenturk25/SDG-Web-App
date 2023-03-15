@@ -61,7 +61,7 @@ const volunteerSchema = mongoose.Schema({
     type: String,
     trim: true,
     enum: ["m", "f", "o"],
-    default: ""
+    default: "o"
   },
 
   birth_date: {

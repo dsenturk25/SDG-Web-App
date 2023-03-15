@@ -74,6 +74,24 @@ block content
                 div(class="card-property card_description loading") #{project.short_description}
                 div(class="card-property card_description loading") Start time: #{project.start_date}
                 div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              .cards
+                div(style="display:none") #{project._id}
+                div(class="card-property card_image loading")
+                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                div(class="card-property card_title loading") #{project.name}
+                div(class="card-property card_creator loading") #{project.creator_name}
+                div(class="card-property card_description loading") #{project.short_description}
+                div(class="card-property card_description loading") Start time: #{project.start_date}
+                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
       .each-project-row-main-wrapper
         h2.each-project-row-title Projects For Social Impact
         .each-project-slider-wrapper

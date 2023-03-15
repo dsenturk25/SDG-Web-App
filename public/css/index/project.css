@@ -79,7 +79,7 @@
 .project-join-button:hover {
   background-color: rgba(0, 140, 255, 1);
   color: #fff;
-  padding: 20px 10px;
+  font-size: 18px;
 }
 
 .project-title {
@@ -453,5 +453,5 @@
 }
 
 .project-exit-button div:hover {
-  padding: 30px;
+  font-size: 18px;
 }
