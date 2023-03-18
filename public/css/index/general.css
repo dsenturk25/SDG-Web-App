@@ -435,3 +435,34 @@ footer {
   color: rgb(40, 40, 40, 0.8);
   font-size: 14px;
 }
+
+@media screen and (max-width: 900px) {
+  .form-each-right-column{
+    display: none;
+  }
+  .form-each-left-column {
+    width: 90%;
+    align-items: center;
+  }
+  .form-main-wrapper {
+    width: 40%;
+  }
+  .submit-button {
+    margin-left: 0px;
+  }
+  .inputs-main-wrapper input {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form-main-wrapper {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .form-main-wrapper {
+    width: 100vw;
+  }
+}

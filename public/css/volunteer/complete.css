@@ -111,3 +111,48 @@ body {
   width: 32vw;
   margin-right: 20px;
 }
+
+@media screen and (max-width: 700px) {
+  .profile-edit-name-group{
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-edit-input {
+    width: 80%;
+  }
+  .profile-edit-birthdate-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-edit-school-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-edit-bio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-edit-location-group {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #phone {
+    min-width: 165px;
+  }
+  .profile-edit-textarea {
+    margin-right: 10px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .main-profile-wrapper {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    display: flex;
+  }
+}

@@ -65,6 +65,7 @@ body {
 
 .profile-edit-input,
 .profile-edit-textarea {
+  height: 120px;
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -80,10 +81,6 @@ body {
 .profile-edit-textarea:focus {
   outline: none;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
-}
-
-.profile-edit-textarea {
-  height: 120px;
 }
 
 .profile-edit-button {
