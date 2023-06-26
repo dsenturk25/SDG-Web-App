@@ -17,8 +17,7 @@ block content
         .each-header-title 
           a(href="/my-projects") My projects
         .each-header-title 
-          div Leaderboard
-          span soon
+          a(href="/leaderboard") Leaderboard
         .each-header-title
           div Progress
           span soon
@@ -103,7 +102,7 @@ block content
             each project in projects
               each sdg_id in project.sdg_goals 
                 each sdg in sdgs 
-                  if `${sdg.id}` == `${sdg_id}` && socialGroup.includes(`${sdg.number}`)
+                  if `${sdg.id}` == `${sdg_id}` && socialGroup.includes(`${sdg.number}`) && `${project.isCompleted}` == "false"
                     .cards
                       div(style="display:none") #{project._id}
                       div(class="card-property card_image loading")

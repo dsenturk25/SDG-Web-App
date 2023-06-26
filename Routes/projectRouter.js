@@ -13,11 +13,12 @@ const addSessionController = require("../controllers/Project/sessions/post");
 const findIdGetController = require("../controllers/Project/getById/get");
 const findAllGetController = require("../controllers/Project/getAll/get");
 
+const updateIsCompletedPostController = require("../controllers/Project/edit/complete/post");
 
 const upload = multer({
   dest: "./uploads/",
   limits: {
-      fileSize: 100000000
+    fileSize: 100000000
   },
 })
 
@@ -57,6 +58,12 @@ router.get(
   isOrganizationAuth,
   findAllGetController
 );
+
+router.post(
+  "/edit/isCompleted",
+  isOrganizationAuth,
+  updateIsCompletedPostController
+)
 
 module.exports = router;
 

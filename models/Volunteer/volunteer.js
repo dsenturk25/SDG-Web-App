@@ -105,7 +105,22 @@ const volunteerSchema = mongoose.Schema({
     {
       type: mongoose.Types.ObjectId
     }
-  ]
+  ],
+
+  totalHoursOfService: {
+    type: Number,
+    default: 0
+  },
+
+  hoursOfServiceGoal: {
+    type: Number,
+    default: 0
+  },
+
+  completedHoursOfService: {
+    type: Number,
+    default: 0
+  }
 })
 
 volunteerSchema.statics.createVolunteer = function (body, callback) {
@@ -160,7 +175,6 @@ volunteerSchema.statics.joinProject = function (body, callback) {
       if (!volunteer.projects.includes(body.project_id)) {
         volunteer.projects.push(body.project_id);
       }
-      volunteer.save();
 
       Project.findById(body.project_id, (err, project) => {
         if (err) return callback("project_not_found");
@@ -169,6 +183,16 @@ volunteerSchema.statics.joinProject = function (body, callback) {
           project.attendants.push((volunteer._id).toString());
         }
         project.save();
+
+        async.timesSeries(project.sessions.length, (i, next) => {
+          const session = project.sessions[i];
+          const sessionDuration = Number(session.session_duration.split(":")[0] + "." + session.session_duration.split(":")[0]);
+          volunteer.totalHoursOfService += sessionDuration;
+          next();
+        }, (err) => {
+          if (err) return callback(err);
+          volunteer.save();
+        })
 
         Organization.findById(project.creator_id, (err, organization) => {
           if (err) return callback("organization_not_found");
@@ -227,13 +251,21 @@ volunteerSchema.statics.exitProject = function (body, callback) {
       })
 
       volunteer.projects = newProjectsArray;
-      volunteer.save();
-
 
       Project.findById(body.project_id, (err, project) => {
         if (err) return callback("project_not_found");
         const newAttendantsArray = project.attendants.filter((value) => {
           return value != body.volunteer_id;
+        })
+
+        async.timesSeries(project.sessions.length, (i, next) => {
+          const session = project.sessions[i];
+          const sessionDuration = Number(session.session_duration.split(":")[0] + "." + session.session_duration.split(":")[0]);
+          volunteer.totalHoursOfService -= sessionDuration;
+          next();
+        }, (err) => {
+          if (err) return callback(err);
+          volunteer.save();
         })
 
         project.attendants = newAttendantsArray;
@@ -412,6 +444,52 @@ volunteerSchema.statics.removeVolunteerFromOrganization = function (body, callba
     }
   })
 }
+
+
+volunteerSchema.statics.getLeaderBoardDataOfUser = function (body, callback) {
+  const city = body.city;
+  const country = body.country;
+  const school = body.school;
+
+
+  const leaderboard = {};
+
+  // Retrieve leaderboard based on city
+  Volunteer.find({ city })
+    .sort({ totalHoursOfService: -1 })
+    .exec((err, volunteersByCity) => {
+      if (err) {
+        return callback(err);
+      }
+
+      leaderboard.city = volunteersByCity;
+      // Retrieve leaderboard based on country
+      Volunteer.find({ country })
+        .sort({ totalHoursOfService: -1 })
+        .exec((err, volunteersByCountry) => {
+          if (err) {
+            return callback(err);
+          }
+
+          leaderboard.country = volunteersByCountry;
+
+          // Retrieve leaderboard based on school
+          Volunteer.find({ school })
+            .sort({ totalHoursOfService: -1 })
+            .exec((err, volunteersBySchool) => {
+              if (err) {
+                return callback(err);
+              }
+
+              leaderboard.school = volunteersBySchool;
+
+              callback(null, leaderboard);
+            });
+        });
+    });
+
+}
+
 
 volunteerSchema.pre('save', hashpassword);
 

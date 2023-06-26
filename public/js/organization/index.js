@@ -21,6 +21,15 @@ window.onload = () => {
 
   document.addEventListener("click", (event) => {
 
+    if (event.target.classList.contains("each-project-mark-as-complete-button")) {
+      const projectId = event.target.previousSibling.previousSibling.innerHTML;
+
+      const url = window.location.href.split("organization")[0] + "project/edit/isCompleted";
+      if (confirm("Do you really want to mark this project as complete? This action will not be reversible.")) {
+        serverRequest(url, "POST", { id: projectId }, () => window.location.reload());
+      }
+    }
+
     if (event.target.classList.contains("add-session-button")) {
       if (sessionCnt % 2 == 0) {
         addSessionForm.style.display = "flex";

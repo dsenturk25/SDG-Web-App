@@ -155,23 +155,31 @@ projectsSchema.statics.addSessionManual = function (body, callback) {
 }
 
 projectsSchema.statics.updateTodaysPicks = function (body, callback) {
+
   Project.find({}, (err, projects) => {
     if (err) return callback("bad_request");
     const size = projects.length;
     const todaysPicksIndexes = [];
-    let i = 0;
-    while (i < 2) {
-      const randomIndex = Math.floor(Math.random() * size);
-      if (todaysPicksIndexes.includes(randomIndex)) continue;
-      todaysPicksIndexes.push(randomIndex)
-      i++;
-    }
 
-    projects[todaysPicksIndexes[0]].isTodaysPick = true;
-    projects[todaysPicksIndexes[0]].save();
-    projects[todaysPicksIndexes[1]].isTodaysPick = true;
-    projects[todaysPicksIndexes[1]].save();
-    return callback(null, todaysPicksIndexes);
+    async.timesSeries(projects.length, (i, next) => {
+      const project = projects[i];
+      project.isTodaysPick = false;
+      project.save();
+    }, (err) => {
+      let i = 0;
+      while (i < 2) {
+        const randomIndex = Math.floor(Math.random() * size);
+        if (todaysPicksIndexes.includes(randomIndex)) continue;
+        todaysPicksIndexes.push(randomIndex)
+        i++;
+      }
+
+      projects[todaysPicksIndexes[0]].isTodaysPick = true;
+      projects[todaysPicksIndexes[0]].save();
+      projects[todaysPicksIndexes[1]].isTodaysPick = true;
+      projects[todaysPicksIndexes[1]].save();
+      return callback(null, todaysPicksIndexes);
+    })
   })
 }
 

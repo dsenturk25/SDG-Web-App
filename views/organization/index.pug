@@ -22,7 +22,12 @@ block main
       .each-project-wrapper
         .each-project-main-info-wrapper
           img.each-project-image(src=`data:image/png;base64,${project.photo}`)
+          .each-project-info(style="display:none") #{project._id}
           .each-project-info #{project.name}
+          if `${project.isCompleted}` == "false"
+            .each-project-mark-as-complete-button Mark as complete
+          else
+            .each-project-info(style="color:green") Completed ✓
         .each-project-more-info-wrapper
           .close-window-button
             i(class="fa-solid fa-close")
