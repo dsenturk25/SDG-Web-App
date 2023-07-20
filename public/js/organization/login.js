@@ -11,7 +11,12 @@ window.onload = () => {
   const password = document.getElementById("password");
   const resInfoWrapper = document.getElementById("res-info-wrapper");
 
+  submitButton.addEventListener("mousedown", (event) => {
+    submitButton.style.transform = "translate(0, 5px)";
+  });
+
   submitButton.addEventListener("click", (event) => {
+    submitButton.style.transform = "translate(0, 0)";
 
     const url = window.location.href.split("/organization")[0] + "/organization/login";
 

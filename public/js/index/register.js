@@ -13,7 +13,12 @@ window.onload = () => {
   const resInfoWrapper = document.getElementById("res-info-wrapper");
   const submitButton = document.getElementById("submit");
 
+  submitButton.addEventListener("mousedown", (event) => {
+    submitButton.style.transform = "translate(0, 5px)";
+  });
+
   submitButton.addEventListener("click", (event) => {
+    submitButton.style.transform = "translate(0, 0)";
 
     if (email.value && name.value && surname.value && password.value && confirmPassword.value && password.value == confirmPassword.value) {
       const domain = email.value.split("@")[1];

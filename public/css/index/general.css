@@ -1,3 +1,8 @@
+:root {
+  --blue-gradient: linear-gradient(to right, #2948ff, #396afc);
+  --blue-gradient-webkit: -webkit-linear-gradient(to right, #2948ff, #396afc);
+}
+
 html {
   padding: 0;
   margin: 0;
@@ -51,9 +56,9 @@ a {
   height: auto;
   background: #396afc;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2948ff, #396afc);
+  background: var(--blue-gradient-webkit);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2948ff, #396afc);
+  background: var(--blue-gradient);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   display: flex;
   flex-direction: column;
@@ -146,47 +151,52 @@ a {
 }
 
 .inputs-main-wrapper label {
-  font-size: 12px;
-  font-weight: bold;
-  color: rgb(0, 0, 0, 0.8);
-  margin-bottom: 10px;
+  display: none;
 }
 
 .inputs-main-wrapper input {
-  width: 92%;
+  width: 100%;
   border-radius: 50px;
   background-color: #f2f2f2;
-  margin-left: 10px;
-  border: 0;
+  margin-left: 0;
+  border: 2px solid #f2f2f2;
   margin-bottom: 30px;
   padding: 4%;
   font-size: 14px;
+  outline: none;
+  transition: 0.3s ease-in-out;
 }
 
-.submit-button {
+.inputs-main-wrapper input:focus {
+  border-radius: 5px;
+  border-color: #396afc;
+}
+
+#submit {
   width: calc(100%);
   border-radius: 50px;
   background: #396afc;
-  background: -webkit-linear-gradient(to right, #2948ff, #396afc);
-  background: linear-gradient(to right, #2948ff, #396afc);
-  margin-left: 10px;
-  border: 0;
+  background: var(--blue-gradient-webkit);
+  background: var(--blue-gradient);
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 10px;
   margin-bottom: 30px;
+  border: 0;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4% 0;
   color: #ffffff;
-  margin-top: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.submit-button:hover {
-  background: #396afc;
-  background: -webkit-linear-gradient(to right, #3d5aff, #6d91fd);
-  background: linear-gradient(to right, #3d5aff, #6d91fd);
+#submit:hover {
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 95%;
 }
 
 .form-footer-text {

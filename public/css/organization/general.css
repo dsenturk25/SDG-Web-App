@@ -1,3 +1,8 @@
+:root {
+  --red-gradient: linear-gradient(to right, #ff3d3d, #fd6d6d);
+  --red-gradient-webkit: -webkit-linear-gradient(to right, #ff3d3d, #fd6d6d);
+}
+
 html {
   padding: 0;
   margin: 0;
@@ -50,8 +55,8 @@ a {
   width: 50%;
   height: auto;
   background: #fc3939; 
-  background: -webkit-linear-gradient(to right, #ff3d3d, #fd6d6d);  
-  background: linear-gradient(to right, #ff3d3d, #fd6d6d);
+  background: var(--red-gradient-webkit);
+  background: var(--red-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,47 +148,52 @@ a {
 }
 
 .inputs-main-wrapper label {
-  font-size: 12px;
-  font-weight: bold;
-  color: rgb(0, 0, 0, 0.8);
-  margin-bottom: 10px;
+  display: none;
 }
 
 .inputs-main-wrapper input {
-  width: 92%;
+  width: 100%;
   border-radius: 50px;
   background-color: #f2f2f2;
-  margin-left: 10px;
-  border: 0;
+  margin-left: 0;
+  border: 2px solid #f2f2f2;
   margin-bottom: 30px;
   padding: 4%;
   font-size: 14px;
+  outline: none;
+  transition: 0.3s ease-in-out;
 }
 
-.submit-button {
+.inputs-main-wrapper input:focus {
+  border-radius: 5px;
+  border-color: #fc3939;
+}
+
+#submit {
   width: calc(100%);
   border-radius: 50px;
-  background: #fc3939; 
-  background: -webkit-linear-gradient(to right, #ff3d3d, #fd6d6d);  
-  background: linear-gradient(to right, #ff3d3d, #fd6d6d);
-  margin-left: 10px;
-  border: 0;
+  background: #396afc;
+  background: var(--red-gradient-webkit);
+  background: var(--red-gradient);
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 10px;
   margin-bottom: 30px;
+  border: 0;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4% 0;
   color: #ffffff;
-  margin-top: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.submit-button:hover {
-  background: #fc3939; 
-  background: -webkit-linear-gradient(to right, #ff3d3d, #fd6d6d);  
-  background: linear-gradient(to right, #ff3d3d, #fd6d6d);
+#submit:hover {
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 95%;
 }
 
 .form-footer-text {
