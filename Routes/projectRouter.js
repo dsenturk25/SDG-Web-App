@@ -14,6 +14,7 @@ const findIdGetController = require("../controllers/Project/getById/get");
 const findAllGetController = require("../controllers/Project/getAll/get");
 
 const updateIsCompletedPostController = require("../controllers/Project/edit/complete/post");
+const updateIsIncompletePostController = require("../controllers/Project/edit/incomplete/post");
 
 const upload = multer({
   dest: "./uploads/",
@@ -64,6 +65,13 @@ router.post(
   isOrganizationAuth,
   updateIsCompletedPostController
 )
+
+router.post(
+  "/edit/isIncomplete",
+  isOrganizationAuth,
+  updateIsIncompletePostController
+)
+
 
 module.exports = router;
 

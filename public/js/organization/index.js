@@ -14,9 +14,6 @@ window.onload = () => {
   const sessionAdressLabel = document.getElementById("session_address_label");
   const sessionLinkToOnlineEnvironmentLabel = document.getElementById("session_link_to_online_environment_label");
 
-  const addSessionForm = document.getElementById("session-form");
-  const addSessionButton = document.getElementById("add-session-button");
-
   let sessionCnt = 0;
 
   document.addEventListener("click", (event) => {
@@ -25,12 +22,21 @@ window.onload = () => {
       const projectId = event.target.previousSibling.previousSibling.innerHTML;
 
       const url = window.location.href.split("organization")[0] + "project/edit/isCompleted";
-      if (confirm("Do you really want to mark this project as complete? This action will not be reversible.")) {
+      if (confirm("Do you really want to mark this project as complete?")) {
+        serverRequest(url, "POST", { id: projectId }, () => window.location.reload());
+      }
+    } else if (event.target.classList.contains("each-project-mark-as-incomplete-button")) {
+      const projectId = event.target.previousSibling.previousSibling.previousSibling.innerHTML;
+
+      const url = window.location.href.split("organization")[0] + "project/edit/isIncomplete";
+      if (confirm("Do you really want to mark this project as incomplete?")) {
         serverRequest(url, "POST", { id: projectId }, () => window.location.reload());
       }
     }
 
     if (event.target.classList.contains("add-session-button")) {
+      const addSessionButton = event.target;
+      const addSessionForm = event.target.nextSibling;
       if (sessionCnt % 2 == 0) {
         addSessionForm.style.display = "flex";
         addSessionButton.innerHTML = "Cancel";
@@ -81,6 +87,49 @@ window.onload = () => {
         sessionLinkToOnlineEnvironmentInput.style.display = "none";
         sessionLinkToOnlineEnvironmentLabel.style.display = "none";
       }
+    }
+  })
+
+  document.addEventListener("click", (event) => {
+
+    if (event.target.classList.contains("attendance-present-button")) {
+
+      event.target.style.backgroundColor = "green";
+      event.target.nextSibling.style.backgroundColor = "#ccc";
+
+      const attendantId = event.target.parentNode.previousSibling.innerHTML;
+      const sessionIndex = event.target.parentNode.previousSibling.previousSibling.innerHTML;
+      const projectId = event.target.parentNode.previousSibling.previousSibling.previousSibling.innerHTML;
+      const sessionDuration = event.target.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML;
+
+      const url = window.location.href + "/attendance/present";
+
+      serverRequest(url, "POST", {
+        volunteer_id: attendantId,
+        projectId: projectId,
+        sessionIndex: sessionIndex,
+        sessionDuration: sessionDuration
+      }, () => { });
+    }
+
+    if (event.target.classList.contains("attendance-absent-button")) {
+
+      event.target.style.backgroundColor = "red";
+      event.target.previousSibling.style.backgroundColor = "#ccc";
+
+      const attendantId = event.target.parentNode.previousSibling.innerHTML;
+      const sessionIndex = event.target.parentNode.previousSibling.previousSibling.innerHTML;
+      const projectId = event.target.parentNode.previousSibling.previousSibling.previousSibling.innerHTML;
+      const sessionDuration = event.target.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML;
+
+      const url = window.location.href + "/attendance/absent";
+
+      serverRequest(url, "POST", {
+        volunteer_id: attendantId,
+        projectId: projectId,
+        sessionIndex: sessionIndex,
+        sessionDuration: sessionDuration
+      }, () => { });
     }
   })
 }

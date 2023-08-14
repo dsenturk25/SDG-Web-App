@@ -21,29 +21,4 @@ html(lang='tr')
           script(src=`/js/functions/searchBar.js`) 
         script(src="https://kit.fontawesome.com/e47420f551.js" crossorigin="anonymous")
   body
-    .all-inner-wrapper 
-      .header-wrapper 
-        a(href="/").logo-section 
-          img.logo-image(src="/res/images/logo.png", alt="SDG Logo")
-        .header-search-bar-section
-          input#search(type="text" placeholder="Search for projects and organizations") 
-          i(class="fa fa-search")
-          .search-bar-results-section#search-res
-            .search-results-entry-text 
-              div no results found
-        .header-titles-section 
-          .each-header-title 
-            a(href="/my-projects") My projects
-          .each-header-title 
-            a(href="/leaderboard") My progress
-          .each-header-title
-            div Learn
-            span soon
-          .auth-section
-            if volunteer 
-              a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
-            else 
-              a(href="/login").each-auth-operation-block Login 
-              a.each-auth-operation-block(href="/register" style="background-color:rgba(0, 115, 255, 1); color: #ffffff") Sign Up 
-      block content
-        
+    block content

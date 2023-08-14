@@ -35,12 +35,13 @@ a {
   opacity: 0;
   transition: 1s;
   margin-bottom: -100px;
+  overflow: hidden;
 }
 
 .form-each-left-column {
   padding: 5%;
   width: 40%;
-  height: 90%;
+  height: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
@@ -202,13 +203,12 @@ a {
 }
 
 .header-wrapper {
-  width: calc(100% - 100px);
+  width: 100%;
   height: 90px;
   display: flex;
   align-items: center;
-  padding: 0 50px;
   box-shadow: 0 0 10px 10px #ccc;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .all-inner-wrapper {
@@ -279,6 +279,7 @@ a {
 
 .header-titles-section {
   display: flex;
+  align-items: center;
 }
 
 .each-header-title {
@@ -354,9 +355,7 @@ footer {
   border-radius: 100%;
   background-color: rgb(40, 40, 40);
   color: #fff;
-  position: absolute;
   cursor: pointer;
-  right: 100px;
   font-weight: 600;
   transition: all 0.3s;
 }

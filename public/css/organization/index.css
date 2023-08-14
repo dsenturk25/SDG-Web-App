@@ -271,7 +271,7 @@
 }
 
 .submit-button {
-  width: 20% !important;
+  width: 20%;
   padding: 1% 0 !important;
   margin-left: 0 !important;
   margin-top: 50px !important;
@@ -321,13 +321,20 @@
 
 .each-session-content {
   display: flex;
-  width: 100%;
+  flex-direction: column;
   height: fit-content;
   margin-bottom: 20px;
+  width: 300px;
+  height: fit-content;
+  margin-left: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.184);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .each-session-info {
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .sdg-content {
@@ -367,4 +374,70 @@
   align-items: center;
   color: white;
   border-radius: 20px;
+}
+
+.open-attendance-page-button {
+  width: 96%;
+  padding: 2%;
+  background-color: blue;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 5px;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.open-attendance-page-button:hover {
+  background-color: rgb(122, 122, 255);
+}
+
+.each-project-mark-as-incomplete-button {
+    width: 80% !important;
+  height: 50px;
+  background-color: red;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 20px;
+}
+
+.each-attendant {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.each-attendant-attendance-buttons {
+  display: flex;
+}
+
+.attendance-present-button {
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  background-color: green;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.attendance-present-button:hover {
+  background-color: rgb(0, 102, 0);
+}
+
+.attendance-absent-button {
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  background-color: red;
+  border-radius: 5px;
+}
+
+.attendance-absent-button:hover {
+  background-color: rgb(154, 0, 0);
 }

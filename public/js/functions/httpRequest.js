@@ -1,6 +1,6 @@
 
 
-function serverRequest (url, method, data, callback) {
+function serverRequest(url, method, data, callback) {
 
   if (!url || typeof url != "string" || !method || typeof method != "string" || (method != 'GET' && method != 'POST') || !data || typeof data != "object") {
     return callback({ success: false, error: 'bad_request' });
@@ -8,9 +8,9 @@ function serverRequest (url, method, data, callback) {
 
   const xhr = new XMLHttpRequest();
   xhr.open(method, url);
-  
+
   if (method == 'POST') {
-    
+
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.send(JSON.stringify(data));
   } else {

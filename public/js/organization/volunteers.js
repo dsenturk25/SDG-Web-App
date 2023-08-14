@@ -6,7 +6,7 @@ window.onload = () => {
   document.addEventListener("click", (event) => {
 
     if (event.target.innerHTML == "Remove") {
-      
+
       const url = window.location.href.split("/organization")[0] + "/organization/volunteers/remove";
 
       serverRequest(url, "POST", {
@@ -16,7 +16,7 @@ window.onload = () => {
         if (res.error) {
           return alert("error");
         } else {
-          return console.log(res);
+          return window.location.reload();
         }
       })
     }

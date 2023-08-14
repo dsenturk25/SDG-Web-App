@@ -5,7 +5,7 @@ const async = require("async");
 
 module.exports = (req, res) => {
 
-  Project.findByIdAndUpdate(req.body.id, { isCompleted: true }, (err, project) => {
+  Project.findByIdAndUpdate(req.body.id, { isCompleted: false }, (err, project) => {
     if (err) return res.redirect("/");
     return res.send(project);
   })

@@ -7,6 +7,7 @@ const Organization = require("../Organizations/organization");
 const { sendConfirmationEmail } = require("../../utils/sendEmail");
 const createConfirmationCode = require("../../utils/createConfirmationCode");
 const async = require("async");
+const { addTimes, subtractTimes } = require("../../utils/timeOperations");
 
 const volunteerSchema = mongoose.Schema({
 
@@ -108,19 +109,30 @@ const volunteerSchema = mongoose.Schema({
   ],
 
   totalHoursOfService: {
-    type: Number,
+    type: String,
     default: 0
   },
 
   hoursOfServiceGoal: {
-    type: Number,
+    type: String,
     default: 0
   },
 
   completedHoursOfService: {
-    type: Number,
+    type: String,
     default: 0
-  }
+  },
+
+  attendance: [
+    each_attendance = {
+      project_id: {
+        type: mongoose.Types.ObjectId
+      },
+      sessions: {
+        type: Array
+      }
+    }
+  ]
 })
 
 volunteerSchema.statics.createVolunteer = function (body, callback) {
@@ -184,10 +196,22 @@ volunteerSchema.statics.joinProject = function (body, callback) {
         }
         project.save();
 
+        function createFalseArray(length) {
+          return Array(length).fill(false);
+        }
+
+        // Example: Create an array containing 5 "false" values
+        const attendance = createFalseArray(project.sessions.length);
+
+        volunteer.attendance = {
+          project_id: project._id,
+          sessions: attendance
+        }
+
         async.timesSeries(project.sessions.length, (i, next) => {
           const session = project.sessions[i];
-          const sessionDuration = Number(session.session_duration.split(":")[0] + "." + session.session_duration.split(":")[0]);
-          volunteer.totalHoursOfService += sessionDuration;
+          volunteer.totalHoursOfService = addTimes(volunteer.totalHoursOfService, session.session_duration);
+
           next();
         }, (err) => {
           if (err) return callback(err);
@@ -241,6 +265,57 @@ volunteerSchema.statics.joinProject = function (body, callback) {
 
 }
 
+volunteerSchema.statics.markVolunteerPresent = function (body, callback) {
+  Volunteer.findById(body.volunteer_id, (err, volunteer) => {
+    if (err) return callback("user_not_found");
+    if (volunteer) {
+      const projectId = body.projectId;
+      const sessionIndex = body.sessionIndex;
+      const sessionDuration = body.sessionDuration;
+
+      for (let i = 0; i < volunteer.attendance.length; i++) {
+        const projectAttendance = volunteer.attendance[i];
+        if (projectAttendance.project_id == projectId) {
+
+          if (projectAttendance.sessions[sessionIndex] == false) {
+            projectAttendance.sessions[sessionIndex] = true;
+
+            volunteer.completedHoursOfService = addTimes(volunteer.completedHoursOfService, sessionDuration);
+
+            volunteer.save();
+          }
+          return callback(null, volunteer);
+        }
+      }
+    }
+  })
+}
+
+volunteerSchema.statics.markVolunteerAbsent = function (body, callback) {
+  Volunteer.findById(body.volunteer_id, (err, volunteer) => {
+    if (err) return callback("user_not_found");
+    if (volunteer) {
+      const projectId = body.projectId;
+      const sessionIndex = body.sessionIndex;
+      const sessionDuration = body.sessionDuration;
+
+      for (let i = 0; i < volunteer.attendance.length; i++) {
+        const projectAttendance = volunteer.attendance[i];
+        if (projectAttendance.project_id == projectId) {
+          if (projectAttendance.sessions[sessionIndex] == true) {
+            projectAttendance.sessions[sessionIndex] = false;
+
+            volunteer.completedHoursOfService = subtractTimes(volunteer.completedHoursOfService, sessionDuration);
+
+            volunteer.save();
+          }
+          return callback(null, volunteer);
+        }
+      }
+    }
+  })
+}
+
 volunteerSchema.statics.exitProject = function (body, callback) {
   Volunteer.findById(body.volunteer_id, (err, volunteer) => {
     if (err) return callback("user_not_found");
@@ -260,8 +335,7 @@ volunteerSchema.statics.exitProject = function (body, callback) {
 
         async.timesSeries(project.sessions.length, (i, next) => {
           const session = project.sessions[i];
-          const sessionDuration = Number(session.session_duration.split(":")[0] + "." + session.session_duration.split(":")[0]);
-          volunteer.totalHoursOfService -= sessionDuration;
+          volunteer.totalHoursOfService = subtractTimes(volunteer.totalHoursOfService, session.session_duration);
           next();
         }, (err) => {
           if (err) return callback(err);
@@ -431,7 +505,8 @@ volunteerSchema.statics.removeVolunteerFromOrganization = function (body, callba
           organization.volunteers = newVolunteersArray;
           organization.save();
 
-          const newOrganizationsArray = volunteer.joined_organizations.filter((value) => {
+          let newOrganizationsArray = []
+          newOrganizationsArray = volunteer.joined_organizations.filter((value) => {
             return value != body.organization_id
           })
 

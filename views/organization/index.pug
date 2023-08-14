@@ -28,6 +28,7 @@ block main
             .each-project-mark-as-complete-button Mark as complete
           else
             .each-project-info(style="color:green") Completed ✓
+            .each-project-mark-as-incomplete-button Mark as incomplete
         .each-project-more-info-wrapper
           .close-window-button
             i(class="fa-solid fa-close")
@@ -44,8 +45,11 @@ block main
                       .sdg-img-content
                         img(src=`data:image/png;base64,${sdg.image}`)
             .project-sessions-wrapper 
+              - var i = 0;
               each session in project.sessions 
                 .each-session-content
+                  .each-session-info(style="display:none") #{project._id}
+                  .each-session-info= ++i
                   .each-session-info Start time: #{session.session_start_time}
                   .each-session-info Duration: #{session.session_duration}
                   .each-session-info Environment: #{session.session_environment}
@@ -53,22 +57,42 @@ block main
                     .each-session-info Address: #{session.session_address}
                   if `${session.session_link_to_online_environment}` != ""
                     .each-session-info Link to online environment: #{session.session_link_to_online_environment}
-            .submit-button(class="add-session-button")#add-session-button Add new session
-            form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
-              hr
-              input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
-              label.each-create-form-label(for="session_date") Date of the session
-              input.create-form-each-text-input(type="date" id="session_date" name="session_date")
-              label.each-create-form-label(for="session_start_time") Start time of the session
-              input.create-form-each-text-input(type="time" id="session_start_time" name="session_start_time")
-              label.each-create-form-label(for="session_duration") Session duration
-              input.create-form-each-text-input(type="time" id="session_duration" name="session_duration" max="05:00" min="00:30")
-              label.each-create-form-label(for="session_environment") Project environment
-              select(name="session_environment" id="session_environment") 
-                option(value="online") Online (virtual)
-                option(value="face-to-face") Face to face
-              label.each-create-form-label(for="session_link_to_online_environment" id="session_link_to_online_environment_label") Link to online environment
-              input.create-form-each-text-input(type="text" id="session_link_to_online_environment" name="session_link_to_online_environment" placeholder="Link to online environment")
-              label.each-create-form-label(for="session_address" id="session_address_label" style="display:none") Project address (Where will the project take place?)
-              input.create-form-each-text-input(type="text" id="session_address" name="session_address" placeholder="Address" style="display:none")
-              input.submit-button(type="submit" value="Save")
+                  .open-attendance-page-button Attendance
+                  .attendance-page
+                    each attendant in project.attendants 
+                      each volunteer in volunteers
+                        if `${volunteer._id}` == `${attendant}`
+                          .each-attendant
+                            .each-attendant-name #{volunteer.name} #{volunteer.surname}
+                            .each-attendant-session-index(style="display:none") #{session.session_duration}
+                            .each-attendant-session-index(style="display:none") #{project._id}
+                            .each-attendant-session-index(style="display:none") #{i-1}
+                            .each-attendant-id(style="display:none") #{volunteer._id}
+                            .each-attendant-attendance-buttons 
+                              each each_attendance in volunteer.attendance 
+                                if `${each_attendance.project_id}` == `${project._id}`
+                                  if `${each_attendance.sessions[i-1]}` == `false`
+                                    .attendance-present-button(style="background-color: #ccc") present
+                                    .attendance-absent-button(style="background-color: red") absent
+                                  if `${each_attendance.sessions[i-1]}` == `true`
+                                    .attendance-present-button(style="background-color: green") present
+                                    .attendance-absent-button(style="background-color: #ccc") absent
+              .submit-button(class="add-session-button")#add-session-button Add new session
+              form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
+                hr
+                input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
+                label.each-create-form-label(for="session_date") Date of the session
+                input.create-form-each-text-input(type="date" id="session_date" name="session_date")
+                label.each-create-form-label(for="session_start_time") Start time of the session
+                input.create-form-each-text-input(type="time" id="session_start_time" name="session_start_time")
+                label.each-create-form-label(for="session_duration") Session duration
+                input.create-form-each-text-input(type="time" id="session_duration" name="session_duration" max="05:00" min="00:30")
+                label.each-create-form-label(for="session_environment") Project environment
+                select(name="session_environment" id="session_environment") 
+                  option(value="online") Online (virtual)
+                  option(value="face-to-face") Face to face
+                label.each-create-form-label(for="session_link_to_online_environment" id="session_link_to_online_environment_label") Link to online environment
+                input.create-form-each-text-input(type="text" id="session_link_to_online_environment" name="session_link_to_online_environment" placeholder="Link to online environment")
+                label.each-create-form-label(for="session_address" id="session_address_label" style="display:none") Project address (Where will the project take place?)
+                input.create-form-each-text-input(type="text" id="session_address" name="session_address" placeholder="Address" style="display:none")
+                input.submit-button(type="submit" value="Save")

@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
+const async = require("async")
 
 const app = express();
 
@@ -19,7 +20,11 @@ const authOrganizationRouter = require("./Routes/organizationRouter");
 const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
-const scheduleUpdates = require("./utils/scheduleUpdates")
+const scheduleUpdates = require("./utils/scheduleUpdates");
+const Volunteer = require("./models/Volunteer/volunteer");
+const Project = require("./models/Projects/project");
+
+const { addTimes, subtractTimes } = require("./utils/timeOperations");
 
 const mongoUri = "mongodb://127.0.0.1:27017/sdg-app-api";
 mongoose.connect(mongoUri, {
@@ -59,5 +64,11 @@ app.use("/admin", adminRouter);
 
 server.listen(PORT, () => {
   scheduleUpdates();
+
+  let time1 = "5:17", time2 = "2:12"
+
+  const res = subtractTimes(time1, time2);
+  console.log(res)
+
   console.log("Server is listening on port", PORT);
 })

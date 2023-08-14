@@ -23,6 +23,9 @@ const isAccountCompleted = require("../middleware/isOrganizationCompleted");
 const completeAccountPostController = require("../controllers/Organization/authOrganization/complete/post");
 const completeAccountGetController = require("../controllers/Organization/authOrganization/complete/get");
 
+const markPresentPostController = require("../controllers/Organization/attendance/present/post");
+const markAbsentPostController = require("../controllers/Organization/attendance/absent/post");
+
 const multer = require("multer");
 
 const upload = multer({
@@ -130,6 +133,22 @@ router.post(
   isOrganizationOnWaitlist,
   upload.single("photo"),
   completeAccountPostController
+)
+
+router.post(
+  "/attendance/present",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  isAccountCompleted,
+  markPresentPostController
+)
+
+router.post(
+  "/attendance/absent",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  isAccountCompleted,
+  markAbsentPostController
 )
 
 module.exports = router;

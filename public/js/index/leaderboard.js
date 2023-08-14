@@ -1,6 +1,8 @@
 
 window.onload = () => {
 
+  searchBar();
+
   const editGoalButton = document.getElementById("edit-goal-button");
 
   editGoalButton.addEventListener("click", (event) => {

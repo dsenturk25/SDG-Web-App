@@ -2,6 +2,7 @@
 const Organization = require("../../../../models/Organizations/organization");
 const Project = require("../../../../models/Projects/project");
 const Sdg = require("../../../../models/SDGs/sdg");
+const Volunteer = require("../../../../models/Volunteer/volunteer");
 
 module.exports = (req, res) => {
 
@@ -24,18 +25,24 @@ module.exports = (req, res) => {
           sdg.image = Buffer.from(sdg.image).toString('base64');
         }
 
-        res.render("organization/index", {
-          page: "organization/index",
-          title: `${req.session.organization.name}`,
-          includes: {
-            external: {
-              css: ["page", "general"],
-              js: ["page", "functions"]
-            }
-          },
-          organization,
-          projects,
-          sdgs
+        Volunteer.find({}, (err, volunteers) => {
+          if (err) return res.redirect("/");
+
+          res.render("organization/index", {
+            page: "organization/index",
+            title: `${req.session.organization.name}`,
+            includes: {
+              external: {
+                css: ["page", "general"],
+                js: ["page", "functions"]
+              }
+            },
+            organization,
+            projects,
+            sdgs,
+            volunteers
+          })
+
         })
       })
     })
