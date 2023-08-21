@@ -86,6 +86,14 @@ window.onload = () => {
       }, 5000)
     }
   })
+
+
+  const organizationDescriptions = document.getElementsByClassName("organization-content-organization-description");
+
+  for (let i = 0; i < organizationDescriptions.length; i++) {
+    const descriptions = organizationDescriptions[i];
+    descriptions.innerHTML = descriptions.innerHTML.slice(0, 20);
+  }
 }
 
 function clone(listToAppend, node) {

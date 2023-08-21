@@ -316,3 +316,54 @@
 .organization-featured-photo-image-content {
   height: 100%;
 }
+
+.each-organization-row-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.each-organization-content {
+  width: 16%;
+  height: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
+}
+
+.organization-featured-photo-outstanding-wrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 4px solid #000000;
+  margin-bottom: 10px;
+}
+
+.organization-content-sdgs-content {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.featured-project-sdg-goal-content-outstanding-organization {
+  width: 40px;
+  aspect-ratio: square;
+  margin-right: 10px;
+}
+
+.featured-project-sdg-goal-content-outstanding-organization-image-content {
+  width: 100%;
+}
+
+.organization-content-organization-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}

@@ -110,17 +110,17 @@ const volunteerSchema = mongoose.Schema({
 
   totalHoursOfService: {
     type: String,
-    default: 0
+    default: "0:00"
   },
 
   hoursOfServiceGoal: {
     type: String,
-    default: 0
+    default: "0"
   },
 
   completedHoursOfService: {
     type: String,
-    default: 0
+    default: "0:00"
   },
 
   attendance: [
@@ -529,39 +529,51 @@ volunteerSchema.statics.getLeaderBoardDataOfUser = function (body, callback) {
 
   const leaderboard = {};
 
-  // Retrieve leaderboard based on city
-  Volunteer.find({ city })
-    .sort({ totalHoursOfService: -1 })
-    .exec((err, volunteersByCity) => {
-      if (err) {
-        return callback(err);
-      }
+  Volunteer.find({}, (err, allVolunteers) => {
+    if (err) return callback(err);
 
-      leaderboard.city = volunteersByCity;
-      // Retrieve leaderboard based on country
-      Volunteer.find({ country })
-        .sort({ totalHoursOfService: -1 })
-        .exec((err, volunteersByCountry) => {
+    async.timesSeries(allVolunteers.length, (i, next) => {
+      const eachVolunteer = allVolunteers[i];
+      eachVolunteer.completedHoursOfService = parseInt(eachVolunteer.completedHoursOfService.split(":")[0] + eachVolunteer.completedHoursOfService.split(":")[1])
+      next();
+    }, (err) => {
+      if (err) return callback(err);
+
+      // Retrieve leaderboard based on city
+      Volunteer.find({ city })
+        .sort({ completedHoursOfService: -1 })
+        .exec((err, volunteersByCity) => {
           if (err) {
             return callback(err);
           }
 
-          leaderboard.country = volunteersByCountry;
-
-          // Retrieve leaderboard based on school
-          Volunteer.find({ school })
-            .sort({ totalHoursOfService: -1 })
-            .exec((err, volunteersBySchool) => {
+          leaderboard.city = volunteersByCity;
+          // Retrieve leaderboard based on country
+          Volunteer.find({ country })
+            .sort({ completedHoursOfService: -1 })
+            .exec((err, volunteersByCountry) => {
               if (err) {
                 return callback(err);
               }
 
-              leaderboard.school = volunteersBySchool;
+              leaderboard.country = volunteersByCountry;
 
-              callback(null, leaderboard);
+              // Retrieve leaderboard based on school
+              Volunteer.find({ school })
+                .sort({ completedHoursOfService: -1 })
+                .exec((err, volunteersBySchool) => {
+                  if (err) {
+                    return callback(err);
+                  }
+
+                  leaderboard.school = volunteersBySchool;
+
+                  callback(null, leaderboard);
+                });
             });
-        });
-    });
+        })
+    })
+  });
 
 }
 

@@ -24,6 +24,8 @@ const resendCodePostController = require("../controllers/Volunteer/authVolunteer
 const completeAccountGetController = require("../controllers/Volunteer/complete/get");
 const completeAccountPostController = require("../controllers/Volunteer/complete/post");
 
+const organizationGetController = require("../controllers/Volunteer/organization/get");
+
 router.use(express.json());
 
 router.get(
@@ -112,6 +114,14 @@ router.post(
   isVolunteerEmailConfirmed,
   isAccountCompleted,
   projectExitPostController
+);
+
+router.post(
+  "/organization",
+  isVolunteerAuth,
+  isVolunteerEmailConfirmed,
+  isAccountCompleted,
+  organizationGetController
 );
 
 module.exports = router;
