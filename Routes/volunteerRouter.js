@@ -116,7 +116,7 @@ router.post(
   projectExitPostController
 );
 
-router.post(
+router.get(
   "/organization",
   isVolunteerAuth,
   isVolunteerEmailConfirmed,
