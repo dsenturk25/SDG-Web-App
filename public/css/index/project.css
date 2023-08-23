@@ -455,3 +455,34 @@
 .project-exit-button div:hover {
   font-size: 18px;
 }
+
+.project-add-to-favorites-button {
+  width: fit-content;
+  padding: 10px 1%;
+  position: absolute;
+  right: 20%;
+  top: 20%;
+  z-index: 1500;
+  background-color: rgba(204, 204, 204, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  transition: 0.3s ease all;
+  cursor: pointer;
+}
+
+.project-add-to-favorites-button:hover {
+    background-color: rgba(204, 204, 204, 0.8);
+}
+
+.project-add-to-favorites-button span {
+  margin-right: 10px;
+  padding: 2px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.project-add-to-favorites-button i {
+  font-size: 20px;
+}

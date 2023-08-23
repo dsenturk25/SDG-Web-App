@@ -117,6 +117,34 @@ window.onload = () => {
     }
   })
 
+
+  const projectAddToFavoritesButton = document.getElementById("project-add-to-favorites-button");
+  const likeStatus = document.getElementById("like-status");
+
+  document.addEventListener("click", (event) => {
+    if (event.target.id == "project-add-to-favorites-button" || event.target.parentNode.id == "project-add-to-favorites-button") {
+      if (likeStatus.children[0].innerHTML == "true") {
+        likeStatus.children[0].innerHTML = "false"
+        projectAddToFavoritesButton.children[1].className = "fa-regular fa-heart";
+        projectAddToFavoritesButton.children[1].style.color = "white";
+      } else if (likeStatus.children[0].innerHTML == "false") {
+        likeStatus.children[0].innerHTML = "true"
+        projectAddToFavoritesButton.children[1].className = "fa-solid fa-heart";
+        projectAddToFavoritesButton.children[1].style.color = "red";
+      }
+
+      const url = window.location.href.split("?")[0] + `/like`;
+
+      serverRequest(url, "POST", {
+        volunteerId: volunteerId,
+        projectId: projectId,
+        likeStatus: likeStatus.children[0].innerHTML == "true" ? true : false
+      }, (res) => {
+        ;
+      })
+    }
+  })
+
 }
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

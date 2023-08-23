@@ -2,10 +2,20 @@ extends ../partials/head.pug
 block content
   #volunteer-id(style="display:none")= volunteer._id
   #project-id(style="display:none")= project._id
-  
+  #like-status(style="display:none")
+    if volunteer.liked_projects.includes(`${project._id}`)
+      span true
+    else 
+      span false
   .inner-main-wrapper#inner-main-wrapper
     .project-main-wrapper 
       .project-image-title-button-main-wrapper#project-image-title-button-main-wrapper
+        .project-add-to-favorites-button#project-add-to-favorites-button
+          span Add to favorites 
+          if volunteer.liked_projects.includes(`${project._id}`)
+            i(class="fa-solid fa-heart" style="color:red")
+          else 
+            i(class="fa-regular fa-heart")
         .project-image 
           img.project-image-content(src=`data:image/png;base64,${project.photo}`, alt="")
         div

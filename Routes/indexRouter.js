@@ -15,6 +15,8 @@ const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
 const isEmailConfirmed = require("../middleware/isVolunteerEmailConfirmed");
 const isAccountCompleted = require("../middleware/isVolunteerCompleted");
 
+const projectLikePostController = require("../controllers/index/project/like/post");
+
 router.get(
   "/",
   isVolunteerLoggedIn,
@@ -29,6 +31,14 @@ router.get(
   isEmailConfirmed,
   isAccountCompleted,
   projectGetController
+)
+
+router.post(
+  "/project/like",
+  isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
+  projectLikePostController
 )
 
 router.get(

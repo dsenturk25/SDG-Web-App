@@ -318,13 +318,14 @@
 
 .each-organization-content {
   width: 400px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px;
   border-radius: 8px;
   cursor: pointer;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .each-organization-content:hover 

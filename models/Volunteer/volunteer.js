@@ -139,6 +139,13 @@ const volunteerSchema = mongoose.Schema({
       type: mongoose.Types.ObjectId,
       default: []
     }
+  ],
+
+  liked_projects: [
+    {
+      type: mongoose.Types.ObjectId,
+      default: []
+    }
   ]
 })
 

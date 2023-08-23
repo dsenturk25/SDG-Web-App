@@ -92,7 +92,7 @@ window.onload = () => {
 
   for (let i = 0; i < organizationDescriptions.length; i++) {
     const descriptions = organizationDescriptions[i];
-    descriptions.innerHTML = descriptions.innerHTML.slice(0, 150) + "...";
+    descriptions.innerHTML = descriptions.innerHTML.slice(0, 200) + "...";
   }
 }
 
