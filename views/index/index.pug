@@ -17,11 +17,12 @@ block content
               .each-featured-project-content-info-wrapper 
                 .each-featured-project-content-info-wrapper-texts
                   h1 #{project.name}
-                  h2 #{project.creator_name}
-                  each organization in organizations 
-                    if `${organization._id}` == `${project.creator_id}`
-                      div(class="organization-featured-photo")
-                        img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}`)
+                  .each-featured-project-content-creator-wrapper
+                    each organization in organizations 
+                      if `${organization._id}` == `${project.creator_id}`
+                        div(class="organization-featured-photo")
+                          img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}`)
+                    h2(style="margin-left: 20px") #{project.creator_name}
                   p #{project.short_description}
                   a(href=`/project?_id=${project._id}`).join-project-button View More
                 .each-featured-project-content-info-wrapper-sdgs

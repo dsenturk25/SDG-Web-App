@@ -64,11 +64,5 @@ app.use("/admin", adminRouter);
 
 server.listen(PORT, () => {
   scheduleUpdates();
-
-  let time1 = "5:17", time2 = "2:12"
-
-  const res = subtractTimes(time1, time2);
-  console.log(res)
-
   console.log("Server is listening on port", PORT);
 })

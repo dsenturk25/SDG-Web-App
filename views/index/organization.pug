@@ -1,10 +1,57 @@
 extends ../partials/head.pug
 block content
+  #organization-id(style="display:none")= organization._id
   #volunteer-id(style="display:none")= volunteer._id
-  #project-id(style="display:none")= project._id
-  
+  #like-status(style="display:none")
+    if volunteer.liked_organizations.includes(`${organization._id}`)
+      span true
+    else 
+      span false
   .inner-main-wrapper#inner-main-wrapper
-    div= organization.name
+    .organization-main-wrapper 
+      .organization-base-info-wrapper 
+        .organization-photo 
+          img(src=`data:image/png;base64,${organization.photo}`)
+        .organization-textual-info-content 
+          .organization-textual-info-content-top 
+            .organization-name #{organization.name}
+            .organization-textual-info-content-top-second-section 
+              .organization-like-button#organization-like-button
+                if volunteer.liked_organizations.includes(organization._id)
+                  i(class="fa-solid fa-heart" style="color:red")
+                else
+                  i(class="fa-regular fa-heart")
+              a(class="organization-more-info-button" href=`${organization.website}` target="_blank") Explore more...
+          hr(style="width:100%; margin: 15px 0;")
+          .organization-textual-info-content-bottom 
+            .organization-description #{organization.description} 
+      .organization-sdg-info-wrapper 
+        .sdgs-wrapper-title Activity areas
+        hr
+        .sdgs-wrapper
+          each sdg_id in organization.completed_sdgs 
+            each sdg in sdgs 
+              if `${sdg_id}` == `${sdg._id}`
+                .each-sdg-goal-content 
+                  img(src=`data:image/png;base64,${sdg.image}`, alt="")
+      .organization-project-info-wrapper 
+        .project-info-wrapper-title 
+          strong #{organization.projects_created.length} 
+          span total projects
+        hr
+        .projects-main-wrapper 
+          each project in projects 
+            each project_id in organization.projects_created 
+              if `${project_id}` == `${project._id}`
+                .each-project-wrapper 
+                  div(style="display:none") #{project._id}
+                  div(class="card-property card_image")
+                    img(class="card-image-content" src=`data:image/png;base64,${project.photo}`)
+                  div(class="card-property card_title") #{project.name}
+                  div(class="card-property card_creator") #{project.creator_name}
+                  div(class="card-property card_description") #{project.short_description}
+                  div(class="card-property card_description") Start time: #{project.start_date}
+                  a(href=`/project?_id=${project._id}`).project-view-button View
     footer
       .footer-column-wrapper
         .each-footer-column

@@ -300,8 +300,8 @@
 }
 
 .organization-featured-photo {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -389,4 +389,10 @@
 .organization-content-organization-info {
   font-size: 14px;
   margin-bottom: 25px;
+}
+
+.each-featured-project-content-creator-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }

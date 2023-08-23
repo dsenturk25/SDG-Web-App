@@ -101,6 +101,11 @@ const organizationSchema = mongoose.Schema({
   city: {
     type: String,
     default: ""
+  },
+
+  website: {
+    type: String,
+    default: ""
   }
 
 })

@@ -26,6 +26,8 @@ const completeAccountPostController = require("../controllers/Volunteer/complete
 
 const organizationGetController = require("../controllers/Volunteer/organization/get");
 
+const organizationLikePostController = require("../controllers/Volunteer/organization/like/post");
+
 router.use(express.json());
 
 router.get(
@@ -122,6 +124,14 @@ router.get(
   isVolunteerEmailConfirmed,
   isAccountCompleted,
   organizationGetController
+);
+
+router.post(
+  "/organization/like",
+  isVolunteerAuth,
+  isVolunteerEmailConfirmed,
+  isAccountCompleted,
+  organizationLikePostController
 );
 
 module.exports = router;
