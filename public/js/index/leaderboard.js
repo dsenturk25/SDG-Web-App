@@ -52,4 +52,19 @@ window.onload = () => {
       document.getElementById("edit-goal-input-wrapper") ? document.getElementById("edit-goal-input-wrapper").remove() : "";
     }
   })
+
+
+  const fakeNameNames = ["Elon", "Bill", "Mark", "Sam", "Mira", "Jeff", "Sergey", "Larry", "Sean", "Gavin"];
+  const fakeNameSurnames = ["Musk", "Gates", "Zuckerberg", "Altman", "Murati", "Bezos", "Brin", "Page", "Parker", "Belson"];
+
+  const volunteerOpponents = document.getElementsByClassName("each-ranking-wrapper-volunteer-opponent-item");
+
+  for (let i = 0; i < volunteerOpponents.length; i++) {
+    const volunteerOpponent = volunteerOpponents[i];
+
+    const fakeNameName = fakeNameNames[Math.floor(Math.random() * fakeNameNames.length)];
+    const fakeNameSurname = fakeNameSurnames[Math.floor(Math.random() * fakeNameNames.length)];
+
+    volunteerOpponent.children[0].children[1].innerHTML = fakeNameName + " " + fakeNameSurname;
+  }
 }

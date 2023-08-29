@@ -1,6 +1,8 @@
 
 window.onload = () => {
 
+  const volunteerId = document.getElementById("volunteer-id").innerHTML;
+
   searchBar()
 
   let clickCnt = -1;
@@ -94,6 +96,52 @@ window.onload = () => {
     const descriptions = organizationDescriptions[i];
     descriptions.innerHTML = descriptions.innerHTML.slice(0, 200) + "...";
   }
+
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("project-thumbnail-add-to-favorites-button")) {
+      if (event.target.previousSibling.children[0].innerHTML == "true") {
+        event.target.previousSibling.children[0].innerHTML = "false"
+        event.target.children[0].className = "fa-regular fa-heart";
+        event.target.children[0].style.color = "white";
+      } else if (event.target.previousSibling.children[0].innerHTML == "false") {
+        event.target.previousSibling.children[0].innerHTML = "true"
+        event.target.children[0].className = "fa-solid fa-heart";
+        event.target.children[0].style.color = "red";
+      }
+
+      const projectId = event.target.previousSibling.previousSibling.previousSibling.innerHTML;
+      const url = window.location.href + `project/like`;
+
+      serverRequest(url, "POST", {
+        volunteerId: volunteerId,
+        projectId: projectId,
+        likeStatus: event.target.previousSibling.children[0].innerHTML == "true" ? true : false
+      }, (res) => {
+        ;
+      })
+    } else if (event.target.parentNode.classList.contains("project-thumbnail-add-to-favorites-button")) {
+      if (event.target.parentNode.previousSibling.children[0].innerHTML == "true") {
+        event.target.parentNode.previousSibling.children[0].innerHTML = "false"
+        event.target.parentNode.children[0].className = "fa-regular fa-heart";
+        event.target.parentNode.children[0].style.color = "white";
+      } else if (event.target.parentNode.previousSibling.children[0].innerHTML == "false") {
+        event.target.parentNode.previousSibling.children[0].innerHTML = "true"
+        event.target.parentNode.children[0].className = "fa-solid fa-heart";
+        event.target.parentNode.children[0].style.color = "red";
+      }
+
+      const projectId = event.target.parentNode.previousSibling.previousSibling.previousSibling.innerHTML;
+      const url = window.location.href + `project/like`;
+
+      serverRequest(url, "POST", {
+        volunteerId: volunteerId,
+        projectId: projectId,
+        likeStatus: event.target.parentNode.previousSibling.children[0].innerHTML == "true" ? true : false
+      }, (res) => {
+        ;
+      })
+    }
+  })
 }
 
 function clone(listToAppend, node) {

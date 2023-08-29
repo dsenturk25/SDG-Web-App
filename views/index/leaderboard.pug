@@ -3,17 +3,20 @@ block content
   .inner-main-wrapper 
     .goal-main-wrapper 
       .goal-main-wrapper-goal-content 
-        h1 #{volunteer.hoursOfServiceGoal} 
-        div hours social service goal
+        h1 #{volunteer.completedHoursOfService} 
+        div hours of social service comopleted
       .goal-main-wrapper-goal-content-detail
         h2 #{volunteer.totalHoursOfService} &nbsp
         div hours of total service estimated
-      .goal-main-wrapper-goal-content-detail
-        h2 #{volunteer.completedHoursOfService} &nbsp
-        div hours of total service completed
-      .goal-main-wrapper-progress-bar
-        .goal-main-wrapper-progress-bar-inner-bar(style=`width: ${((volunteer.completedHoursOfService / volunteer.hoursOfServiceGoal) * 100).toFixed(0)}% !important; background-color: rgba(0, 115, 255, 0.5);`)
-        .goal-main-wrapper-progress-bar-inner-bar(style=`width: ${((volunteer.totalHoursOfService / volunteer.hoursOfServiceGoal) * 100).toFixed(0)}% !important; background-color: rgba(0, 115, 255, 0.5)`)
+        div &nbsp&nbsp out of &nbsp&nbsp
+        h2 #{volunteer.hoursOfServiceGoal} &nbsp
+        div hours of service goal
+      if volunteer.completedHoursOfService > volunteer.hoursOfServiceGoal
+        .goal-main-wrapper-goal-content-detail
+          div Congratulations! You surpassed your current goal. It's time to set a new goal!
+      .goal-main-wrapper-progress-bar(style="overflow:hidden")
+        .goal-main-wrapper-progress-bar-inner-bar(style=`width: ${((parseInt(volunteer.completedHoursOfService.split(":")[0]) / volunteer.hoursOfServiceGoal) * 100).toFixed(0)}% !important; background-color: rgba(0, 115, 255, 0.5);`)
+        .goal-main-wrapper-progress-bar-inner-bar(style=`width: ${((parseInt(volunteer.totalHoursOfService.split(":")[0]) / volunteer.hoursOfServiceGoal) * 100).toFixed(0)}% !important; background-color: rgba(0, 115, 255, 0.5)`)
       .goal-main-wrapper-desc-text
       .goal-main-wrapper-edit-goal-wrapper
         button.edit-goal-button#edit-goal-button Set a New Goal
@@ -22,23 +25,125 @@ block content
     - var schoolRank = 0;
     each volunteerSchool in leaderboardData.school
       if `${volunteerSchool._id}` == `${volunteer._id}`
-        .each-ranking-content 
-          .each-ranking-content-rank #{schoolRank + 1}. 
-          div in your school
+        .each-ranking-wrapper 
+          if schoolRank == 0
+            .each-ranking-category-title School Ranking
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{schoolRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{schoolRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
+          else 
+            .each-ranking-category-title School Ranking
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{schoolRank + 2}
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{schoolRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{schoolRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
       else
         - schoolRank++
     each volunteerCity in leaderboardData.city
       if `${volunteerCity._id}` == `${volunteer._id}`
-        .each-ranking-content 
-          .each-ranking-content-rank #{cityRank + 1}. 
-          div in your city
+        .each-ranking-wrapper 
+          if cityRank == 0
+            .each-ranking-category-title City Ranking
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{cityRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{cityRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
+          else 
+            .each-ranking-category-title City Ranking
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{cityRank}
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{cityRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{cityRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
       else
         - cityRank++
     each volunteerCountry in leaderboardData.country
       if `${volunteerCountry._id}` == `${volunteer._id}`
-        .each-ranking-content 
-          .each-ranking-content-rank #{countryRank + 1}.
-          div in your country
+        .each-ranking-wrapper 
+          if countryRank == 0
+            .each-ranking-category-title Country Ranking
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{countryRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{countryRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
+          else 
+            .each-ranking-category-title Country Ranking
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{countryRank}
+            .each-ranking-wrapper-volunteer-item
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name #{volunteer.name} #{volunteer.surname}
+              .each-ranking-wrapper-rank #{countryRank + 1}
+            .each-ranking-wrapper-volunteer-opponent-item 
+              .each-ranking-wrapper-volunteer-content
+                .each-ranking-wrapper-volunteer-dummy-image
+                  img(src="/res/images/dummyuser.jpeg", alt="")
+                .each-ranking-wrapper-volunteer-name
+              .each-ranking-wrapper-rank #{countryRank + 2}
+            .each-ranking-wrapper-volunteer-trailing-item •••
       else
         - countryRank++
     footer

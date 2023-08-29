@@ -102,3 +102,65 @@
   line-height: 0;
   margin-bottom: 20px;
 }
+
+.each-ranking-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.each-ranking-wrapper-volunteer-opponent-item {
+  width: 50%;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.each-ranking-wrapper-volunteer-item, .each-ranking-wrapper-volunteer-trailing-item {
+  width: 50%;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.each-ranking-wrapper-volunteer-trailing-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.each-ranking-wrapper-volunteer-dummy-image {
+  height: 50px;
+  aspect-ratio: square;
+  border-radius: 100%;
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.each-ranking-wrapper-volunteer-dummy-image img {
+  height: 100%;
+}
+
+.each-ranking-wrapper-volunteer-content {
+  display: flex;
+  align-items: center;
+}
+
+.each-ranking-wrapper-rank {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.each-ranking-category-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  margin-top: 20px;
+}
