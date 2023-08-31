@@ -229,7 +229,6 @@ volunteerSchema.statics.joinProject = function (body, callback) {
           next();
         }, (err) => {
           if (err) return callback(err);
-          volunteer.save();
         })
 
         Organization.findById(project.creator_id, (err, organization) => {
