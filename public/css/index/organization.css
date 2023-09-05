@@ -7,8 +7,9 @@
 
 .organization-main-wrapper {
   width: 70%;
-  height: 90%;
+  height: fit-content;
   padding: 5% 15%;
+  position: relative;
 }
 
 h1 {
@@ -112,7 +113,7 @@ h1 {
 .organization-base-info-wrapper {
   width: 100%;
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .organization-photo {
@@ -124,17 +125,20 @@ h1 {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  border: 4px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .organization-photo img {
   height: 100%;
+  transform: scale(1.25)
 }
 
 .organization-textual-info-content {
   width: calc(100% - 200px);
   display: flex;
   flex-direction: column;
+  justify-content: end;
+  padding-top: 50px;
 }
 
 .organization-textual-info-content-top {
@@ -148,9 +152,9 @@ h1 {
   width: 200px;
   padding: 10px 2%;
   color: #fff;
-  background-color: blue;
+  background-color: rgb(65, 65, 255);
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 25px;
   transition: 0.3s ease all;
   display: flex;
   align-items: center;
@@ -191,8 +195,15 @@ h1 {
 }
 
 .organization-name {
-  font-size: 36px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
+  color: #444444;
+}
+
+.organization-short-description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #444444;
 }
 
 .sdgs-wrapper-title, .project-info-wrapper-title {
@@ -217,4 +228,23 @@ h1 {
 
 .organization-like-button:hover {
   background-color: #e2e2e2;
+}
+
+.organization-absolute-background {
+  width: 95%;
+  height: 75px;
+  position: absolute;
+  background-color: #ccc;
+  z-index: -5;
+  top: 30px;
+  left: 20px;
+  right: 20px;
+}
+
+.organization-textual-info-content-bottom {
+  margin-bottom: 30px;
+  background-color: #f8f9fa;
+  color: #444444;
+  padding: 20px;
+  line-height: 30px;
 }

@@ -9,12 +9,27 @@ block content
       span false
   .inner-main-wrapper#inner-main-wrapper
     .organization-main-wrapper 
+      .organization-absolute-background
       .organization-base-info-wrapper 
         .organization-photo 
           img(src=`data:image/png;base64,${organization.photo}`)
         .organization-textual-info-content 
           .organization-textual-info-content-top 
-            .organization-name #{organization.name}
+            .organization-top-texts-content
+              .organization-name #{organization.name}
+              .organization-short-description 
+                if `${organization.organization_type}` == `school_based`
+                  span 
+                    span is associated with 
+                    span #{organization.associated_school} 
+                    span active in 
+                    span #{organization.country}
+                if `${organization.organization_type}` == `ngo`
+                  span is an NGO active in 
+                  span #{organization.country}
+                if `${organization.organization_type}` == `governmental`
+                  span is associated with government of 
+                  span #{organization.country}
             .organization-textual-info-content-top-second-section 
               .organization-like-button#organization-like-button
                 if volunteer.liked_organizations.includes(organization._id)
@@ -23,17 +38,15 @@ block content
                   i(class="fa-regular fa-heart")
               a(class="organization-more-info-button" href=`${organization.website}` target="_blank") Explore more...
           hr(style="width:100%; margin: 15px 0;")
-          .organization-textual-info-content-bottom 
-            .organization-description #{organization.description} 
-      .organization-sdg-info-wrapper 
-        .sdgs-wrapper-title Activity areas
-        hr
-        .sdgs-wrapper
-          each sdg_id in organization.completed_sdgs 
-            each sdg in sdgs 
-              if `${sdg_id}` == `${sdg._id}`
-                .each-sdg-goal-content 
-                  img(src=`data:image/png;base64,${sdg.image}`, alt="")
+          .organization-sdg-info-wrapper 
+            .sdgs-wrapper
+              each sdg_id in organization.completed_sdgs 
+                each sdg in sdgs 
+                  if `${sdg_id}` == `${sdg._id}`
+                    .each-sdg-goal-content 
+                      img(src=`data:image/png;base64,${sdg.image}`, alt="")
+      .organization-textual-info-content-bottom 
+        .organization-description #{organization.description} 
       .organization-project-info-wrapper 
         .project-info-wrapper-title 
           strong #{organization.projects_created.length} 
