@@ -13,6 +13,7 @@ const organizationFetchGetController = require("../controllers/Admin/fetch/organ
 const projectFetchGetController = require("../controllers/Admin/fetch/project/get");
 const volunteerFetchFilterGetController = require("../controllers/Admin/fetch/filter/volunteer/get");
 const comparisonsFetchPostController = require("../controllers/Admin/fetch/comparisons/post");
+const createLearnPostController = require("../controllers/Admin/index/learn/create/post");
 
 const volunteerDeletePostController = require("../controllers/Admin/delete/volunteer/post");
 const sdgDeletePostController = require("../controllers/Admin/delete/sdg/post");
@@ -33,6 +34,7 @@ const projectGetController = require("../controllers/Admin/index/project/get");
 const volunteerGetController = require("../controllers/Admin/index/volunteer/get");
 const sdgGetController = require("../controllers/Admin/index/sdg/get");
 const comparisonsGetController = require("../controllers/Admin/index/comparisons/get");
+const learnGetController = require("../controllers/Admin/index/learn/get");
 
 const multer = require("multer");
 
@@ -40,7 +42,7 @@ const multer = require("multer");
 const upload = multer({
   dest: "./uploads/",
   limits: {
-      fileSize: 100000000
+    fileSize: 100000000
   },
 })
 
@@ -110,7 +112,7 @@ router.get(
 )
 
 router.post(
-  "/authLogin", 
+  "/authLogin",
   loginPostController
 );
 
@@ -184,6 +186,18 @@ router.post(
   "/organization/delete",
   isAdminAuth,
   organizationDeletePostController
+)
+
+router.get(
+  "/learn",
+  isAdminAuth,
+  learnGetController
+)
+
+router.post(
+  "/learn/create",
+  isAdminAuth,
+  createLearnPostController
 )
 
 module.exports = router;

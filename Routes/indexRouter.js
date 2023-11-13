@@ -10,6 +10,7 @@ const myProjectsGetController = require("../controllers/index/myProjects/get");
 const searchBarPostController = require("../controllers/index/search/post");
 const leaderboardGetController = require("../controllers/index/leaderboard/get")
 const hoursOfServiceGoalPostController = require("../controllers/index/hoursOfServiceGoal/post");
+const learnGetController = require("../controllers/index/learn/get");
 
 const isVolunteerLoggedIn = require("../middleware/isVolunteerLoggedIn");
 const isEmailConfirmed = require("../middleware/isVolunteerEmailConfirmed");
@@ -71,6 +72,14 @@ router.post(
   isEmailConfirmed,
   isAccountCompleted,
   hoursOfServiceGoalPostController
+)
+
+router.get(
+  "/learn",
+  isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
+  learnGetController
 )
 
 router.get(

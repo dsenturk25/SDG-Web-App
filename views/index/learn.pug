@@ -1,0 +1,45 @@
+extends ../partials/head.pug
+block content
+  - var socialGroup = ["1", "2", "3", "4", "5", "10", "16", "17"]
+  - var economicGroup = ["7", "8", "9", "11", "12"]
+  - var environmentalGroup = ["6", "13", "14", "15"]
+  #volunteer-id(style="display:none")= volunteer._id
+  .inner-main-wrapper 
+    .learn-main-wrapper
+      .title-wrapper Learn
+      .rows-wrapper 
+        .each-content-row
+          a(href=`${learnArray[0].video_link}` target="_blank").each-learn-content
+            .each-learn-content-image
+              img(src=`https://img.youtube.com/vi/${learnArray[0].video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
+            .each-learn-content-info-content
+              .each-learn-content-info-content-title #{learnArray[0].title.slice(0, 50)}...
+              .each-learn-content-info-content-activist #{learnArray[0].activist}
+          a(href=`${learnArray[1].video_link}` target="_blank").each-learn-content
+            .each-learn-content-image
+              img(src=`https://img.youtube.com/vi/${learnArray[1].video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
+            .each-learn-content-info-content
+              .each-learn-content-info-content-title #{learnArray[1].title.slice(0, 50)}...
+              .each-learn-content-info-content-activist #{learnArray[1].activist}
+          .each-learn-content 
+        .each-content-row
+          .each-learn-content
+          .each-learn-content
+          .each-learn-content 
+        .each-content-row
+          .each-learn-content
+          .each-learn-content
+          .each-learn-content 
+    .featured-activist-main-wrapper
+      .main-background-shape-cluster
+        .main-background-shape-cluster-one
+        .main-background-shape-cluster-two
+        .main-background-shape-cluster-three
+          div Activist Of The Week
+        .main-featured-activist-wrapper 
+          .main-featured-activist-image-wrapper 
+            img(src="/res/images/greta.png", alt="")
+          .main-featured-activist-info-box 
+            .main-featured-activist-info-box-title Greta Thunberg
+            .main-featured-activist-info-box-description Greta Thunberg is a climate activist. Zart zurt herhangi bir anlamsız text falan filan UN is a great thing. Greta Thunberg is a climate activist. Zart zurt herhangi bir anlamsız text falan filan UN is a great thing. 
+        

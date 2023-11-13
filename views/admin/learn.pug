@@ -1,0 +1,23 @@
+extends ../partials/header.pug
+block content
+  .all-inner-wrapper
+    .header-content 
+      .admin-info-wrapper 
+        .admin-name-surname Welcome back #{admin.name_surname}!
+        .admin-type #{admin.admin_type}
+      .sdg-goal-image
+        img(src="/res/images/un.png", alt="United Nations")
+        img(src="/res/images/sdg.png" alt="Sustainable Development Goals")
+    .main-content 
+      .learn-create-content 
+        form.create-form#create-form(method='POST' action='/admin/learn/create' autocomplete="off" enctype='application/json')
+          label(for="title") Video title 
+          input#name(type="text" name="title").sdg-name 
+          label(for="activist") Associated activist name
+          input#activist(type="text" name="activist").sdg-name 
+          label(for="video_link") Video youtube link 
+          input#video_link(type="text" name="video_link").sdg-name 
+          button.submit-button#submit-button(type="submit") Save
+      .learn-wrapper
+    .footer-content
+      .signature-text powered by Üsküdar American Academy
