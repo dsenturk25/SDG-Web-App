@@ -14,7 +14,7 @@ block content
           input.profile-edit-input(type="file" accept="image/png, image/jpeg" name="photo" required)
         div.profile-edit-school-group
           label.profile-edit-label(for="organization_type") Organization Type
-          select.profile-edit-input(name="organization_type" required)#organization_type
+          select#organization_type.profile-edit-input(name="organization_type" required)
             option(value="") Choose
             option(value="school_based") School Based
             option(value="ngo") NGO (Non-govermental Organization)
@@ -22,7 +22,7 @@ block content
           label.profile-edit-label(for="associated_school") Associated School
           input.profile-edit-input(type="text" value=`${organization.associated_school}` name="associated_school")#associated_school
           label.profile-edit-label(for="associated_school") Website
-          input.profile-edit-input(type="text" value=`${organization.website}` name="associated_school")#website
+          input.profile-edit-input(type="text" value=`${organization.website}` name="website")#website
         div.profile-edit-school-group
           label.profile-edit-label(for="school") Phone Number
           input.profile-edit-input(type="text" value=`${organization.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)

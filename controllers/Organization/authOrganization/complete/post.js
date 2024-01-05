@@ -15,6 +15,7 @@ module.exports = (req, res) => {
     country: req.body.country,
     isAccountCompleted: true
   }
+
   Organization.findByIdAndUpdate(req.session.organization._id, args, (err, updatedVolunteer) => {
     if (err) return res.status(400).send("bad_request");
     fs.unlink(path.join(__dirname + '../../../../../uploads/' + req.file.filename), (err, file) => {
