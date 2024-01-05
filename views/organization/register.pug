@@ -11,14 +11,25 @@ block content
             .each-social-media-icon
               i(class="fa fa-linkedin")
         .inputs-main-wrapper 
+          label(for="email") Organization Name
+          input.each-input(type="text" placeholder="Name" autocomplete="off")#name
+          label(for="email") Telephone Number
+          input.each-input(type="text" placeholder="+90 530-xxx-xxxx" autocomplete="off")#phone_number
+          label Choose Organization Type
+          select#organization_type(name="organization_type")
+            option(value="school_based") School based
+            option(value="governmental") Governmental
+            option(value="ngo") NGO
           label(for="email") Email
           input.each-input(type="text" placeholder="Email" autocomplete="off")#email
           label(for="email") Password
           input.each-input(type="password" placeholder="Password" autocomplete="off")#password
+          label(for="email") Confirm Password
+          input.each-input(type="password" placeholder="Confirm Password" autocomplete="off")#password-confirm
           .res-info-wrapper#res-info-wrapper
           .submit-button#submit Sign up
           .form-footer-text Uskudar American Academy - 2022
       .form-each-right-column
-        .each-right-column-title Welcome to SDG WebApp Organization Register 
+        .each-right-column-title Welcome to SDG Hub Organization Register 
         .each-right-column-text Already have an account?
         a(href="/organization/register").each-right-column-button Sign In

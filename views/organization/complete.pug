@@ -25,7 +25,7 @@ block content
           input.profile-edit-input(type="text" value=`${organization.website}` name="associated_school")#website
         div.profile-edit-school-group
           label.profile-edit-label(for="school") Phone Number
-          input.profile-edit-input(type="tel" value=`${organization.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)
+          input.profile-edit-input(type="text" value=`${organization.phone_number}` id="phone" name="phone_number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" placeholder="530 000 0000" required)
         div.profile-edit-bio-group
           label.profile-edit-label(for="description") Tell us about your Organization
           textarea.profile-edit-textarea(name="description" required) #{organization.description}

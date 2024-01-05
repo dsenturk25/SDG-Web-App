@@ -1,5 +1,7 @@
 
 const mongoose = require("mongoose");
+const async = require("async");
+const Sdg = require("../SDGs/sdg");
 
 const projectsSchema = mongoose.Schema({
 
@@ -149,8 +151,29 @@ projectsSchema.statics.addSessionManual = function (body, callback) {
     if (err) return callback("create_failed");
 
     project.sessions.push(session);
-    project.save();
-    return callback(null, project);
+
+    async.timesSeries(project.sdg_goals.length, (i, next) => {
+      const sdgId = project.sdg_goals[i];
+      Sdg.findById(sdgId, (err, sdg) => {
+        if (err) return callback("create_failed");
+        const totalHour = parseInt(body.session_duration.split(":")[0]);
+        const totalMinute = parseInt(body.session_duration.split(":")[1]);
+
+        const prevHour = parseInt(sdg.total_hours.split(":")[0])
+        const prevMinute = parseInt(sdg.total_hours.split(":")[1]);
+
+        const hour = totalMinute + prevMinute >= 60 ? totalHour + prevHour + 1 : totalHour + prevHour;
+        const minute = totalMinute + prevMinute >= 60 ? (totalMinute + prevMinute) - 60 : totalMinute + prevMinute;
+
+        sdg.total_hours = `${hour}:${minute}`;
+        sdg.save();
+        next();
+      })
+    }, (err) => {
+      if (err) return callback("create_failed");
+      project.save();
+      return callback(null, project);
+    })
   })
 }
 

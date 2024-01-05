@@ -266,12 +266,11 @@ volunteerSchema.statics.joinProject = function (body, callback) {
             if (err) return callback("volunteer_push_failed");
             if (flag != 1) {
               volunteer.joined_organizations.push(organization._id);
-              volunteer.save();
             }
+            volunteer.save();
+            return callback(null, project);
           })
-
         })
-        return callback(null, project);
       })
     }
   });

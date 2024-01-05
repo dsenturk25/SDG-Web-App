@@ -5,6 +5,9 @@ window.onload = () => {
   form.style.opacity = "1";
   form.style.marginBottom = "0";
 
+  const name = document.getElementById("name");
+  const phone_number = document.getElementById("phone_number");
+  const organization_type = document.getElementById("organization_type");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("password-confirm");
@@ -27,6 +30,9 @@ window.onload = () => {
         const url = window.location.href.split("/organization")[0] + "/organization/register";
 
         serverRequest(url, "POST", {
+          name: name.value,
+          phone_number: phone_number.value,
+          organization_type: organization_type.value,
           email: email.value,
           password: password.value
         }, (res) => {

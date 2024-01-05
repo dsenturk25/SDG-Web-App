@@ -37,9 +37,9 @@ const adminSchema = mongoose.Schema({
 })
 
 adminSchema.statics.createAdmin = function (body, callback) {
-  
+
   if (body.root_admin_password == process.env.ROOT_ADMIN_PASSWORD) {
-    Admin.findOne({email: body.email}).then(admin => {
+    Admin.findOne({ email: body.email }).then(admin => {
       if (admin) return callback("email_not_unique", null);
     });
 
@@ -58,20 +58,19 @@ adminSchema.statics.createAdmin = function (body, callback) {
 }
 
 adminSchema.statics.loginAdmin = function (body, callback) {
-  
-  Admin.findOne({email: body.email}).then(admin => {
-    if (!admin) return callback("user_not_found");
+
+  Admin.findOne({ email: body.email }, (err, admin) => {
+    if (err || !admin) return callback("user_not_found");
 
     verifypassword(body.password, admin.password, (res) => {
       if (res) return callback(null, admin);
-      
       return callback("verify_error", null);
     })
   });
 }
 
 adminSchema.statics.findAdminById = function (body, callback) {
-  Admin.findById(mongoose.Types.ObjectId(body._id), (err, admin) => {;
+  Admin.findById(body._id, (err, admin) => {
     if (err || !admin) return callback("user_not_found");
     callback(null, admin);
   })
@@ -89,7 +88,7 @@ adminSchema.statics.createSdgGoal = function (body, callback) {
 
 adminSchema.statics.approveOrganizationsWaitlist = function (body, callback) {
 
-  Organization.findByIdAndUpdate(body._id, {isOnWaitList: false}, (err, organization) => {
+  Organization.findByIdAndUpdate(body._id, { isOnWaitList: false }, (err, organization) => {
     if (err) return callback("update_failure");
     return callback(null, organization);
   })
@@ -99,14 +98,14 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
 
   Organization.findById(body._id, (err, organization) => {
     if (err) return callback("delete_failed");
-    
+
     if (organization.projects_created[0] == null) return callback(null, organization);
 
     for (let i = 0; i < organization.projects_created.length; i++) {
       const project_id = organization.projects_created[i];
       Project.findByIdAndDelete(project_id, (err, project) => {
         if (err || !project) return callback("delete_failed");
-        
+
         async.timesSeries(project.attendants.length, (j, next) => {
 
           const volunteer_id = project.attendants[j];
@@ -201,25 +200,25 @@ adminSchema.statics.fetchVolunteersByFilter = function (body, callback) {
           resArray.push(volunteer);
         }
         next();
-      } else  if (body.filter == "gender") {
-        
-        if(body.input == volunteer.gender) {
+      } else if (body.filter == "gender") {
+
+        if (body.input == volunteer.gender) {
           resArray.push(volunteer);
         }
         next();
-      } else  if (body.filter == "school") {
+      } else if (body.filter == "school") {
 
         if (volunteer.school.toLowerCase().includes(body.input.toLowerCase())) {
           resArray.push(volunteer)
         }
         next();
-      } else  if (body.filter == "country") {
-        
+      } else if (body.filter == "country") {
+
         if (volunteer.country.toLowerCase().includes(body.input.toLowerCase())) {
           resArray.push(volunteer);
         }
         next();
-      } else  if (body.filter == "city") {
+      } else if (body.filter == "city") {
         if (volunteer.city.toLowerCase().includes(body.input.toLowerCase())) {
           resArray.push(volunteer);
         }
@@ -293,7 +292,7 @@ adminSchema.statics.createStackedBarGraph = function (body, callback) {
     }, (err) => {
       if (err) return callback("fetch_failed");
     });
-    
+
     const xAxisFilter = body.x_axis_filter;
     const barStackFilters = body.bar_stack_filter
 
@@ -305,28 +304,28 @@ adminSchema.statics.createStackedBarGraph = function (body, callback) {
       Volunteer.find({
         [xAxisFilter]: xAxisLabels[j]
       }).countDocuments()
-      .then(number => {
-        try {
-          xAxisDocumentCountArray.push(number);
-          barStackDocumentCountArray.push([]);
-        } catch (err) {
-          return callback("fetch_failed");
-        }
-      })
+        .then(number => {
+          try {
+            xAxisDocumentCountArray.push(number);
+            barStackDocumentCountArray.push([]);
+          } catch (err) {
+            return callback("fetch_failed");
+          }
+        })
 
       async.timesSeries(barStackLabels.length, (k, next) => {
         Volunteer.find({
           [xAxisFilter]: xAxisLabels[j],
           [barStackFilters]: barStackLabels[k]
         }).countDocuments()
-        .then(numberAssociatedwithBarStacks => {
-          try {
-            barStackDocumentCountArray[j].push(numberAssociatedwithBarStacks);
-          } catch (error) {
-            return callback("fetch_failed");
-          }
-          next();
-        })
+          .then(numberAssociatedwithBarStacks => {
+            try {
+              barStackDocumentCountArray[j].push(numberAssociatedwithBarStacks);
+            } catch (error) {
+              return callback("fetch_failed");
+            }
+            next();
+          })
 
       }, (err) => {
         if (err) return callback("fetch_failed");

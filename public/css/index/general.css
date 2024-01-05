@@ -445,16 +445,20 @@ footer {
   left: 20px;
   z-index: 1000000;
   display: none;
+  cursor: pointer;
 }
 
 .hamburger-menu-toggle hr {
   height: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background-color: rgb(0, 0, 0);
   border: 0;
+  transition: all 0.2s;
 }
 
 .hamburger-menu-wrapper {
-  width: 70%;
+  width: 40%;
   position: absolute;
   height: 100%;
   background-color: #1c3273;
@@ -462,7 +466,10 @@ footer {
   padding: 100px 30px;
   font-size: 20px;
   color: white;
-  display: none;
+  flex-direction: column;
+  left: calc(-40% - 60px);
+  transition: all 0.5s;
+  display: flex;
 }
 
 .each-header-title-hamburger {
@@ -545,4 +552,3 @@ footer {
     height: 40px;
   }
 }
-

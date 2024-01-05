@@ -26,11 +26,11 @@ window.onload = () => {
     }, (res) => {
       if (res.error) {
         return resTextWrapper.innerHTML = "Incorrect email or password. Please try again."
-      } else {
+      } else if (res.admin) {
         return window.location.href = "/admin";
       }
     })
-    
+
   })
 
 }

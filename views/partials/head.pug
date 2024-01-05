@@ -19,9 +19,10 @@ html(lang='tr')
           script(src=`/js/functions/httpRequest.js`)
           script(src=`/js/functions/createStackedBarGraph.js`) 
           script(src=`/js/functions/searchBar.js`) 
+          script(src=`/js/functions/hamburgerMenu.js`) 
         script(src="https://kit.fontawesome.com/e47420f551.js" crossorigin="anonymous")
   body
-    .hamburger-menu-wrapper
+    .hamburger-menu-wrapper#hamburger-menu-wrapper
       .each-header-title-hamburger
         a(href="/my-projects") My projects
       .each-header-title-hamburger
@@ -31,7 +32,7 @@ html(lang='tr')
     .all-inner-wrapper 
       .header-wrapper 
         .header-spacer 
-        .hamburger-menu-toggle
+        .hamburger-menu-toggle#hamburger-menu-toggle
           hr
           hr
           hr

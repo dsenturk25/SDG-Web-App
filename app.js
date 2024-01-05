@@ -25,8 +25,9 @@ const Volunteer = require("./models/Volunteer/volunteer");
 const Project = require("./models/Projects/project");
 
 const { addTimes, subtractTimes } = require("./utils/timeOperations");
+const cookieParser = require("cookie-parser");
 
-const mongoUri = "mongodb://127.0.0.1:27017/sdg-app-api";
+const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/sdg-app-api";
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -43,17 +44,37 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 
 app.use(express.json());
 
+app.set('trust proxy', 1);
+
+app.use(cookieParser());
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+  saveUninitialized: false,
+  cookie: { secure: false, path: "/admin" },
+  store: new session.MemoryStore()
+}));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false, path: "/" },
+  store: new session.MemoryStore()
+}));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false, path: "/organization" },
+  store: new session.MemoryStore()
 }));
 
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/", indexRouter);

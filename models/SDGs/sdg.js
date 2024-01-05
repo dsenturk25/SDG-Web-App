@@ -6,7 +6,7 @@ const sdgSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true
-  }, 
+  },
 
   number: {
     type: Number,
@@ -25,8 +25,8 @@ const sdgSchema = mongoose.Schema({
   ],
 
   total_hours: {
-    type: Number,
-    default: 0
+    type: String,
+    default: "0:00"
   },
 
   total_attendants: {

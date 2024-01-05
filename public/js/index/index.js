@@ -3,7 +3,8 @@ window.onload = () => {
 
   const volunteerId = document.getElementById("volunteer-id").innerHTML;
 
-  searchBar()
+  searchBar();
+  handleHeaderMenu();
 
   let clickCnt = -1;
 
