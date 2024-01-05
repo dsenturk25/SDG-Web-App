@@ -9,27 +9,13 @@ block content
       .title-wrapper Learn
       .rows-wrapper 
         .each-content-row
-          a(href=`${learnArray[0].video_link}` target="_blank").each-learn-content
-            .each-learn-content-image
-              img(src=`https://img.youtube.com/vi/${learnArray[0].video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
-            .each-learn-content-info-content
-              .each-learn-content-info-content-title #{learnArray[0].title.slice(0, 50)}...
-              .each-learn-content-info-content-activist #{learnArray[0].activist}
-          a(href=`${learnArray[1].video_link}` target="_blank").each-learn-content
-            .each-learn-content-image
-              img(src=`https://img.youtube.com/vi/${learnArray[1].video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
-            .each-learn-content-info-content
-              .each-learn-content-info-content-title #{learnArray[1].title.slice(0, 50)}...
-              .each-learn-content-info-content-activist #{learnArray[1].activist}
-          .each-learn-content 
-        .each-content-row
-          .each-learn-content
-          .each-learn-content
-          .each-learn-content 
-        .each-content-row
-          .each-learn-content
-          .each-learn-content
-          .each-learn-content 
+          each learnContent in learnArray
+            a(href=`${learnContent.video_link}` target="_blank").each-learn-content
+              .each-learn-content-image
+                img(src=`https://img.youtube.com/vi/${learnContent.video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
+              .each-learn-content-info-content
+                .each-learn-content-info-content-title #{learnContent.title.slice(0, 50)}...
+                .each-learn-content-info-content-activist #{learnContent.activist}        
     .featured-activist-main-wrapper
       .main-background-shape-cluster
         .main-background-shape-cluster-one
