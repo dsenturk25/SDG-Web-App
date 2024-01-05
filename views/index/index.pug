@@ -160,10 +160,12 @@ block content
         div(class="btn next")
           i(class="fa-solid fa-angle-right")
         .each-project-row
+          - var alreadyPushedArray = []
           each project in projects
-            each sdg_id in project.sdg_goals 
-              each sdg in sdgs 
-                if `${sdg.id}` == `${sdg_id}` && socialGroup.includes(`${sdg.number}`) && `${project.isCompleted}` == "false"
+            each sdg in sdgs 
+              each sdg_id in project.sdg_goals                 
+                if `${sdg._id}` == `${sdg_id}` && socialGroup.includes(`${sdg.number}`) && `${project.isCompleted}` == "false" && alreadyPushedArray.includes(`${project._id}`) == false
+                  - alreadyPushedArray.push(`${project._id}`)
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
@@ -173,7 +175,6 @@ block content
                     div(class="card-property card_description loading") #{project.short_description}
                     div(class="card-property card_description loading") Start time: #{project.start_date}
                     div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-                - break
     .each-project-row-main-wrapper
       h2.each-project-row-title Economic Equality
       .each-project-slider-wrapper
@@ -182,10 +183,12 @@ block content
         div(class="btn next")
           i(class="fa-solid fa-angle-right")
         .each-project-row
+          - var alreadyPushedArray = []
           each project in projects
-            each sdg_id in project.sdg_goals 
-              each sdg in sdgs 
-                if `${sdg.id}` == `${sdg_id}` && economicGroup.includes(`${sdg.number}`)
+            each sdg in sdgs 
+              each sdg_id in project.sdg_goals 
+                if `${sdg._id}` == `${sdg_id}` && economicGroup.includes(`${sdg.number}`) && `${project.isCompleted}` == "false" && alreadyPushedArray.includes(`${project._id}`) == false
+                  - alreadyPushedArray.push(`${project._id}`)
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
@@ -195,7 +198,6 @@ block content
                     div(class="card-property card_description loading") #{project.short_description}
                     div(class="card-property card_description loading") Start time: #{project.start_date}
                     div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-                - break
     .each-project-row-main-wrapper
       h2.each-project-row-title Take Action For The Environment 
       .each-project-slider-wrapper
@@ -204,10 +206,12 @@ block content
         div(class="btn next")
           i(class="fa-solid fa-angle-right")
         .each-project-row
+          - var alreadyPushedArray = []
           each project in projects
-            each sdg_id in project.sdg_goals 
-              each sdg in sdgs 
-                if `${sdg.id}` == `${sdg_id}` && environmentalGroup.includes(`${sdg.number}`)
+            each sdg in sdgs 
+              each sdg_id in project.sdg_goals 
+                if `${sdg._id}` == `${sdg_id}` && environmentalGroup.includes(`${sdg.number}`) && `${project.isCompleted}` == "false" && alreadyPushedArray.includes(`${project._id}`) == false
+                  - alreadyPushedArray.push(`${project._id}`)
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
@@ -217,7 +221,6 @@ block content
                     div(class="card-property card_description loading") #{project.short_description}
                     div(class="card-property card_description loading") Start time: #{project.start_date}
                     div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-                - break
     footer
       .footer-column-wrapper
         .each-footer-column
