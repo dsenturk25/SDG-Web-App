@@ -4,6 +4,7 @@ const verifypassword = require("../../utils/verifyPassword");
 const hashpassword = require("../../utils/hashPassword");
 const Project = require("../Projects/project");
 const Sdg = require("../SDGs/sdg");
+const async = require("async");
 
 const organizationSchema = mongoose.Schema({
 
@@ -153,32 +154,35 @@ organizationSchema.statics.createProject = function (body, callback) {
 
   const newProject = new Project(body);
 
-  if (newProject) {
-    newProject.save();
-  }
-
   Organization.findById(body.creator_id, (err, organization) => {
     if (err || !organization) return callback("user_not_found");
     if (organization) {
-
       organization.projects_created.push((newProject._id).toString());
-      organization.save();
-      return callback(null, organization);
     }
 
-    if (body.sdg_goals.length) {
-      for (let i = 0; i < body.sdg_goals.length; i++) {
+
+    if (body.sdg_goals.length > 0) {
+
+      async.timesSeries(body.sdg_goals.length, (i, next) => {
         const sdgGoalId = body.sdg_goals[i];
 
         Sdg.findById(sdgGoalId, (err, sdg) => {
           if (err) return callback("bad_request");
-
-          sdg.total_hours += body.duration;
           sdg.projects.push((newProject._id).toString());
+
+          if (organization.completed_sdgs.includes(sdg._id) == false) {
+            organization.completed_sdgs.push(sdg._id);
+          }
+
           sdg.save();
-          return callback(null, organization);
+          next();
         })
-      }
+      }, (err) => {
+        if (err) return callback("bad_request");
+        newProject.save();
+        organization.save();
+        return callback(null, organization);
+      })
     }
   });
 }
