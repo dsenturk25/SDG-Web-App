@@ -96,7 +96,7 @@ adminSchema.statics.approveOrganizationsWaitlist = function (body, callback) {
 
 adminSchema.statics.deleteOrganization = function (body, callback) {
 
-  Organization.findById(body._id, (err, organization) => {
+  Organization.findByIdAndDelete(body._id, (err, organization) => {
     if (err) return callback("delete_failed");
 
     if (organization.projects_created[0] == null) return callback(null, organization);
@@ -104,13 +104,13 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
     for (let i = 0; i < organization.projects_created.length; i++) {
       const project_id = organization.projects_created[i];
       Project.findByIdAndDelete(project_id, (err, project) => {
-        if (err || !project) return callback("delete_failed");
+        if (err) return callback("delete_failed");
 
         async.timesSeries(project.attendants.length, (j, next) => {
 
           const volunteer_id = project.attendants[j];
 
-          Volunteer.findByIdAndDelete(volunteer_id, (err, volunteer) => {
+          Volunteer.findById(volunteer_id, (err, volunteer) => {
             if (err) return callback("delete_failed");
 
             const newArray = volunteer.projects.filter((id) => {
@@ -120,9 +120,9 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
             volunteer.save();
             next();
           })
-        }, (err, res) => {
+        }, (err) => {
           if (err) return callback("delete_failed");
-          return callback(null, res);
+          return callback(null, organization);
         })
       })
     }
