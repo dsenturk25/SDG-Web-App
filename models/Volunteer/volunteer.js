@@ -153,20 +153,19 @@ volunteerSchema.statics.createVolunteer = function (body, callback) {
 
   Volunteer.findOne({ email: body.email }).then(volunteer => {
     if (volunteer) return callback("email_not_unique", null);
+    const newVolunteer = new Volunteer(body);
+
+    if (newVolunteer) {
+  
+      newVolunteer.confirmation_code = createConfirmationCode();
+  
+      newVolunteer.save();
+      sendConfirmationEmail(newVolunteer);
+      return callback(null, newVolunteer);
+    }
+  
+    return callback("bad_request");
   });
-
-  const newVolunteer = new Volunteer(body);
-
-  if (newVolunteer) {
-
-    newVolunteer.confirmation_code = createConfirmationCode();
-
-    newVolunteer.save();
-    sendConfirmationEmail(newVolunteer);
-    return callback(null, newVolunteer);
-  }
-
-  return callback("bad_request");
 }
 
 volunteerSchema.statics.loginVolunteer = function (body, callback) {

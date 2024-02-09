@@ -113,9 +113,12 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
           Volunteer.findById(volunteer_id, (err, volunteer) => {
             if (err) return callback("delete_failed");
 
-            const newArray = volunteer.projects.filter((id) => {
-              return id != `${project._id}`;
-            })
+            let newArray = []
+            if (volunteer.projects.length > 0) {
+              newArray = volunteer.projects.filter((id) => {
+                return id != `${project._id}`;
+              })
+            }
             volunteer.projects = newArray;
             volunteer.save();
             next();
