@@ -18,6 +18,9 @@ const isAccountCompleted = require("../middleware/isVolunteerCompleted");
 
 const projectLikePostController = require("../controllers/index/project/like/post");
 
+const calendarGetController = require("../controllers/index/calendar/get.js");
+const calendarDataGetController = require("../controllers/index/calendar/data/get.js");
+
 router.get(
   "/",
   isVolunteerLoggedIn,
@@ -90,6 +93,22 @@ router.get(
 router.get(
   "/register",
   registerGetController
+)
+
+router.get(
+  "/calendar",
+  isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
+  calendarGetController
+)
+
+router.get(
+  "/calendar/data",
+  isVolunteerLoggedIn,
+  isEmailConfirmed,
+  isAccountCompleted,
+  calendarDataGetController
 )
 
 module.exports = router;

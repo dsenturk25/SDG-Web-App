@@ -3,6 +3,7 @@ html(lang='tr')
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0')
     title SDG APP | #{title}
+    script(src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js')
     link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' rel='stylesheet')
     if includes && includes.external
       if includes.external.css
@@ -28,6 +29,8 @@ html(lang='tr')
       .each-header-title-hamburger
         a(href="/leaderboard") My progress
       .each-header-title-hamburger
+        a(href="/calendar") Calendar
+      .each-header-title-hamburger
         a(href="/learn") Learn
     .all-inner-wrapper 
       .header-wrapper 
@@ -49,6 +52,8 @@ html(lang='tr')
             a(href="/my-projects") My projects
           .each-header-title 
             a(href="/leaderboard") My progress
+          .each-header-title 
+            a(href="/calendar") Calendar
           .each-header-title
             a(href="/learn") Learn
         .auth-section

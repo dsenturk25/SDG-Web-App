@@ -72,6 +72,10 @@ window.onload = () => {
         numberOfSessionsInput.disabled = false;
       }
     }
+
+    if (event.target.classList.includes("add-session-submit")) {
+      event.target.disabled = true;
+    }
   })
 
   document.addEventListener("change", (event) => {

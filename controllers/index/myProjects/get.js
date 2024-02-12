@@ -6,7 +6,7 @@ const async = require("async");
 module.exports = (req, res) => {
 
   Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
-    if (err) return res.send("error");
+    if (err || !volunteer || !volunteer.projects) return res.send("error");
 
     let projectsArray = [];
 
