@@ -552,3 +552,53 @@ footer {
     height: 40px;
   }
 }
+
+.profile-hover-wrapper {
+  width: 250px;
+  height: fit-content;
+  position: absolute;
+  border: 1px solid #ccc;
+  right: 50px;
+  top: 70px;
+  z-index: 100;
+  background-color: #fff;
+  opacity: 0;
+  display: none;
+  transition: all 1s ease-in;
+}
+
+.hover-wrapper-credentials-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 15px 15px 0 15px;
+}
+
+.volunteer-credentials-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.volunteer-credentials-text-wrapper .email {
+  font-size: 14px;
+  color: #252525af;
+}
+
+.hover-wrapper-menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  width: 100%;
+  background-color: #ccc;
+}
+
+.hover-wrapper-menu-wrapper a {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #252525af;
+}

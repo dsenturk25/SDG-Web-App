@@ -5,6 +5,7 @@ window.onload = () => {
 
   searchBar();
   handleHeaderMenu();
+  profileHover();
 
   let clickCnt = -1;
 
