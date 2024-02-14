@@ -21,11 +21,10 @@ const projectRouter = require("./Routes/projectRouter");
 const adminRouter = require("./Routes/adminRouter");
 
 const scheduleUpdates = require("./utils/scheduleUpdates");
-const Volunteer = require("./models/Volunteer/volunteer");
-const Project = require("./models/Projects/project");
 
 const { addTimes, subtractTimes } = require("./utils/timeOperations");
 const cookieParser = require("cookie-parser");
+const Project = require("./models/Projects/project");
 
 const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/sdg-app-api";
 mongoose.connect(mongoUri, {

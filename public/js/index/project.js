@@ -96,8 +96,13 @@ window.onload = () => {
     if (innerMainWrapper.scrollTop >= projectMainTitleWrapper.offsetHeight + 30) {
       if (!clonedNode) {
         clonedNode = projectMainTitleWrapper.cloneNode(true);
+        
         console.log(clonedNode)
         innerMainWrapper.appendChild(clonedNode);
+        document.getElementsByClassName("project-exit-button-div")[2].style.fontSize = "14px";
+        document.getElementsByClassName("project-exit-button-div")[2].innerHTML = "My Projects";
+        document.getElementsByClassName("project-exit-button-div")[3].style.fontSize = "14px";
+        document.getElementsByClassName("project-image-content")[1].style.height = "55%";
         clonedNode.classList.add("scrolled-project-image-title-button")
         clonedNode.classList.remove("project-image-title-button-main-wrapper")
         clonedNode.id = "";
@@ -110,6 +115,9 @@ window.onload = () => {
     }
     else if (innerMainWrapper.scrollTop < projectMainTitleWrapper.offsetHeight + 30) {
       if (clonedNode) {
+        document.getElementsByClassName("project-exit-button-div")[0].style.fontSize = "16px";
+        document.getElementsByClassName("project-exit-button-div")[1].style.fontSize = "16px";
+        document.getElementsByClassName("project-image-content")[0].style.height = "max-content";
         innerMainWrapper.removeChild(clonedNode)
         clonedNode.style.opacity = 1;
         clonedNode = "";

@@ -130,9 +130,14 @@ const projectsSchema = mongoose.Schema({
   },
 
   isTodaysPick: {
-    type: Boolean
-  }
+    type: Boolean,
+    default: false,
+  },
 
+  quota: {
+    type: Number,
+    required: true,
+  }
 })
 
 projectsSchema.statics.addSessionManual = function (body, callback) {

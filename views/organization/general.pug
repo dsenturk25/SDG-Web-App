@@ -17,6 +17,8 @@ block content
       textarea(name="long_description" id="long_description" cols="30" rows="10").create-form-each-text-input 
       label.each-create-form-label(for="photo") Project image
       input.create-form-image-input(type="file" accept="image/png, image/jpeg" id="photo" name="photo")
+      label.each-create-form-label(for="quote") Project Quota (0-999)
+      input.create-form-each-text-input(type="number" id="quota" name="quota" placeholder="Quota")
       label.each-create-form-label(for="environment") Project environment
       select#environment(name="environment") 
         option(value="online") Online (virtual)
@@ -25,7 +27,6 @@ block content
       input.create-form-each-text-input(type="text" id="link_to_online_environment" name="link_to_online_environment" placeholder="Link to online environment")
       label.each-create-form-label(for="address") Project address (Where will the project take place?)
       input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address")
-
       label.each-create-form-label(for="start_date") Start date (When will the project start)
       input.create-form-each-text-input(type="date" id="start_date" name="start_date")
       label.each-create-form-label(for="finish_date") End date (When will the project finish)

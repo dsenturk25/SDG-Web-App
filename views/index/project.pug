@@ -25,14 +25,14 @@ block content
         .project-descriptions-texts-wrapper(style="display:none")
           .project-info-label Aim of this Project
           .project-info #{project.short_description}
-          .project-info(style="margin-left: 0; margin-top: 20px; color: rgb(255, 255,255, 0.8); text-align: center") 
-            div(style="color:white; font-size: 20px") #{project.attendants.length} 
+          .project-info(style="margin-left: 0; margin-top: 5px; margin-bottom:0; color: rgb(255, 255,255, 0.8); text-align: center") 
+            div(style="color:white; font-size: 20px") #{project.attendants.length} / #{project.quota}
             div volunteers attending this projects
         
         if project.attendants.includes(volunteer._id)
-          .project-exit-button
-            div(style="background-color: rgba(0, 115, 255, 1)") You are a participant. Click to view your projects.
-            div(style="background-color: rgba(200, 20, 10, 1)") Exit project
+          .project-exit-button(style="margin-top:0")
+            a.project-exit-button-div(href="/my-projects" style="background-color: rgba(0, 70, 120, 1)") You're in. Click for project details.
+            .project-exit-button-div(style="background-color: rgba(120, 30, 50, 1)") Exit project
         else 
           .project-join-button 
             span Join the project
