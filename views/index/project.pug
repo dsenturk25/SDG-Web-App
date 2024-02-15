@@ -70,6 +70,9 @@ block content
               .cards
                 .session-number= i++
                 if `${session.session_environment}` == `face-to-face`
+                  .session-location-info 
+                    .session-latitude(style="display:none") #{session.session_latitude}
+                    .session-longitude(style="display:none") #{session.session_longitude}
                   .session-location-content
                 .sesssion-informations-wrapper
                   if `${session.session_environment}` == `online`

@@ -97,7 +97,6 @@ window.onload = () => {
       if (!clonedNode) {
         clonedNode = projectMainTitleWrapper.cloneNode(true);
         
-        console.log(clonedNode)
         innerMainWrapper.appendChild(clonedNode);
         if (document.getElementsByClassName("project-exit-button-div").length > 0) {
           document.getElementsByClassName("project-exit-button-div")[2].style.fontSize = "14px";
@@ -157,6 +156,28 @@ window.onload = () => {
     }
   })
 
+
+  const sessionLatitudeContentArray = document.getElementsByClassName("session-latitude");
+  const sessionLongitudeContentArray = document.getElementsByClassName("session-longitude");
+  const sessionLocationContentArray = document.getElementsByClassName("session-location-content");
+
+  for (let i = 0; i < sessionLocationContentArray.length; i++) {
+    const eachSessionLocationContent = sessionLocationContentArray[i];
+    const eachSessionLatitude = sessionLatitudeContentArray[i];
+    const eachSessionLongitude = sessionLongitudeContentArray[i];
+  
+    console.log(eachSessionLatitude.innerHTML)
+    const map = document.createElement("div");
+    map.id = `map-${i}`;
+    map.classList.add("map");
+
+    const lat = parseInt(eachSessionLatitude.innerHTML);
+    const long = parseInt(eachSessionLongitude.innerHTML);
+    if (Math.abs(lat) > 0 && Math.abs(long) > 0) {
+      eachSessionLocationContent.appendChild(map);
+      createMap(lat, long, i)
+    }
+  }
 }
 
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -186,3 +207,14 @@ function makeDatesPrettier(datesWrapper) {
   datesWrapper.style.display = "flex";
   datesWrapper.style.opacity = "1";
 }
+
+function createMap(latitude, longitude, sessionIdx) {
+  const map = L.map(`map-${sessionIdx}`).setView([latitude, longitude], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+  }).addTo(map);
+
+  L.marker([latitude, longitude], { draggable: true }).addTo(map);
+}
+

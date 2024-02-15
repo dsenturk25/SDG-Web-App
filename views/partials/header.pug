@@ -3,6 +3,8 @@ html(lang='tr')
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0')
     title SDG APP | #{title}
+    link(rel="stylesheet", href="https://unpkg.com/leaflet/dist/leaflet.css")
+    script(src="https://unpkg.com/leaflet/dist/leaflet.js")
     link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' rel='stylesheet')
     if includes && includes.external
       if includes.external.css

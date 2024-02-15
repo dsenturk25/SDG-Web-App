@@ -39,8 +39,20 @@ window.onload = () => {
       const addSessionForm = event.target.nextSibling;
       if (sessionCnt % 2 == 0) {
         addSessionForm.style.display = "flex";
+
+        const mapContainer = document.createElement("div")
+        mapContainer.id = "map";
+        mapContainer.classList.add("map");
+
+        const afterChild = addSessionForm.children[addSessionForm.children.length - 1];
+        addSessionForm.insertBefore(mapContainer, afterChild);
+        createMap(addSessionForm);
         addSessionButton.innerHTML = "Cancel";
       } else {
+
+        const map = document.getElementById("map");
+        map.remove();
+
         addSessionForm.style.display = "none";
         addSessionButton.innerHTML = "Add new session";
       }
@@ -137,3 +149,25 @@ window.onload = () => {
     }
   })
 }
+
+function createMap(sessionFormContainer) {
+  const map = L.map('map').setView([0, 0], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+  }).addTo(map);
+
+  var marker = L.marker([0, 0], { draggable: true }).addTo(map);
+
+  marker.on('dragend', function (event) {
+      var marker = event.target;
+      var position = marker.getLatLng();
+
+      const latitudeContainer = sessionFormContainer.children[sessionFormContainer.children.length - 5];
+      const longitudeContainer = sessionFormContainer.children[sessionFormContainer.children.length - 3];
+
+      latitudeContainer.value = position.lat.toFixed(6);
+      longitudeContainer.value = position.lng.toFixed(6);
+  });
+}
+

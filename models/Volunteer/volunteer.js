@@ -8,6 +8,7 @@ const { sendConfirmationEmail } = require("../../utils/sendEmail");
 const createConfirmationCode = require("../../utils/createConfirmationCode");
 const async = require("async");
 const { addTimes, subtractTimes } = require("../../utils/timeOperations");
+const Sdg = require("../SDGs/sdg");
 
 const volunteerSchema = mongoose.Schema({
 
@@ -148,6 +149,79 @@ const volunteerSchema = mongoose.Schema({
     }
   ]
 })
+
+volunteerSchema.statics.addSessionManual = function (body, callback) {
+
+  const session = {
+    session_date: body.session_date,
+    session_address: body.session_address,
+    session_environment: body.session_environment,
+    session_start_time: body.session_start_time,
+    session_duration: body.session_duration,
+    session_link_to_online_environment: body.session_link_to_online_environment,
+    session_latitude: body.session_latitude,
+    session_longitude: body.session_longitude,
+  }
+
+  Project.findById(body._id, (err, project) => {
+
+    if (err) return callback("create_failed");
+
+    project.sessions.push(session);
+
+    async.timesSeries(project.sdg_goals.length, (i, next) => {
+      const sdgId = project.sdg_goals[i];
+      Sdg.findById(sdgId, (err, sdg) => {
+        if (err) return callback("create_failed");
+        const totalHour = parseInt(body.session_duration.split(":")[0]);
+        const totalMinute = parseInt(body.session_duration.split(":")[1]);
+
+        const prevHour = parseInt(sdg.total_hours.split(":")[0])
+        const prevMinute = parseInt(sdg.total_hours.split(":")[1]);
+
+        const hour = totalMinute + prevMinute >= 60 ? totalHour + prevHour + 1 : totalHour + prevHour;
+        const minute = totalMinute + prevMinute >= 60 ? (totalMinute + prevMinute) - 60 : totalMinute + prevMinute;
+
+        sdg.total_hours = `${hour}:${minute}`;
+        sdg.save();
+        next();
+      })
+    }, (err) => {
+      if (err) return callback("create_failed");
+
+      if (project.attendants) {
+        async.timesSeries(project.attendants.length, (j, next1) => {
+          const volunteerId = project.attendants[j];
+
+          Volunteer.findById(volunteerId, (err, volunteer) => {
+            if (err) return callback("create_failed");
+
+            if (volunteer.attendance) {
+              async.timesSeries(volunteer.attendance.length, (k, next2) => {
+                const eachAttendanceObject = volunteer.attendance[k];
+
+                if (eachAttendanceObject.project_id.toString() == project._id.toString()) {
+                  eachAttendanceObject.sessions.push(false);
+                  volunteer.save();
+                  next2();
+                } else {
+                  next2();
+                }
+              }, (err) => {
+                if (err) return callback("create_failed");
+                next1();
+              })
+            }
+          })
+        }, (err) => {
+          if (err) return callback("create_failed");
+          project.save();
+          return callback(null, project);
+        })
+      }
+    })
+  })
+}
 
 volunteerSchema.statics.createVolunteer = function (body, callback) {
 

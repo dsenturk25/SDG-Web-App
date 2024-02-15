@@ -121,6 +121,12 @@ const projectsSchema = mongoose.Schema({
       session_date: {
         type: String
       },
+      session_latitude: {
+        type: Number
+      },
+      session_longitude: {
+        type: Number
+      }
     }
   ],
 
@@ -139,48 +145,6 @@ const projectsSchema = mongoose.Schema({
     required: true,
   }
 })
-
-projectsSchema.statics.addSessionManual = function (body, callback) {
-
-  const session = {
-    session_date: body.session_date,
-    session_address: body.session_address,
-    session_environment: body.session_environment,
-    session_start_time: body.session_start_time,
-    session_duration: body.session_duration,
-    session_link_to_online_environment: body.session_link_to_online_environment
-  }
-
-  Project.findById(body._id, (err, project) => {
-
-    if (err) return callback("create_failed");
-
-    project.sessions.push(session);
-
-    async.timesSeries(project.sdg_goals.length, (i, next) => {
-      const sdgId = project.sdg_goals[i];
-      Sdg.findById(sdgId, (err, sdg) => {
-        if (err) return callback("create_failed");
-        const totalHour = parseInt(body.session_duration.split(":")[0]);
-        const totalMinute = parseInt(body.session_duration.split(":")[1]);
-
-        const prevHour = parseInt(sdg.total_hours.split(":")[0])
-        const prevMinute = parseInt(sdg.total_hours.split(":")[1]);
-
-        const hour = totalMinute + prevMinute >= 60 ? totalHour + prevHour + 1 : totalHour + prevHour;
-        const minute = totalMinute + prevMinute >= 60 ? (totalMinute + prevMinute) - 60 : totalMinute + prevMinute;
-
-        sdg.total_hours = `${hour}:${minute}`;
-        sdg.save();
-        next();
-      })
-    }, (err) => {
-      if (err) return callback("create_failed");
-      project.save();
-      return callback(null, project);
-    })
-  })
-}
 
 projectsSchema.statics.updateTodaysPicks = function (body, callback) {
 

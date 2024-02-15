@@ -441,3 +441,8 @@
 .attendance-absent-button:hover {
   background-color: rgb(154, 0, 0);
 }
+
+.map {
+  width: 100%;
+  height: 200px;
+}
