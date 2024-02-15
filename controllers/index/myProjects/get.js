@@ -14,7 +14,7 @@ module.exports = (req, res) => {
       const projectId = volunteer.projects[i];
       Project.findById(projectId, (err, project) => {
         if (err) return res.send("error");
-        if (project || project.photo) {
+        if (project && project.photo) {
           project.photo = Buffer.from(project.photo).toString('base64');
           projectsArray.push(project);
         }
