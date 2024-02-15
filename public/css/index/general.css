@@ -554,7 +554,7 @@ footer {
 }
 
 .profile-hover-wrapper {
-  width: 250px;
+  width: fit-content;
   height: fit-content;
   position: absolute;
   border: 1px solid #ccc;
