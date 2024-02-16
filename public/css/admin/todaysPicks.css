@@ -1,0 +1,27 @@
+
+.all-inner-wrapper {
+    flex-direction: column !important;
+}
+
+.each-project-content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    background-color: #ccc;
+    margin: 10px 0;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+.each-project-info {
+    margin-right: 20px;
+}
+
+.each-project-info-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.each-project-check-todays-pick-button {
+    width: 30px;
+}

@@ -6,6 +6,7 @@ window.onload = () => {
   const organizationsButton = document.getElementById("organizations");
   const comparisonsButton = document.getElementById("comparisons");
   const learnButton = document.getElementById("learn");
+  const todaysPicksButton = document.getElementById("todays-picks");
 
   waitlistButton.addEventListener("click", (event) => {
     window.location.href = "/admin/waitlist";
@@ -29,5 +30,9 @@ window.onload = () => {
 
   learnButton.addEventListener("click", (event) => {
     window.location.href = "/admin/learn";
+  })
+
+  todaysPicksButton.addEventListener("click", (event) => {
+    window.location.href = "/admin/todays-picks";
   })
 }
