@@ -42,26 +42,28 @@ block content
           i(class="fa-solid fa-angle-right")
         .each-project-row
           each project in projects
-            if `${project.city}` == `${volunteer.city}`
-              .cards
-                div(style="display:none") #{project._id}
-                div(class="card-property card_image loading")
-                  img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                .like-status(style="display:none")
-                  if volunteer.liked_projects.includes(project._id)
-                    span true
-                  else
-                    span false
-                .project-thumbnail-add-to-favorites-button
-                  if volunteer.liked_projects.includes(project._id)
-                    i(class="fa-solid fa-heart" style="color: red;")
-                  else
-                    i(class="fa-regular fa-heart", style="color: #ccc;")
-                div(class="card-property card_title loading") #{project.name}
-                div(class="card-property card_creator loading") #{project.creator_name}
-                div(class="card-property card_description loading") #{project.short_description}
-                div(class="card-property card_description loading") Start time: #{project.start_date}
-                div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+            if project.city && volunteer.city
+              //- div #{project.name} #{project.city.trim().toLowerCase()} #{volunteer.city.trim().toLowerCase()}
+              if `${project.city.trim().toLowerCase()}` == `${volunteer.city.trim().toLowerCase()}`
+                .cards
+                  div(style="display:none") #{project._id}
+                  div(class="card-property card_image loading")
+                    img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                  .like-status(style="display:none")
+                    if volunteer.liked_projects.includes(project._id)
+                      span true
+                    else
+                      span false
+                  .project-thumbnail-add-to-favorites-button
+                    if volunteer.liked_projects.includes(project._id)
+                      i(class="fa-solid fa-heart" style="color: red;")
+                    else
+                      i(class="fa-regular fa-heart", style="color: #ccc;")
+                  div(class="card-property card_title loading") #{project.name}
+                  div(class="card-property card_creator loading") #{project.creator_name}
+                  div(class="card-property card_description loading") #{project.short_description}
+                  div(class="card-property card_description loading") Start time: #{project.start_date}
+                  div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
     .each-project-row-main-wrapper
       h2.each-project-row-title 
         span Liked by you
