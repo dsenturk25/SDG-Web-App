@@ -13,10 +13,13 @@ window.onload = () => {
   const projectId = document.getElementById("project-id").innerHTML;
 
   let clickCnt = -1;
+  let buttonClicked = false;
 
   document.addEventListener("click", (event) => {
 
-    if (event.target.innerHTML == "Join the project") {
+    if (event.target.innerHTML == "Join the project" && !buttonClicked) {
+
+      buttonClicked = true;
       const url = "/volunteer/project/join";
       serverRequest(url, "POST", {
         volunteer_id: volunteerId,

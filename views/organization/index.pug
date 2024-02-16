@@ -80,23 +80,23 @@ block main
               .submit-button(class="add-session-button")#add-session-button Add new session
               form.create-project-form-content(action="/project/add/session" method="post" enctype="application/json" autocomplete="off" id="session-form" style="display:none") 
                 hr
-                input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}`)
+                input.create-form-each-text-input(type="text" id="_id" name="_id" style="display:none" value=`${project._id}` required)
                 label.each-create-form-label(for="session_date") Date of the session
-                input.create-form-each-text-input(type="date" id="session_date" name="session_date")
+                input.create-form-each-text-input(type="date" id="session_date" name="session_date" required)
                 label.each-create-form-label(for="session_start_time") Start time of the session
-                input.create-form-each-text-input(type="time" id="session_start_time" name="session_start_time")
+                input.create-form-each-text-input(type="time" id="session_start_time" name="session_start_time" required)
                 label.each-create-form-label(for="session_duration") Session duration
-                input.create-form-each-text-input(type="time" id="session_duration" name="session_duration" max="05:00" min="00:30")
+                input.create-form-each-text-input(type="time" id="session_duration" name="session_duration" max="05:00" min="00:30" required)
                 label.each-create-form-label(for="session_environment") Project environment
                 select(name="session_environment" id="session_environment") 
                   option(value="online") Online (virtual)
                   option(value="face-to-face") Face to face
                 label.each-create-form-label(for="session_link_to_online_environment" id="session_link_to_online_environment_label") Link to online environment
-                input.create-form-each-text-input(type="text" id="session_link_to_online_environment" name="session_link_to_online_environment" placeholder="Link to online environment")
+                input.create-form-each-text-input(type="text" id="session_link_to_online_environment" name="session_link_to_online_environment" placeholder="Link to online environment" required)
                 label.each-create-form-label(for="session_address" id="session_address_label") Project address (Where will the project take place?)
-                input.create-form-each-text-input(type="text" id="session_address" name="session_address" placeholder="Address")
+                input.create-form-each-text-input(type="text" id="session_address" name="session_address" placeholder="Address" required)
                 label.each-create-form-label(for="session_latitude") Latitude
-                input.create-form-each-text-input(type="text" id="session_latitude" name="session_latitude" readonly)
+                input.create-form-each-text-input(type="text" id="session_latitude" name="session_latitude" readonly required)
                 label.each-create-form-label(for="session_longitude") Longitude
-                input.create-form-each-text-input(type="text" id="session_longitude" name="session_longitude" readonly)
+                input.create-form-each-text-input(type="text" id="session_longitude" name="session_longitude" readonly required)
                 input.submit-button(type="submit" value="Save" class="add-session-submit")

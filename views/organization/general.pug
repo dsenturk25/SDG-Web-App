@@ -7,41 +7,41 @@ block content
     .create-form-description Please fill all required fields and create the project to bring thousands of volunteers into action!
     form.create-project-form-content(action="/project/create" method="post" enctype="multipart/form-data" autocomplete="off") 
       hr
-      input.create-form-each-text-input(type="text" id="creator_id" name="creator_id" style="display:none" value=`${organization._id}`)
-      input.create-form-each-text-input(type="text" id="creator_name" name="creator_name" style="display:none" value=`${organization.name}` )
+      input.create-form-each-text-input(type="text" id="creator_id" name="creator_id" style="display:none" value=`${organization._id}` required)
+      input.create-form-each-text-input(type="text" id="creator_name" name="creator_name" style="display:none" value=`${organization.name}`  required)
       label.each-create-form-label(for="name") Project name
-      input.create-form-each-text-input(type="text" id="name" name="name" placeholder="name")
+      input.create-form-each-text-input(type="text" id="name" name="name" placeholder="name" required)
       label.each-create-form-label(for="short_description") Project description (short)
-      input.create-form-each-text-input(type="text" id="short_description" name="short_description" placeholder="Short description")
+      input.create-form-each-text-input(type="text" id="short_description" name="short_description" placeholder="Short description" required)
       label.each-create-form-label(for="long_description") Project description (long) 
       textarea(name="long_description" id="long_description" cols="30" rows="10").create-form-each-text-input 
       label.each-create-form-label(for="photo") Project image
-      input.create-form-image-input(type="file" accept="image/png, image/jpeg" id="photo" name="photo")
+      input.create-form-image-input(type="file" accept="image/png, image/jpeg" id="photo" name="photo" required)
       label.each-create-form-label(for="quote") Project Quota (0-999)
-      input.create-form-each-text-input(type="number" id="quota" name="quota" placeholder="Quota")
+      input.create-form-each-text-input(type="number" id="quota" name="quota" placeholder="Quota" required)
       label.each-create-form-label(for="environment") Project environment
       select#environment(name="environment") 
         option(value="online") Online (virtual)
         option(value="face-to-face") Face to face
       label.each-create-form-label(for="link_to_online_environment") Link to online environment (zoom or Google meet)
-      input.create-form-each-text-input(type="text" id="link_to_online_environment" name="link_to_online_environment" placeholder="Link to online environment")
+      input.create-form-each-text-input(type="text" id="link_to_online_environment" name="link_to_online_environment" placeholder="Link to online environment" required)
       label.each-create-form-label(for="address") Project address (Where will the project take place?)
-      input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address")
+      input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address" required)
       label.each-create-form-label(for="city") City (the city that the project is held)
-      input.create-form-each-text-input(type="text" id="city" name="city" placeholder="City")
+      input.create-form-each-text-input(type="text" id="city" name="city" placeholder="City" required)
       label.each-create-form-label(for="start_date") Start date (When will the project start)
-      input.create-form-each-text-input(type="date" id="start_date" name="start_date")
+      input.create-form-each-text-input(type="date" id="start_date" name="start_date" required)
       label.each-create-form-label(for="finish_date") End date (When will the project finish)
-      input.create-form-each-text-input(type="date" id="finish_date" name="finish_date")
+      input.create-form-each-text-input(type="date" id="finish_date" name="finish_date" required)
       .each-form-session-checkbox-content
         label.each-create-form-label(for="") Add sessions manually later
         input.create-form-each-check-box(type="checkbox" id="add-sessions-manual-checkbox") 
       label.each-create-form-label(for="number_of_sessions") Number of total sessions
-      input.create-form-each-text-input(type="number" id="number_of_sessions" name="number_of_sessions")
+      input.create-form-each-text-input(type="number" id="number_of_sessions" name="number_of_sessions" required)
       label.each-create-form-label(for="duration_of_each_session") Duration of each session
-      input.create-form-each-text-input(type="time" id="duration_of_each_session" name="duration_of_each_session" max="05:00" min="00:30")
+      input.create-form-each-text-input(type="time" id="duration_of_each_session" name="duration_of_each_session" max="05:00" min="00:30" required)
       label.each-create-form-label(for="start_time_of_each_session") Start time of each session
-      input.create-form-each-text-input(type="time" id="start_time_of_each_session" name="start_time_of_each_session")
+      input.create-form-each-text-input(type="time" id="start_time_of_each_session" name="start_time_of_each_session" required)
       label.each-create-form-label Which UN's Sustainable Developement Goals do you think this project promotes?
       .create-form-sdg-goals-check-content
         each sdg in sdgs
