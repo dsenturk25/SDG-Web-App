@@ -116,27 +116,31 @@ adminSchema.statics.deleteOrganization = function (body, callback) {
       Project.findByIdAndDelete(project_id, (err, project) => {
         if (err) return callback("delete_failed");
 
-        async.timesSeries(project.attendants.length, (j, next) => {
+        if (project.attendants && project.attendants.length) {
+          async.timesSeries(project.attendants.length, (j, next) => {
 
-          const volunteer_id = project.attendants[j];
+            const volunteer_id = project.attendants[j];
 
-          Volunteer.findById(volunteer_id, (err, volunteer) => {
+            Volunteer.findById(volunteer_id, (err, volunteer) => {
+              if (err) return callback("delete_failed");
+
+              let newArray = []
+              if (volunteer.projects.length > 0) {
+                newArray = volunteer.projects.filter((id) => {
+                  return id != `${project._id}`;
+                })
+              }
+              volunteer.projects = newArray;
+              volunteer.save();
+              next();
+            })
+          }, (err) => {
             if (err) return callback("delete_failed");
-
-            let newArray = []
-            if (volunteer.projects.length > 0) {
-              newArray = volunteer.projects.filter((id) => {
-                return id != `${project._id}`;
-              })
-            }
-            volunteer.projects = newArray;
-            volunteer.save();
-            next();
+            return callback(null, organization);
           })
-        }, (err) => {
-          if (err) return callback("delete_failed");
-          return callback(null, organization);
-        })
+        }
+      
+        return callback(null, organization);
       })
     }
   })
