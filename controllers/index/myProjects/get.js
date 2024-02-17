@@ -16,12 +16,14 @@ module.exports = (req, res) => {
       Project.findById(projectId, async (err, project) => {
         if (err) return res.send("error");
 
-        if (project && project.imageName && project.imageName.length > 0) {
-          project.photo = await retrieveImageFromImageName(project.imageName);
-        } else {
-          project.photo = Buffer.from(project.photo).toString('base64');
+        if (project && project.name) {
+          if (project && project.imageName && project.imageName.length > 0) {
+            project.photo = await retrieveImageFromImageName(project.imageName);
+          } else {
+            project.photo = Buffer.from(project.photo).toString('base64');
+          }
+          projectsArray.push(project);
         }
-        projectsArray.push(project);
       
         next();
       })
