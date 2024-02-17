@@ -107,8 +107,12 @@ const organizationSchema = mongoose.Schema({
   website: {
     type: String,
     default: ""
-  }
+  },
 
+  imageName: {
+    type: String,
+    default: ""
+  }
 })
 
 

@@ -4,7 +4,7 @@ const Volunteer = require("../../../models/Volunteer/volunteer");
 const Sdgs = require("../../../models/SDGs/sdg");
 const Organization = require("../../../models/Organizations/organization");
 const async = require("async");
-const { uploadImageToAws, retrieveImageFromImageName } = require("../../../utils/uploadImageToAws");
+const { retrieveImageFromImageName } = require("../../../utils/uploadImageToAws");
 
 module.exports = (req, res) => {
 
@@ -38,47 +38,56 @@ module.exports = (req, res) => {
 
 
           Organization.find({}, (err, organizations) => {
-            if (err) return res.redirect("/login")
-            for (let i = 0; i < organizations.length; i++) {
-              const organization = organizations[i];
-              organization.photo = Buffer.from(organization.photo).toString('base64');
-            }
-            if (req.session.volunteer && req.session.volunteer._id) {
+            if (err) return res.redirect("/login");
 
-              Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
-                if (err) return res.redirect("/login");
-              return res.render("index/index", {
-                page: "index/index",
-                title: "Volunteer",
-                includes: {
-                  external: {
-                    css: ["page", "general"],
-                    js: ["page", "functions"]
-                  }
-                },
-                projects,
-                volunteer,
-                sdgs,
-                organizations
-              })
-            })      
-          } else {
-            return res.render("index/index", {
-              page: "index/index",
-              title: "Volunteer",
-              includes: {
-                external: {
-                  css: ["page", "general"],
-                  js: ["page", "functions"]
-                }
-              },
-              projects,
-              sdgs,
-              organizations
+            async.timesSeries(organizations.length, async (i, next) => {
+              const organization = organizations[i];
+
+              if (organization.imageName && organization.imageName.length > 0) {
+                organization.photo = await retrieveImageFromImageName(organization.imageName);
+              } else {
+                organization.photo = Buffer.from(organization.photo).toString('base64');
+              }
+            }, (err) => {
+              if (err) return res.redirect("/login");
+
+              if (req.session.volunteer && req.session.volunteer._id) {
+
+                Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
+                  if (err) return res.redirect("/login");
+                  return res.render("index/index", {
+                    page: "index/index",
+                    title: "Volunteer",
+                    includes: {
+                      external: {
+                        css: ["page", "general"],
+                        js: ["page", "functions"]
+                      }
+                    },
+                    projects,
+                    volunteer,
+                    sdgs,
+                    organizations
+                  })
+                })      
+              } else {
+                return res.render("index/index", {
+                  page: "index/index",
+                  title: "Volunteer",
+                  includes: {
+                    external: {
+                      css: ["page", "general"],
+                      js: ["page", "functions"]
+                    }
+                  },
+                  projects,
+                  sdgs,
+                  organizations
+                })
+              }
             })
-          }
+          })
         })
-      })
       })
     })
   })

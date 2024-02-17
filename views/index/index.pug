@@ -26,7 +26,10 @@ block content
                     each organization in organizations 
                       if `${organization._id}` == `${project.creator_id}`
                         div(class="organization-featured-photo")
-                          img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}`)
+                          if organization.imageName && organization.imageName.length > 0
+                            img(class="organization-featured-photo-image-content" src=`${organization.photo}`)
+                          else 
+                            img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}`)
                     h2(style="margin-left: 20px") #{project.creator_name}
                   p #{project.short_description}
                   a(href=`/project?_id=${project._id}`).join-project-button View More
@@ -105,7 +108,10 @@ block content
                 a(href=`/volunteer/organization?id=${organization._id}`).each-organization-content              
                   .each-organization-content-base-info-wrapper
                     div(class="organization-featured-photo-outstanding-wrapper")
-                      img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
+                      if organization.imageName && organization.imageName.length > 0
+                        img(class="organization-featured-photo-image-content" src=`${organization.photo}` style="")
+                      else
+                        img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
                     .each-organization-text-wrapper
                       .organization-content-organization-name #{organization.name}
                       .organization-content-organization-info
@@ -145,7 +151,10 @@ block content
             a(href=`/volunteer/organization?id=${organization._id}`).each-organization-content              
               .each-organization-content-base-info-wrapper
                 div(class="organization-featured-photo-outstanding-wrapper")
-                  img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
+                  if organization.imageName && organization.imageName.length > 0
+                    img(class="organization-featured-photo-image-content" src=`${organization.photo}` style="")
+                  else
+                    img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
                 .each-organization-text-wrapper
                   .organization-content-organization-name #{organization.name}
                   .organization-content-organization-info

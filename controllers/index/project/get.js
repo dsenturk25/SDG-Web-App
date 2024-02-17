@@ -21,7 +21,14 @@ module.exports = (req, res) => {
         project.photo = Buffer.from(project.photo).toString('base64');
       }
 
-      organization.photo ? organization.photo = Buffer.from(organization.photo).toString('base64') : organization.photo = "";
+      if (organization) {
+        if (organization.imageName && organization.imageName.length > 0) {
+          organization.photo = await retrieveImageFromImageName(organization.imageName);
+        } else {
+          organization.photo = Buffer.from(organization.photo).toString('base64');
+        }
+      }
+
 
       Sdg.find({}, (err, sdgs) => {
 

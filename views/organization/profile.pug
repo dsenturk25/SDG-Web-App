@@ -8,7 +8,10 @@ block main
       .main-content-wrapper
         form.profile-edit-form(method="post" action="/organization/edit-profile" enctype="multipart/form-data")
           div.profile-image-wrapper
-            img(src=`data:image/png;base64,${organization.photo}`)
+            if organization.imageName && organization.imageName.length > 0
+              img(src=`${organization.photo}`)
+            else 
+              img(src=`data:image/png;base64,${organization.photo}`)
           .profile-edit-heading 
             div.profile-edit-birthdate-group
               label.profile-edit-label(for="photo") Profile Photo

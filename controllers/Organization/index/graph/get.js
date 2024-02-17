@@ -1,6 +1,8 @@
 
 const Project = require("../../../../models/Projects/project");
 const Sdg = require("../../../../models/SDGs/sdg");
+const { retrieveImageFromImageName } = require("../../../../utils/uploadImageToAws");
+const async = require("async");
 
 module.exports = (req, res) => {
 
@@ -10,32 +12,48 @@ module.exports = (req, res) => {
 
     if (err) return res.redirect("/");
 
-    for (let i = 0; i < projects.length; i++) {
+    async.timesSeries(projects.length, async (i, next) => {
       const project = projects[i];
-      project.photo = Buffer.from(project.photo).toString('base64');
-    }
-
-    Sdg.find({}, (err, sdgs) => {
-
+      if (project) {
+        if (project.imageName && project.imageName.length > 0) {
+          project.photo = await retrieveImageFromImageName(project.imageName);
+        } else {
+          project.photo = Buffer.from(project.photo).toString('base64');
+        }
+      }
+    }, (err) => {
       if (err) return res.redirect("/");
 
-      for (let i = 0; i < sdgs.length; i++) {
-        const sdg = sdgs[i];
-        sdg.image = Buffer.from(sdg.image).toString('base64');
-      }  
+      Sdg.find({}, (err, sdgs) => {
 
-      res.render("organization/graph", {
-        page: "organization/graph",
-        title: `${req.session.organization.name}`,
-        includes: {
-          external: {
-            css: ["page", "general", "index"],
-            js: ["page", "functions"]
+        if (err) return res.redirect("/");
+
+        async.timesSeries(sdgs.length, async (i, next) => {
+          const sdg = sdgs[i];
+
+          if (sdg) {
+            if (sdg.imageName && sdg.imageName.length) {
+              sdg.image = await retrieveImageFromImageName(sdg.imageName);
+            } else {
+              sdg.image = Buffer.from(sdg.image).toString('base64');
+            }
           }
-        }, 
-        organization,
-        projects,
-        sdgs
+        }, (err) => {
+          if (err) return res.redirect("/");
+          res.render("organization/graph", {
+            page: "organization/graph",
+            title: `${req.session.organization.name}`,
+            includes: {
+              external: {
+                css: ["page", "general", "index"],
+                js: ["page", "functions"]
+              }
+            }, 
+            organization,
+            projects,
+            sdgs
+          })
+        })
       })
     })
   })

@@ -2,17 +2,21 @@ extends ../partials/head.pug
 block content
   #organization-id(style="display:none")= organization._id
   #volunteer-id(style="display:none")= volunteer._id
-  #like-status(style="display:none")
-    if volunteer.liked_organizations.includes(`${organization._id}`)
-      span true
-    else 
-      span false
+  if volunteer && volunteer.liked_organizations
+    #like-status(style="display:none")
+      if volunteer.liked_organizations.includes(`${organization._id}`)
+        span true
+      else 
+        span false
   .inner-main-wrapper#inner-main-wrapper
     .organization-main-wrapper 
       .organization-absolute-background
       .organization-base-info-wrapper 
         .organization-photo 
-          img(src=`data:image/png;base64,${organization.photo}`)
+          if organization.imageName && organization.imageName.length > 0
+            img(src=`${organization.photo}`)
+          else 
+            img(src=`data:image/png;base64,${organization.photo}`)
         .organization-textual-info-content 
           .organization-textual-info-content-top 
             .organization-top-texts-content
@@ -31,11 +35,12 @@ block content
                   span is associated with government of 
                   span #{organization.country}
             .organization-textual-info-content-top-second-section 
-              .organization-like-button#organization-like-button
-                if volunteer.liked_organizations.includes(organization._id)
-                  i(class="fa-solid fa-heart" style="color:red")
-                else
-                  i(class="fa-regular fa-heart")
+              if volunteer && volunteer.liked_organizations
+                .organization-like-button#organization-like-button
+                  if volunteer.liked_organizations.includes(organization._id)
+                    i(class="fa-solid fa-heart" style="color:red")
+                  else
+                    i(class="fa-regular fa-heart")
               a(class="organization-more-info-button" href=`${organization.website}` target="_blank") Explore more...
           hr(style="width:100%; margin: 15px 0;")
           .organization-sdg-info-wrapper 
@@ -60,7 +65,7 @@ block content
           each project in projects 
             each project_id in organization.projects_created 
               if `${project_id}` == `${project._id}`
-                .each-project-wrapper 
+                .each-project-wrapper(style="height: fit-content")
                   div(style="display:none") #{project._id}
                   div(class="card-property card_image")
                     if project.imageName && project.imageName.length > 0
@@ -69,7 +74,7 @@ block content
                       img(class="card-image-content" src=`data:image/png;base64,${project.photo}`)
                   div(class="card-property card_title") #{project.name}
                   div(class="card-property card_creator") #{project.creator_name}
-                  div(class="card-property card_description") #{project.short_description}
+                  div(class="card-property card_description") #{project.short_description.slice(0, 500)}...
                   div(class="card-property card_description") Start time: #{project.start_date}
                   a(href=`/project?_id=${project._id}`).project-view-button View
     footer

@@ -50,7 +50,10 @@ block content
         h2.project-organization-title #{organization.name}
         .project-organization-photo-description-wrapper 
           .project-organization-photo-wrapper 
-            img.project-organization-photo-wrapper(src=`data:image/png;base64,${organization.photo}`, alt="")
+            if organization.imageName && organization.imageName.length > 0
+              img.project-organization-photo-wrapper(src=`${organization.photo}`, alt="")
+            else 
+              img.project-organization-photo-wrapper(src=`data:image/png;base64,${organization.photo}`, alt="")
           .project-organization-description-wrapper #{organization.description}
       .project-sdg-goals-wrapper 
         h2.project-sdg-wrapper-title 

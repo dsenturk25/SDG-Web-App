@@ -120,9 +120,6 @@ router.post(
 
 router.get(
   "/organization",
-  isVolunteerAuth,
-  isVolunteerEmailConfirmed,
-  isAccountCompleted,
   organizationGetController
 );
 
