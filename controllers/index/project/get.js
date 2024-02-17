@@ -44,7 +44,7 @@ module.exports = (req, res) => {
           Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
             if (err) return res.send("error");
   
-              res.render("index/project", {
+              return res.render("index/project", {
                 page: "index/project",
                 title: "Volunteer",
                 includes: {
@@ -60,7 +60,7 @@ module.exports = (req, res) => {
               })
             })
           } else {
-            res.render("index/project", {
+            return res.render("index/project", {
               page: "index/project",
               title: "Volunteer",
               includes: {
