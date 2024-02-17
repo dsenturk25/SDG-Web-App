@@ -26,21 +26,22 @@ html(lang='tr')
           script(src=`/js/functions/profileHover.js`) 
         script(src="https://kit.fontawesome.com/e47420f551.js" crossorigin="anonymous")
   body
-    #profile-hover-wrapper.profile-hover-wrapper
-      .hover-wrapper-credentials-wrapper
-        a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
-        .volunteer-credentials-text-wrapper 
-          div #{volunteer.name} #{volunteer.surname}
-          div.email #{volunteer.email}
-      hr
-      .hover-wrapper-menu-wrapper
-        a(href="/calendar").each-hover-wrapper-link Stream
-        a(href="/leaderboard").each-hover-wrapper-link My Portfolio
-        a(href="/leaderboard").each-hover-wrapper-link My Certificates
-      hr
-      .hover-wrapper-menu-wrapper 
-        a(href="/help").each-hover-wrapper-link Help
-        a(href="/profile").each-hover-wrapper-link Edit Profile
+    if volunteer && volunteer.name && volunteer.surname
+      #profile-hover-wrapper.profile-hover-wrapper
+        .hover-wrapper-credentials-wrapper
+          a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
+          .volunteer-credentials-text-wrapper 
+            div #{volunteer.name} #{volunteer.surname}
+            div.email #{volunteer.email}
+        hr
+        .hover-wrapper-menu-wrapper
+          a(href="/calendar").each-hover-wrapper-link Stream
+          a(href="/leaderboard").each-hover-wrapper-link My Portfolio
+          a(href="/leaderboard").each-hover-wrapper-link My Certificates
+        hr
+        .hover-wrapper-menu-wrapper 
+          a(href="/help").each-hover-wrapper-link Help
+          a(href="/profile").each-hover-wrapper-link Edit Profile
     .hamburger-menu-wrapper#hamburger-menu-wrapper
       .each-header-title-hamburger
         a(href="/my-projects") My projects
@@ -75,7 +76,7 @@ html(lang='tr')
           .each-header-title
             a(href="/learn") Learn
         .auth-section
-          if volunteer 
+          if volunteer && volunteer.name && volunteer.surname
             a(href="/volunteer/edit-profile").volunteer-auth-block#volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
           else 
             a(href="/login").each-auth-operation-block Login 

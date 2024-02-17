@@ -160,7 +160,6 @@ organizationSchema.statics.createProject = function (body, callback) {
       organization.projects_created.push((newProject._id).toString());
     }
 
-
     if (body.sdg_goals.length > 0) {
 
       async.timesSeries(body.sdg_goals.length, (i, next) => {

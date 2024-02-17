@@ -3,7 +3,8 @@ block content
   - var socialGroup = ["1", "2", "3", "4", "5", "10", "16", "17"]
   - var economicGroup = ["7", "8", "9", "11", "12"]
   - var environmentalGroup = ["6", "13", "14", "15"]
-  #volunteer-id(style="display:none")= volunteer._id
+  if volunteer && volunteer._id
+    #volunteer-id(style="display:none")= volunteer._id
   .inner-main-wrapper
     .main-wrapper-todays-picks#featured-projects-content
       .featured-wrapper-main-title Today's Picks
@@ -14,7 +15,10 @@ block content
           if project.isTodaysPick
             .each-featured-project-content
               .featured-project-image-content
-                img(src=`data:image/png;base64,${project.photo}`, alt="")
+                if project.imageName && project.imageName.length > 0
+                  img(src=`${project.photo}`, alt="")
+                else
+                  img(src=`data:image/png;base64,${project.photo}`, alt="")
               .each-featured-project-content-info-wrapper 
                 .each-featured-project-content-info-wrapper-texts
                   h1 #{project.name}
@@ -31,93 +35,107 @@ block content
                     each sdg_id in project.sdg_goals
                       if `${sdg_id}` == `${sdg._id}`
                         .featured-project-sdg-goal-content 
-                          img(src=`data:image/png;base64,${sdg.image}`, alt="")
+                          if sdg.imageName && sdg.imageName.length 
+                            img(src=`${sdg.image}`, alt="")
+                          else
+                            img(src=`data:image/png;base64,${sdg.image}`, alt="")
                         - break
-    .each-project-row-main-wrapper
-      h2.each-project-row-title Popular in #{volunteer.city}
-      .each-project-slider-wrapper
-        div(class="btn prev")
-          i(class="fa-solid fa-angle-left")
-        div(class="btn next")
-          i(class="fa-solid fa-angle-right")
-        .each-project-row
-          each project in projects
-            if project.city && volunteer.city
-              //- div #{project.name} #{project.city.trim().toLowerCase()} #{volunteer.city.trim().toLowerCase()}
-              if `${project.city.trim().toLowerCase()}` == `${volunteer.city.trim().toLowerCase()}`
-                .cards
-                  div(style="display:none") #{project._id}
-                  div(class="card-property card_image loading")
-                    img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                  .like-status(style="display:none")
-                    if volunteer.liked_projects.includes(project._id)
-                      span true
-                    else
-                      span false
-                  .project-thumbnail-add-to-favorites-button
-                    if volunteer.liked_projects.includes(project._id)
-                      i(class="fa-solid fa-heart" style="color: red;")
-                    else
-                      i(class="fa-regular fa-heart", style="color: #ccc;")
-                  div(class="card-property card_title loading") #{project.name}
-                  div(class="card-property card_creator loading") #{project.creator_name}
-                  div(class="card-property card_description loading") #{project.short_description}
-                  div(class="card-property card_description loading") Start time: #{project.start_date}
-                  div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-    .each-project-row-main-wrapper
-      h2.each-project-row-title 
-        span Liked by you
-        i(class="fa-solid fa-heart" style="color: red; margin-left: 10px;")
-      .each-project-slider-wrapper
-        div(class="btn prev")
-          i(class="fa-solid fa-angle-left")
-        div(class="btn next")
-          i(class="fa-solid fa-angle-right")
-        .each-project-row
-          - var i = 0
-          while i <= (volunteer.liked_organizations.length >= volunteer.liked_projects.length ? volunteer.liked_projects.length : volunteer.liked_organizations.length)
+    if volunteer && volunteer.city && volunteer.city.length > 0
+      .each-project-row-main-wrapper
+        h2.each-project-row-title Popular in #{volunteer.city}
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
             each project in projects
-              if `${project._id}` == `${volunteer.liked_projects[i]}`
-                .cards
-                  div(style="display:none") #{project._id}
-                  div(class="card-property card_image loading")
-                    img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
-                  div(class="card-property card_title loading") #{project.name}
-                  div(class="card-property card_creator loading") #{project.creator_name}
-                  div(class="card-property card_description loading") #{project.short_description}
-                  div(class="card-property card_description loading") Start time: #{project.start_date}
-                  div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
-            each organization in organizations
-              if `${organization._id}` == `${volunteer.liked_organizations[i]}`
-                a(href=`/volunteer/organization?id=${organization._id}`).each-organization-content              
-                  .each-organization-content-base-info-wrapper
-                    div(class="organization-featured-photo-outstanding-wrapper")
-                      img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
-                    .each-organization-text-wrapper
-                      .organization-content-organization-name #{organization.name}
-                      .organization-content-organization-info
-                        if `${organization.organization_type}` == `school_based`
-                          span 
-                            span is associated with 
-                            strong #{organization.associated_school} 
-                            span active in 
+              if project.city && volunteer.city
+                //- div #{project.name} #{project.city.trim().toLowerCase()} #{volunteer.city.trim().toLowerCase()}
+                if `${project.city.trim().toLowerCase()}` == `${volunteer.city.trim().toLowerCase()}`
+                  .cards
+                    div(style="display:none") #{project._id}
+                    div(class="card-property card_image loading")
+                      if project.imageName && project.imageName.length > 0
+                        img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
+                      else 
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                    .like-status(style="display:none")
+                      if volunteer.liked_projects.includes(project._id)
+                        span true
+                      else
+                        span false
+                    .project-thumbnail-add-to-favorites-button
+                      if volunteer.liked_projects.includes(project._id)
+                        i(class="fa-solid fa-heart" style="color: red;")
+                      else
+                        i(class="fa-regular fa-heart", style="color: #ccc;")
+                    div(class="card-property card_title loading") #{project.name}
+                    div(class="card-property card_creator loading") #{project.creator_name}
+                    div(class="card-property card_description loading") #{project.short_description}
+                    div(class="card-property card_description loading") Start time: #{project.start_date}
+                    div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+    if volunteer && volunteer.liked_organizations && volunteer.liked_organizations.length > 0
+      .each-project-row-main-wrapper
+        h2.each-project-row-title 
+          span Liked by you
+          i(class="fa-solid fa-heart" style="color: red; margin-left: 10px;")
+        .each-project-slider-wrapper
+          div(class="btn prev")
+            i(class="fa-solid fa-angle-left")
+          div(class="btn next")
+            i(class="fa-solid fa-angle-right")
+          .each-project-row
+            - var i = 0
+            while i <= (volunteer.liked_organizations.length >= volunteer.liked_projects.length ? volunteer.liked_projects.length : volunteer.liked_organizations.length)
+              each project in projects
+                if `${project._id}` == `${volunteer.liked_projects[i]}`
+                  .cards
+                    div(style="display:none") #{project._id}
+                    div(class="card-property card_image loading")
+                      if project.imageName && project.imageName.length > 0
+                        img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
+                      else
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                    div(class="card-property card_title loading") #{project.name}
+                    div(class="card-property card_creator loading") #{project.creator_name}
+                    div(class="card-property card_description loading") #{project.short_description}
+                    div(class="card-property card_description loading") Start time: #{project.start_date}
+                    div(class=`card-property card_environment loading ${project.environment}`) #{project.environment}
+              each organization in organizations
+                if `${organization._id}` == `${volunteer.liked_organizations[i]}`
+                  a(href=`/volunteer/organization?id=${organization._id}`).each-organization-content              
+                    .each-organization-content-base-info-wrapper
+                      div(class="organization-featured-photo-outstanding-wrapper")
+                        img(class="organization-featured-photo-image-content" src=`data:image/png;base64,${organization.photo}` style="")
+                      .each-organization-text-wrapper
+                        .organization-content-organization-name #{organization.name}
+                        .organization-content-organization-info
+                          if `${organization.organization_type}` == `school_based`
+                            span 
+                              span is associated with 
+                              strong #{organization.associated_school} 
+                              span active in 
+                              strong #{organization.country}
+                          if `${organization.organization_type}` == `ngo`
+                            span is an NGO active in 
                             strong #{organization.country}
-                        if `${organization.organization_type}` == `ngo`
-                          span is an NGO active in 
-                          strong #{organization.country}
-                        if `${organization.organization_type}` == `governmental`
-                          span is associated with government of 
-                          strong #{organization.country}
-                  .organization-content-sdgs-content
-                      each sdg_id in organization.completed_sdgs
-                        each sdg in sdgs
-                          if `${sdg._id}` == `${sdg_id}`
-                            .featured-project-sdg-goal-content-outstanding-organization
-                              img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`data:image/png;base64,${sdg.image}`, alt="")
-                            - break
-                  .organization-content-organization-description #{organization.description}  
-            - i++
-          
+                          if `${organization.organization_type}` == `governmental`
+                            span is associated with government of 
+                            strong #{organization.country}
+                    .organization-content-sdgs-content
+                        each sdg_id in organization.completed_sdgs
+                          each sdg in sdgs
+                            if `${sdg._id}` == `${sdg_id}`
+                              .featured-project-sdg-goal-content-outstanding-organization
+                                if sdg.imageName && sdg.imageName.length > 0
+                                  img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`${sdg.image}`, alt="")
+                                else
+                                  img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`data:image/png;base64,${sdg.image}`, alt="")
+                              - break
+                    .organization-content-organization-description #{organization.description}  
+              - i++
+            
     .each-project-row-main-wrapper(style="height: 300px")
       .h2.each-project-row-title Outstanding Organizations
       .each-project-slider-wrapper
@@ -151,7 +169,10 @@ block content
                     each sdg in sdgs
                       if `${sdg._id}` == `${sdg_id}`
                         .featured-project-sdg-goal-content-outstanding-organization
-                          img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`data:image/png;base64,${sdg.image}`, alt="")
+                          if sdg.imageName && sdg.imageName.length > 0
+                            img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`${sdg.image}`, alt="")
+                          else 
+                            img(class="featured-project-sdg-goal-content-outstanding-organization-image-content" src=`data:image/png;base64,${sdg.image}`, alt="")
                         - break
               .organization-content-organization-description #{organization.description}
     .each-project-row-main-wrapper
@@ -171,7 +192,10 @@ block content
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
-                      img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      if project.imageName && project.imageName.length > 0
+                        img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
+                      else
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}
@@ -194,7 +218,10 @@ block content
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
-                      img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      if project.imageName && project.imageName.length > 0
+                        img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
+                      else 
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}
@@ -217,7 +244,10 @@ block content
                   .cards
                     div(style="display:none") #{project._id}
                     div(class="card-property card_image loading")
-                      img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                      if project.imageName && project.imageName.length > 0
+                        img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
+                      else 
+                        img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}

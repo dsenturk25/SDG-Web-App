@@ -8,7 +8,7 @@ const learnSchema = mongoose.Schema({
     required: true
   },
 
-  activist: {
+  activistId: {
     type: String,
     required: true
   },

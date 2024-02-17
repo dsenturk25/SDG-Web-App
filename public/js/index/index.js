@@ -1,7 +1,10 @@
 
 window.onload = () => {
 
-  const volunteerId = document.getElementById("volunteer-id").innerHTML;
+  let volunteerId = "";
+  if (document.getElementById("volunteer-id") != undefined && document.getElementById("volunteer-id") != null) {
+    volunteerId = document.getElementById("volunteer-id").innerHTML;
+  }
 
   searchBar();
   handleHeaderMenu();

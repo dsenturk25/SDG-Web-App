@@ -1,9 +1,11 @@
 .inner-main-wrapper {
   width: 90%;
   display: flex;
+  flex-direction: column;
   padding: 5%;
-  height: 100%;
+  height: fit-content;
   background-color: rgb(20, 20, 20);
+  overflow-y: scroll;
 }
 
 .learn-main-wrapper {
@@ -25,7 +27,6 @@
 .main-background-shape-cluster-one {
   width: 80%;
   height: 100%;
-  background-color: rgb(61, 61, 255);
   transform: skewX(20deg);
   border-radius: 10%;
   position: absolute;
@@ -34,7 +35,6 @@
 .main-background-shape-cluster-two {
   width: 50%;
   height: 100%;
-  background-color: rgb(255, 115, 21);
   transform: skewX(-20deg);
   border-radius: 10%;
   position: absolute;
@@ -55,14 +55,14 @@
 }
 
 .main-featured-activist-info-box  {
-  width: 25%;
+  width: 50%;
   position: absolute;
   z-index: 10000000;
   display: flex;
   flex-direction: column;
   bottom: 0;
   padding: 5%;
-  right: 20%;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.395);
   color: white;
 }
@@ -98,7 +98,7 @@
  .rows-wrapper {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
  }
 
  .each-content-row {
@@ -113,6 +113,7 @@
   background-color: black;
   margin-right: 20px;
   position: relative;
+  margin-bottom: 20px;
  }
 
  .title-wrapper {
@@ -150,4 +151,11 @@
  .each-learn-content-info-content-activist {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.602);
+ }
+
+ .each-activist-wrapper {
+  width: 100%;
+  display: flex;
+  margin-bottom: 100px;
+  min-height: 100%;
  }

@@ -14,8 +14,7 @@ const sdgSchema = mongoose.Schema({
   },
 
   image: {
-    type: Buffer,
-    required: true
+    type: Buffer
   },
 
   projects: [
@@ -32,6 +31,11 @@ const sdgSchema = mongoose.Schema({
   total_attendants: {
     type: Number,
     default: 0
+  },
+
+  imageName: {
+    type: String,
+    required: true
   }
 })
 

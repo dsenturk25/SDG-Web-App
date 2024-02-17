@@ -21,7 +21,10 @@ block main
     each project in projects 
       .each-project-wrapper
         .each-project-main-info-wrapper
-          img.each-project-image(src=`data:image/png;base64,${project.photo}`)
+          if project.imageName && project.imageName.length > 0
+            img.each-project-image(src=`${project.photo}`)
+          else 
+            img.each-project-image(src=`data:image/png;base64,${project.photo}`)
           .each-project-info(style="display:none") #{project._id}
           .each-project-info #{project.name}
           if `${project.isCompleted}` == "false"
@@ -43,7 +46,10 @@ block main
                   if `${sdg_id}` === `${sdg._id}`
                     .sdg-content 
                       .sdg-img-content
-                        img(src=`data:image/png;base64,${sdg.image}`)
+                        if sdg.imageName && sdg.imageName.length > 0
+                          img(src=`${sdg.image}`)
+                        else 
+                          img(src=`data:image/png;base64,${sdg.image}`)
             .project-sessions-wrapper 
               - var i = 0;
               each session in project.sessions 

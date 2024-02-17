@@ -37,6 +37,9 @@ const comparisonsGetController = require("../controllers/Admin/index/comparisons
 const learnGetController = require("../controllers/Admin/index/learn/get");
 const todaysPicksGetController = require("../controllers/Admin/index/todaysPicks/get");
 const todaysPicksPostController = require("../controllers/Admin/index/todaysPicks/post");
+const activistsGetController = require("../controllers/Admin/index/activists/get");
+const createActivistPostController = require("../controllers/Admin/index/activists/create/post");
+const activistOfWeekPostController = require("../controllers/Admin/index/activists/edit/post");
 
 const multer = require("multer");
 
@@ -212,6 +215,25 @@ router.post(
   "/todays-picks/change-state",
   isAdminAuth,
   todaysPicksPostController
+)
+
+router.get(
+  "/activists",
+  isAdminAuth,
+  activistsGetController
+)
+
+router.post(
+  "/activists/create",
+  isAdminAuth,
+  upload.single("image"),
+  createActivistPostController
+)
+
+router.post(
+  "/activists/edit",
+  isAdminAuth,
+  activistOfWeekPostController
 )
 
 module.exports = router;

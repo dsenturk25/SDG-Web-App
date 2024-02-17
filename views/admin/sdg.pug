@@ -24,7 +24,10 @@ block content
         each sdg in sdgs 
           .sdg-content 
             .sdg-img-content
-              img(src=`data:image/png;base64,${sdg.image}`)
+              if sdg.imageName && sdg.imageName.length > 0
+                img(src=`${sdg.image}`)
+              else
+                img(src=`data:image/png;base64,${sdg.image}`)
             .sdg-info #{sdg.projects.length} total projects created
             .sdg-info #{sdg.total_hours} total hours of project completed
     .footer-content

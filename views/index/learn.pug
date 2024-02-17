@@ -1,31 +1,31 @@
 extends ../partials/head.pug
 block content
-  - var socialGroup = ["1", "2", "3", "4", "5", "10", "16", "17"]
-  - var economicGroup = ["7", "8", "9", "11", "12"]
-  - var environmentalGroup = ["6", "13", "14", "15"]
-  #volunteer-id(style="display:none")= volunteer._id
+  - var colors = ["rgb(30, 50, 150)", "rgb(120, 50, 150)", "rgb(150, 50, 150)", "rgb(150, 50, 20)", "rgb(30, 50, 150)", "rgb(10, 50, 150)", "rgb(150, 50, 150)", "rgb(150, 50, 20)", "rgb(30, 50, 150)", "rgb(10, 50, 150)", "rgb(150, 50, 150)", "rgb(150, 50, 20)", "rgb(30, 50, 150)", "rgb(10, 50, 150)", "rgb(150, 50, 150)", "rgb(150, 50, 20)"]
   .inner-main-wrapper 
-    .learn-main-wrapper
-      .title-wrapper Learn
-      .rows-wrapper 
-        .each-content-row
-          each learnContent in learnArray
-            a(href=`${learnContent.video_link}` target="_blank").each-learn-content
-              .each-learn-content-image
-                img(src=`https://img.youtube.com/vi/${learnContent.video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
-              .each-learn-content-info-content
-                .each-learn-content-info-content-title #{learnContent.title.slice(0, 50)}...
-                .each-learn-content-info-content-activist #{learnContent.activist}        
-    .featured-activist-main-wrapper
-      .main-background-shape-cluster
-        .main-background-shape-cluster-one
-        .main-background-shape-cluster-two
-        .main-background-shape-cluster-three
-          div Activist Of The Week
-        .main-featured-activist-wrapper 
-          .main-featured-activist-image-wrapper 
-            img(src="/res/images/greta.png", alt="")
-          .main-featured-activist-info-box 
-            .main-featured-activist-info-box-title Greta Thunberg
-            .main-featured-activist-info-box-description Greta Tintin Eleonora Ernman Thunberg is a Swedish environmental activist known for challenging world leaders to take immediate action for climate change mitigation. 
-        
+    each activist, i in activists
+      .each-activist-wrapper
+        .learn-main-wrapper
+          .title-wrapper Learn #{i + 1}
+          .rows-wrapper 
+            each learnContent in learnArray
+              if `${learnContent.activistId}` == `${activist._id}`
+                a(href=`${learnContent.video_link}` target="_blank").each-learn-content
+                  .each-learn-content-image
+                    img(src=`https://img.youtube.com/vi/${learnContent.video_link.split("/")[3]}/hqdefault.jpg`, alt=`image`)
+                  .each-learn-content-info-content
+                    .each-learn-content-info-content-title #{learnContent.title.slice(0, 50)}...
+                    .each-learn-content-info-content-activist #{activist.name}
+        .featured-activist-main-wrapper
+          .main-background-shape-cluster
+            .main-background-shape-cluster-one(style=`background-color: ${colors[i]}`)
+            .main-background-shape-cluster-two(style=`background-color: ${colors[i+1]}`)
+            .main-background-shape-cluster-three
+              if activist.isActivistOfWeek
+                div Activist Of The Week
+            .main-featured-activist-wrapper 
+              .main-featured-activist-image-wrapper 
+                img(src=`${activist.profile_photo}`, alt="")
+              .main-featured-activist-info-box 
+                .main-featured-activist-info-box-title #{activist.name}
+                .main-featured-activist-info-box-description #{activist.description.slice(0, 200)}...
+            

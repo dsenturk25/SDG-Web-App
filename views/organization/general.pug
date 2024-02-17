@@ -47,9 +47,11 @@ block content
         each sdg in sdgs
           .each-sdg-content 
             input(type="checkbox" id="sdg_goals" name="sdg_goals" value=`${sdg._id}`)
-            img(src=`data:image/png;base64,${sdg.image}`).sdg-image
-            .each-sdg-info #{sdg.name}
-
+            if sdg.imageName && sdg.imageName.length > 0
+              img(src=`${sdg.image}`).sdg-image
+            else 
+              img(src=`data:image/png;base64,${sdg.image}`).sdg-image
+            .each-sdg-info(style="display:none") #{sdg.name}
       input.submit-button(type="submit" value="Save")
   .all-inner-wrapper
     .header-main-wrapper 

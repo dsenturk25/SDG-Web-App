@@ -13,8 +13,10 @@ block content
         form.create-form#create-form(method='POST' action='/admin/learn/create' autocomplete="off" enctype='application/json')
           label(for="title") Video title 
           input#name(type="text" name="title").sdg-name 
-          label(for="activist") Associated activist name
-          input#activist(type="text" name="activist").sdg-name 
+          label(for="activist") Associated activist
+          select#activistId(name="activistId") 
+            each activist in activists 
+              option(value=`${activist._id}`) #{activist.name}
           label(for="video_link") Video youtube link 
           input#video_link(type="text" name="video_link").sdg-name 
           button.submit-button#submit-button(type="submit") Save

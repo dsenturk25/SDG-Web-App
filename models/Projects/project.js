@@ -143,6 +143,11 @@ const projectsSchema = mongoose.Schema({
   quota: {
     type: Number,
     required: true,
+  },
+
+  imageName: {
+    type: String,
+    required: true
   }
 })
 

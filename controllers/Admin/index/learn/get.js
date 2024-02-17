@@ -1,6 +1,7 @@
 
 const Admin = require("../../../../models/Admin/admin");
 const Learn = require("../../../../models/Learn/learn");
+const Activist = require("../../../../models/Activist/activist");
 
 module.exports = (req, res) => {
 
@@ -9,17 +10,22 @@ module.exports = (req, res) => {
     Learn.find({}, (err, learnArray) => {
       if (err) return res.redirect("/admin/login");
 
-      res.render("admin/learn", {
-        page: "admin/learn",
-        title: "Admin Learn",
-        includes: {
-          external: {
-            css: ["page", "general"],
-            js: ["page", "functions"]
-          }
-        },
-        admin,
-        learnArray
+      Activist.find({}, (err, activists) => {
+        if (err) return res.redirect("/admin/login");
+
+        res.render("admin/learn", {
+          page: "admin/learn",
+          title: "Admin Learn",
+          includes: {
+            external: {
+              css: ["page", "general"],
+              js: ["page", "functions"]
+            }
+          },
+          admin,
+          learnArray,
+          activists
+        })
       })
     })
   })

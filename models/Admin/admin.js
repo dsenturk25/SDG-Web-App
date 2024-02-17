@@ -6,6 +6,7 @@ const Sdg = require("../SDGs/sdg");
 const Organization = require("../Organizations/organization");
 const Volunteer = require("../Volunteer/volunteer");
 const Project = require("../Projects/project");
+const Activist = require("../Activist/activist");
 const async = require("async")
 
 const adminSchema = mongoose.Schema({
@@ -82,6 +83,15 @@ adminSchema.statics.createSdgGoal = function (body, callback) {
     newSdg.save();
 
     return callback(null, newSdg);
+  }
+  return callback("bad_request");
+}
+
+adminSchema.statics.createActivist = function (body, callback) {
+  const newActivist = new Activist(body);
+  if (newActivist) {
+    newActivist.save();
+    return callback(null, newActivist);
   }
   return callback("bad_request");
 }

@@ -1,0 +1,35 @@
+
+.all-inner-wrapper {
+    flex-direction: column !important;
+}
+
+.activists-main-wrapper {
+    width: 96%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.each-activist-content  {
+    width: 100%;
+    padding: 10px;
+    background-color: #ccc;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.each-activist-info-content {
+    display: flex;
+    width: 100%;
+}
+
+.each-activist-info {
+    margin-right: 10px;
+}
+
+.each-activist-checkbox {
+    width: 30px;
+}

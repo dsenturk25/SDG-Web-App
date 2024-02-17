@@ -16,8 +16,11 @@ block content
             i(class="fa-solid fa-heart" style="color:red")
           else 
             i(class="fa-regular fa-heart")
-        .project-image 
-          img.project-image-content(src=`data:image/png;base64,${project.photo}`, alt="")
+        .project-image
+          if project.imageName && project.imageName.length > 0
+            img.project-image-content(src=`${project.photo}`, alt="")
+          else
+            img.project-image-content(src=`data:image/png;base64,${project.photo}`, alt="")
         div
         .project-main-texts-wrapper 
           .project-title #{project.name}

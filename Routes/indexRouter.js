@@ -23,17 +23,11 @@ const calendarDataGetController = require("../controllers/index/calendar/data/ge
 
 router.get(
   "/",
-  isVolunteerLoggedIn,
-  isEmailConfirmed,
-  isAccountCompleted,
   indexGetController
 )
 
 router.get(
   "/project",
-  isVolunteerLoggedIn,
-  isEmailConfirmed,
-  isAccountCompleted,
   projectGetController
 )
 
@@ -79,9 +73,6 @@ router.post(
 
 router.get(
   "/learn",
-  isVolunteerLoggedIn,
-  isEmailConfirmed,
-  isAccountCompleted,
   learnGetController
 )
 

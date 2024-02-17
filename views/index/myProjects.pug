@@ -6,7 +6,10 @@ block content
         .each-project-wrapper 
           div(style="display:none") #{project._id}
           div(class="card-property card_image")
-            img(class="card-image-content" src=`data:image/png;base64,${project.photo}`)
+            if project.imageName && project.imageName.length > 0
+              img(class="card-image-content" src=`${project.photo}`)
+            else
+              img(class="card-image-content" src=`data:image/png;base64,${project.photo}`)
           div(class="card-property card_title") #{project.name}
           div(class="card-property card_creator") #{project.creator_name}
           div(class="card-property card_description") #{project.short_description}
