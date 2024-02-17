@@ -28,27 +28,34 @@ module.exports = (req, res) => {
 
           if (err) return res.redirect("/");
   
-          for (let i = 0; i < sdgs.length; i++) {
-            const sdg = sdgs[i];
-            sdg.image = Buffer.from(sdg.image).toString('base64');
-          }
-  
-          Volunteer.find({}, (err, volunteers) => {
+          async.timesSeries(sdgs.length, async (j, next) => {
+            const sdg = sdgs[j];
+            if (sdg.imageName && sdg.imageName.length > 0) {
+              sdg.image = await retrieveImageFromImageName(sdg.imageName);
+            } else {
+              sdg.image = Buffer.from(sdg.image).toString('base64');
+            }
+          }, (err) => {
+
             if (err) return res.redirect("/");
-  
-            res.render("organization/index", {
-              page: "organization/index",
-              title: `${req.session.organization.name}`,
-              includes: {
-                external: {
-                  css: ["page", "general"],
-                  js: ["page", "functions"]
-                }
-              },
-              organization,
-              projects,
-              sdgs,
-              volunteers
+
+            Volunteer.find({}, (err, volunteers) => {
+              if (err) return res.redirect("/");
+    
+              res.render("organization/index", {
+                page: "organization/index",
+                title: `${req.session.organization.name}`,
+                includes: {
+                  external: {
+                    css: ["page", "general"],
+                    js: ["page", "functions"]
+                  }
+                },
+                organization,
+                projects,
+                sdgs,
+                volunteers
+              })
             })
           })
         })
