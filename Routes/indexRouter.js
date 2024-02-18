@@ -49,9 +49,6 @@ router.get(
 
 router.post(
   "/search-query",
-  isVolunteerLoggedIn,
-  isEmailConfirmed,
-  isAccountCompleted,
   searchBarPostController
 )
 

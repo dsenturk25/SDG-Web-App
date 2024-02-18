@@ -64,12 +64,12 @@ block content
                       else 
                         img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
                     .like-status(style="display:none")
-                      if volunteer.liked_projects.includes(project._id)
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
                         span true
                       else
                         span false
                     .project-thumbnail-add-to-favorites-button
-                      if volunteer.liked_projects.includes(project._id)
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
                         i(class="fa-solid fa-heart" style="color: red;")
                       else
                         i(class="fa-regular fa-heart", style="color: #ccc;")
@@ -202,6 +202,16 @@ block content
                         img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
                       else
                         img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                    .like-status(style="display:none")
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        span true
+                      else
+                        span false
+                    .project-thumbnail-add-to-favorites-button
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        i(class="fa-solid fa-heart" style="color: red;")
+                      else
+                        i(class="fa-regular fa-heart", style="color: #ccc;")
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}
@@ -228,6 +238,16 @@ block content
                         img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
                       else 
                         img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                    .like-status(style="display:none")
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        span true
+                      else
+                        span false
+                    .project-thumbnail-add-to-favorites-button
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        i(class="fa-solid fa-heart" style="color: red;")
+                      else
+                        i(class="fa-regular fa-heart", style="color: #ccc;")
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}
@@ -254,6 +274,16 @@ block content
                         img(class="card-image-content card-image-content-opacity" src=`${project.photo}`)
                       else 
                         img(class="card-image-content card-image-content-opacity" src=`data:image/png;base64,${project.photo}`)
+                    .like-status(style="display:none")
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        span true
+                      else
+                        span false
+                    .project-thumbnail-add-to-favorites-button
+                      if volunteer.liked_projects && volunteer.liked_projects.includes(project._id)
+                        i(class="fa-solid fa-heart" style="color: red;")
+                      else
+                        i(class="fa-regular fa-heart", style="color: #ccc;")
                     div(class="card-property card_title loading") #{project.name}
                     div(class="card-property card_creator loading") #{project.creator_name}
                     div(class="card-property card_description loading") #{project.short_description}

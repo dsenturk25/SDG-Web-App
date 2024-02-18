@@ -31,11 +31,13 @@ function searchBar() {
             eachResultProjectImage.classList.add("each-result-project-img");
             const projectImg = document.createElement("img");
 
-            let binary = '';
-            project.photo.data.forEach((byte) => binary += String.fromCharCode(byte));
-            const photo = btoa(binary);
+            
+            if (project.imageName && project.imageName.length > 0) {
+              projectImg.src = project.photo;
+            } else {  
+              projectImg.src = `data:image/png;base64,${project.photo}`;  
+            }
 
-            projectImg.src = `data:image/png;base64,${photo}`;
             eachResultProjectImage.appendChild(projectImg);
             eachResultProject.appendChild(eachResultProjectImage);
 
