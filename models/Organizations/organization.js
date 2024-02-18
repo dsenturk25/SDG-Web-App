@@ -156,6 +156,12 @@ organizationSchema.statics.findOrganizationById = function (body, callback) {
 
 organizationSchema.statics.createProject = function (body, callback) {
 
+  if (body.sdg_goals[0].length <= 1) {
+    const sdg_goal = body.sdg_goals;
+    body.sdg_goals = [];
+    body.sdg_goals.push(sdg_goal);
+  }
+
   const newProject = new Project(body);
 
   Organization.findById(body.creator_id, (err, organization) => {

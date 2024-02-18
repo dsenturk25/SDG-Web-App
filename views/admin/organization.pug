@@ -63,7 +63,10 @@ block content
                                   if `${sdg_id}` === `${sdg._id}`
                                     .sdg-content 
                                       .sdg-img-content
-                                        img(src=`data:image/png;base64,${sdg.image}`)
+                                        if sdg.imageName && sdg.imageName.length > 0
+                                          img(src=`${sdg.image}`)
+                                        else 
+                                          img(src=`data:image/png;base64,${sdg.image}`)
                           .project-attendants-section
                             .attendant-list-title Attendants list: #{project.attendants.length} people
                             .project-info-attendants
