@@ -64,7 +64,10 @@ block content
             each sdg in sdgs
               if `${sdg_id}` == `${sdg._id}`
                 .each-sdg-content 
-                  img.sdg-image-content(src=`data:image/png;base64,${sdg.image}`)
+                  if sdg.imageName && sdg.imageName.length > 0
+                    img.sdg-image-content(src=`${sdg.image}`)
+                  else 
+                    img.sdg-image-content(src=`data:image/png;base64,${sdg.image}`)
       .each-project-row-main-wrapper
         h2.each-project-row-title This project contains #{project.sessions.length} total sessions
         .each-project-slider-wrapper
