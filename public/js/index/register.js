@@ -37,7 +37,7 @@ window.onload = () => {
           if (res.error) {
             resInfoWrapper.innerHTML = "Something went wrong. Please try again later."
           } else {
-            window.location.href = "/";
+            window.location.href = "/volunteer/complete_account";
           }
         })
       }
