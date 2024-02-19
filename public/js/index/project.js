@@ -25,11 +25,15 @@ window.onload = () => {
         volunteer_id: volunteerId,
         project_id: projectId
       }, (res) => {
+        console.log(res)
         if (!res.success && res.err) {
           if (res.err == "email_not_confirmed") {
             const url = window.location.href.split("/project")[0] + "/volunteer/email_confirm";
             window.location.href = url;
           } else if (res.err == "account_incomplete") {
+            const url = window.location.href.split("/project")[0] + "/volunteer/complete_account";
+            window.location.href = url;
+          } else if(res.err == "no_volunteer") {
             const url = window.location.href.split("/project")[0] + "/volunteer/complete_account";
             window.location.href = url;
           }

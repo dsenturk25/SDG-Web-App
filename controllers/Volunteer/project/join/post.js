@@ -8,12 +8,12 @@ module.exports = (req, res) => {
       else if (!volunteer.isAccountCompleted) return res.send({success: false, err: "account_incomplete"});
 
       Volunteer.joinProject(req.body, (err, volunteer) => {
-        if (err) return res.redirect();
+        if (err) return res.redirect("/");
         return res.send(volunteer);
       })
     })
   } else {
-    return res.redirect("/login");
+    return res.send({success: false, err: "no_volunteer"});
   }
 }
 
