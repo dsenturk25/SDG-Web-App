@@ -146,8 +146,7 @@ const projectsSchema = mongoose.Schema({
   },
 
   imageName: {
-    type: String,
-    required: true
+    type: String
   }
 })
 

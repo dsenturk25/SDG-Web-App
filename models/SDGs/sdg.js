@@ -34,8 +34,7 @@ const sdgSchema = mongoose.Schema({
   },
 
   imageName: {
-    type: String,
-    required: true
+    type: String
   }
 })
 

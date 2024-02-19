@@ -196,6 +196,8 @@ volunteerSchema.statics.addSessionManual = function (body, callback) {
           Volunteer.findById(volunteerId, (err, volunteer) => {
             if (err) return callback("create_failed");
 
+            volunteer.totalHoursOfService = addTimes(volunteer.totalHoursOfService, session.session_duration);
+
             if (volunteer.attendance) {
               async.timesSeries(volunteer.attendance.length, (k, next2) => {
                 const eachAttendanceObject = volunteer.attendance[k];
