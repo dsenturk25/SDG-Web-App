@@ -83,6 +83,5 @@ app.use("/project", projectRouter);
 app.use("/admin", adminRouter);
 
 server.listen(PORT, () => {
-  scheduleUpdates();
   console.log("Server is listening on port", PORT);
 })
