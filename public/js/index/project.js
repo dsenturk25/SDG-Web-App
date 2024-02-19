@@ -11,6 +11,8 @@ window.onload = () => {
 
   const volunteerId = document.getElementById("volunteer-id").innerHTML;
   const projectId = document.getElementById("project-id").innerHTML;
+  const isEmailConfirmed = document.getElementById("is_email_confirmed");
+  const isAccountCompleted = document.getElementById("is_account_completed");
 
   let clickCnt = -1;
   let buttonClicked = false;
@@ -18,14 +20,19 @@ window.onload = () => {
   document.addEventListener("click", (event) => {
 
     if (event.target.innerHTML == "Join the project" && !buttonClicked) {
-
       buttonClicked = true;
       const url = "/volunteer/project/join";
+      if (volunteerId.length <= 0) {
+        return window.location.href = "/login";
+      } else if (isEmailConfirmed.children[0].innerHTML == "false") {
+        return window.location.href = "/volunteer/email_confirm";
+      } else if (isAccountCompleted.children[0].innerHTML == "false") {
+        return window.location.href = "/volunteer/complete_account";
+      }
       serverRequest(url, "POST", {
         volunteer_id: volunteerId,
         project_id: projectId
       }, (res) => {
-        console.log(res)
         if (!res.success && res.err) {
           if (res.err == "email_not_confirmed") {
             const url = window.location.href.split("/project")[0] + "/volunteer/email_confirm";
@@ -34,7 +41,7 @@ window.onload = () => {
             const url = window.location.href.split("/project")[0] + "/volunteer/complete_account";
             window.location.href = url;
           } else if(res.err == "no_volunteer") {
-            const url = window.location.href.split("/project")[0] + "/volunteer/complete_account";
+            const url = window.location.href.split("/project")[0] + "/login";
             window.location.href = url;
           }
         } else {

@@ -84,7 +84,7 @@ window.onload = () => {
           resInfoWrapper.style.color = "red";
           return resInfoWrapper.innerHTML = "The code you've entered appears to be incorrect. Please try again";
         }
-        else return window.location.href = "";
+        else return window.location.href = "/volunteer/complete_account";
       })
     }
   })

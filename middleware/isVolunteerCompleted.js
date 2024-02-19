@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
       else if (volunteer.isAccountCompleted) return next();
     })
   } else {
-    return res.redirect("/login");
+    return res.redirect("/volunteer/complete_account");
   }
 }
