@@ -20,7 +20,7 @@ block content
       label.each-create-form-label(for="quote") Project Quota (0-999)
       input.create-form-each-text-input(type="number" id="quota" name="quota" placeholder="Quota" required)
       label.each-create-form-label(for="environment") Project environment
-      select#environment(name="environment") 
+      select#environment(name="environment")
         option(value="online") Online (virtual)
         option(value="face-to-face") Face to face
       label.each-create-form-label(for="link_to_online_environment") Link to online environment (zoom or Google meet)
@@ -28,7 +28,18 @@ block content
       label.each-create-form-label(for="address") Project address (Where will the project take place?)
       input.create-form-each-text-input(type="text" id="address" name="address" placeholder="Address" required)
       label.each-create-form-label(for="city") City (the city that the project is held)
-      input.create-form-each-text-input(type="text" id="city" name="city" placeholder="City" required)
+      select#city(name="city")
+        option(value="") Choose
+        option(value="Istanbul") Istanbul
+        option(value="Ankara") Ankara
+        option(value="Izmir") Izmir
+        option(value="Antalya") Antalya
+        option(value="Bursa") Bursa
+        option(value="Adana") Adana
+        option(value="Konya") Konya
+        option(value="Muğla") Muğla
+        option(value="Trabzon") Trabzon
+        option(value="Izmit") İzmit
       label.each-create-form-label(for="start_date") Start date (When will the project start)
       input.create-form-each-text-input(type="date" id="start_date" name="start_date" required)
       label.each-create-form-label(for="finish_date") End date (When will the project finish)
