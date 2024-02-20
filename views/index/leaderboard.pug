@@ -3,8 +3,11 @@ block content
   .inner-main-wrapper 
     .goal-main-wrapper 
       .goal-main-wrapper-goal-content 
-        h1 #{volunteer.completedHoursOfService} 
-        div hours of social service comopleted
+        h1 #{volunteer.completedHoursOfService.split(":")[0]}
+        div(style="font-size:72px") h
+        h1 #{volunteer.completedHoursOfService.split(":")[1]}
+        div(style="font-size:72px") m &nbsp
+        div hours of social service completed
       .goal-main-wrapper-goal-content-detail
         h2 #{volunteer.totalHoursOfService} &nbsp
         div hours of total service estimated
