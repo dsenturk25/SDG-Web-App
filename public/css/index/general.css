@@ -515,6 +515,15 @@ footer {
 }
 
 @media only screen and (min-width: 0px) and (max-width: 800px) {
+
+  .form-each-right-column {
+    display: none;
+  }
+
+  .form-each-left-column {
+    width: 100%;
+  }
+
   .each-header-title {
     font-size: 12px;
   }
