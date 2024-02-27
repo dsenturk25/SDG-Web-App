@@ -1,0 +1,17 @@
+extends ./general.pug
+block main
+  .main-content-title Volunteer Pool 
+  .main-content-description Here you can find new volunteers by filtering them through their skills.
+  hr
+  .main-volunteers-wrapper 
+    each skillName in skillNamesArray
+        h2 #{skillName.toUpperCase()}
+        hr
+        each volunteer in volunteersBySkills[`${skillName}`]
+            .each-volunteer-wrapper
+                .each-volunteer-info= volunteer.name
+                .each-volunteer-info= volunteer.country
+                .each-volunteer-info= volunteer.city
+                .each-volunteer-info= volunteer.birth_date
+                .each-volunteer-info= volunteer.phone_number
+                .each-volunteer-info= volunteer.email

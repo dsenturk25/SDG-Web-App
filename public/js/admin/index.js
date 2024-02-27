@@ -8,6 +8,7 @@ window.onload = () => {
   const learnButton = document.getElementById("learn");
   const todaysPicksButton = document.getElementById("todays-picks");
   const activistsButton = document.getElementById("activists");
+  const skillsButton = document.getElementById("skills");
 
   waitlistButton.addEventListener("click", (event) => {
     window.location.href = "/admin/waitlist";
@@ -39,5 +40,9 @@ window.onload = () => {
 
   activistsButton.addEventListener("click", (event) => {
     window.location.href = "/admin/activists";
+  })
+
+  skillsButton.addEventListener("click", (event) => {
+    window.location.href = "/admin/skills";
   })
 }

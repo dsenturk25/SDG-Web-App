@@ -18,6 +18,7 @@ const comparisonsPostController = require("../controllers/Organization/create/co
 const graphGetController = require("../controllers/Organization/index/graph/get");
 const volunteersRemovePostController = require("../controllers/Organization/remove/volunteer/post");
 const profilePostController = require("../controllers/Organization/index/profile/post");
+const volunteerPoolGetController = require("../controllers/Organization/index/volunteerPool/get");
 
 const isAccountCompleted = require("../middleware/isOrganizationCompleted");
 const completeAccountPostController = require("../controllers/Organization/authOrganization/complete/post");
@@ -149,6 +150,14 @@ router.post(
   isOrganizationOnWaitlist,
   isAccountCompleted,
   markAbsentPostController
+)
+
+router.get(
+  "/volunteer-pool",
+  isOrganizationAuth,
+  isOrganizationOnWaitlist,
+  isAccountCompleted,
+  volunteerPoolGetController
 )
 
 module.exports = router;

@@ -147,7 +147,11 @@ const volunteerSchema = mongoose.Schema({
       type: mongoose.Types.ObjectId,
       default: []
     }
-  ]
+  ],
+
+  skills: [{
+    type: mongoose.Types.ObjectId
+  }]
 })
 
 volunteerSchema.statics.addSessionManual = function (body, callback) {

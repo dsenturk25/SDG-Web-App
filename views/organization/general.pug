@@ -55,14 +55,15 @@ block content
       input.create-form-each-text-input(type="time" id="start_time_of_each_session" name="start_time_of_each_session" required)
       label.each-create-form-label Which UN's Sustainable Developement Goals do you think this project promotes?
       .create-form-sdg-goals-check-content
-        each sdg in sdgs
-          .each-sdg-content 
-            input(type="checkbox" id="sdg_goals" name="sdg_goals" value=`${sdg._id}`)
-            if sdg.imageName && sdg.imageName.length > 0
-              img(src=`${sdg.image}`).sdg-image
-            else 
-              img(src=`data:image/png;base64,${sdg.image}`).sdg-image
-            .each-sdg-info(style="display:none") #{sdg.name}
+        if sdgs && sdgs.length > 0
+          each sdg in sdgs
+            .each-sdg-content 
+              input(type="checkbox" id="sdg_goals" name="sdg_goals" value=`${sdg._id}`)
+              if sdg.imageName && sdg.imageName.length > 0
+                img(src=`${sdg.image}`).sdg-image
+              else 
+                img(src=`data:image/png;base64,${sdg.image}`).sdg-image
+              .each-sdg-info(style="display:none") #{sdg.name}
       input.submit-button(type="submit" value="Save")
   .all-inner-wrapper
     .header-main-wrapper 
@@ -86,6 +87,9 @@ block content
         a(href="/organization/graph").each-side-bar-icon#graph
           i(class="fa-solid fa-chart-pie")
           .each-side-bar-icon-label Data science tool
+        a(href="/organization/volunteer-pool").each-side-bar-icon#volunteer-pool
+          i(class="fa-solid fa-users")
+          .each-side-bar-icon-label Volunteer Pool
         a(href="/organization/volunteers").each-side-bar-icon#volunteers
           i(class="fa-solid fa-users")
           .each-side-bar-icon-label Your volunteers
