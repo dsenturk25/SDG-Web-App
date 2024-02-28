@@ -6,9 +6,9 @@
 }
 
 .organization-main-wrapper {
-  width: 70%;
+  width: 90%;
   height: fit-content;
-  padding: 5% 15%;
+  padding: 5% 5%;
   position: relative;
 }
 
@@ -111,27 +111,28 @@ h1 {
 }
 
 .organization-base-info-wrapper {
-  width: 95%;
+  width: 90%;
   display: flex;
-  margin-bottom: 10px;
-  padding-left: 5%;
+  margin-bottom: 50px;
+  align-items: center;
+  padding: 0 5%;
 }
 
 .organization-photo {
-  width: 200px;
-  height: 190px;
+  height: 180px;
+  width: 190px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100%;
+  border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: -20px;
 }
 
 .organization-photo img {
   height: 100%;
-  transform: scale(1.25)
+  transform: scale(1.1)
 }
 
 .organization-textual-info-content {
@@ -153,10 +154,11 @@ h1 {
 .organization-more-info-button {
   width: 200px;
   padding: 10px 2%;
+  font-size: 14px;
   color: #fff;
-  background-color: rgb(65, 65, 255);
+  background-color: rgb(70, 70, 150);
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 5px;
   transition: 0.3s ease all;
   display: flex;
   align-items: center;
@@ -164,7 +166,7 @@ h1 {
 }
 
 .organization-more-info-button:hover {
-  background-color: rgb(52, 52, 255);
+  background-color: rgb(100, 100, 150);
 }
 
 .organization-sdg-info-wrapper {
@@ -181,9 +183,11 @@ h1 {
 }
 
 .each-sdg-goal-content {
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   margin-right: 20px;
+  border: 2px solid rgb(70, 70, 150);
+  border-radius: 2px;
 }
 
 .each-sdg-goal-content img {
@@ -233,14 +237,13 @@ h1 {
 }
 
 .organization-absolute-background {
-  width: 80%;
-  height: 100px;
+  width: 90%;
+  height: 75px;
   position: absolute;
   background-color: #ccc;
   z-index: -5;
   top: 30px;
-  left: 10%;
-  right: 20px;
+  left: 5%;
 }
 
 .organization-textual-info-content-bottom {
@@ -263,4 +266,26 @@ h1 {
   align-items: center;
   padding: 5px 0;
   font-weight: 700;
+}
+
+.organization-sdg-completes-info-box {
+  width: 170px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: rgb(200, 200, 115);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease all;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: -10px;
+}
+
+.organization-sdg-completes-info-box-circle-content {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(70, 70, 150);
+  border-radius: 100%;
 }

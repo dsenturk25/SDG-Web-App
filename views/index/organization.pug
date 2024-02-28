@@ -41,6 +41,9 @@ block content
                     i(class="fa-solid fa-heart" style="color:red")
                   else
                     i(class="fa-regular fa-heart")
+              div(class="organization-sdg-completes-info-box")
+                .organization-sdg-completes-info-box-circle-content
+                .organization-sdg-completes-info-box-info-content completes #{organization.completed_sdgs.length} SDGs
               a(class="organization-more-info-button" href=`${organization.website}` target="_blank") Explore more...
           hr(style="width:100%; margin: 15px 0;")
           .organization-sdg-info-wrapper 
