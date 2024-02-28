@@ -4,12 +4,12 @@ window.onload = () => {
   let volunteerId = "";
   if (document.getElementById("volunteer-id") != undefined && document.getElementById("volunteer-id") != null) {
     volunteerId = document.getElementById("volunteer-id").innerHTML;
+    addSkillsWrapper();
   }
 
   searchBar();
   handleHeaderMenu();
   profileHover();
-  addSkillsWrapper();
 
   let clickCnt = -1;
 

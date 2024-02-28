@@ -606,13 +606,10 @@ hr {
   background-color: #ccc;
 }
 
-.hover-wrapper-menu-wrapper a, div {
+.hover-wrapper-menu-wrapper a {
   font-size: 14px;
   color: #252525af;
   cursor: pointer;
-}
-
-.hover-wrapper-menu-wrapper a {
   margin-bottom: 10px;
 }
 
@@ -707,4 +704,11 @@ hr {
   cursor: pointer;
   width: fit-content;
   margin-top: 20px;
+}
+
+.each-hover-wrapper-link {
+  font-size: 14px;
+  color: #252525af;
+  cursor: pointer;
+  margin-bottom: 10px;
 }

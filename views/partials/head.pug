@@ -32,7 +32,7 @@ html(lang='tr')
         #add-new-skills-wrapper.add-new-skills-wrapper
           .skills-header-wrapper
             .skills-header-wrapper-text-content
-              h2.skills-wrapper-title Tell us what you can do?
+              h2.skills-wrapper-title(style="color:rgb(75, 75, 75)") Tell us what you can do?
               div.skills-wrapper-description Add new skills to your portfolio and help organizations find you!
             .skills-wrapper-close-button#skills-wrapper-close-button ×
           hr
@@ -44,7 +44,7 @@ html(lang='tr')
                   input.each-skill-checkbox(type="checkbox", name="skills", value=`${skill._id}`, id=`${skill.name}`, checked=volunteer.skills.includes(skill._id))
           hr
           .skills-wrapper-expand-button#skills-wrapper-expand-button More skills
-          h2 Can't see your skill on the list?
+          h2(style="color:rgb(75, 75, 75)") Can't see your skill on the list?
           div Please contact us to offer for new skills to be add to the list!
           a(href="mailto:hkavas25@my.uaa.k12.tr").contact-us-button-skill Contact Us!
           hr
