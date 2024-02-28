@@ -9,6 +9,7 @@ window.onload = () => {
   searchBar();
   handleHeaderMenu();
   profileHover();
+  addSkillsWrapper();
 
   let clickCnt = -1;
 

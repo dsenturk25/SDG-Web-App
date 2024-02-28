@@ -3,6 +3,7 @@ const Projects = require("../../../models/Projects/project");
 const Volunteer = require("../../../models/Volunteer/volunteer");
 const Sdgs = require("../../../models/SDGs/sdg");
 const Organization = require("../../../models/Organizations/organization");
+const Skill = require("../../../models/Skills/skill");
 const async = require("async");
 const { retrieveImageFromImageName } = require("../../../utils/uploadImageToAws");
 
@@ -55,21 +56,42 @@ module.exports = (req, res) => {
 
                 Volunteer.findById(req.session.volunteer._id, (err, volunteer) => {
                   if (err) return res.redirect("/login");
-                  return res.render("index/index", {
-                    page: "index/index",
-                    title: "Volunteer",
-                    includes: {
-                      external: {
-                        css: ["page", "general"],
-                        js: ["page", "functions"]
-                      }
-                    },
-                    projects,
-                    volunteer,
-                    sdgs,
-                    organizations
+
+                  const volunteerSkillsArray = [];
+
+                  Skill.find({}, (err, skills) => {
+                    if (err) return res.redirect("/login");
+
+                    async.timesSeries(skills.length, (i, next) => {
+                      const skill = skills[i];
+
+
+                      volunteerSkillsArray.push({
+                        _id: skill._id,
+                        name: skill.name
+                      });
+                      next();
+                    }, (err) => {
+                      if (err) return res.redirect("/login");
+
+                      return res.render("index/index", {
+                        page: "index/index",
+                        title: "Volunteer",
+                        includes: {
+                          external: {
+                            css: ["page", "general"],
+                            js: ["page", "functions"]
+                          }
+                        },
+                        projects,
+                        volunteer,
+                        sdgs,
+                        organizations,
+                        volunteerSkillsArray
+                      })
+                    })
                   })
-                })      
+                })
               } else {
                 return res.render("index/index", {
                   page: "index/index",

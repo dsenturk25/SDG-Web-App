@@ -24,9 +24,30 @@ html(lang='tr')
           script(src=`/js/functions/searchBar.js`) 
           script(src=`/js/functions/hamburgerMenu.js`) 
           script(src=`/js/functions/profileHover.js`) 
+          script(src=`/js/functions/addSkills.js`) 
         script(src="https://kit.fontawesome.com/e47420f551.js" crossorigin="anonymous")
   body
     if volunteer && volunteer.name && volunteer.surname
+      if volunteerSkillsArray && volunteerSkillsArray.length > 0
+        #add-new-skills-wrapper.add-new-skills-wrapper
+          .skills-header-wrapper
+            .skills-header-wrapper-text-content
+              h2.skills-wrapper-title Tell us what you can do?
+              div.skills-wrapper-description Add new skills to your portfolio and help organizations find you!
+            .skills-wrapper-close-button#skills-wrapper-close-button ×
+          hr
+          div.skills-wrapper-add-new-skills-wrapper#skills-wrapper-add-new-skills-wrapper
+            each skill in volunteerSkillsArray
+              .skill-group-each-skill-wrapper
+                label.each-skill-label(for="skills") #{skill.name}
+                  div(style="display: none;") #{skill._id}
+                  input.each-skill-checkbox(type="checkbox", name="skills", value=`${skill._id}`, id=`${skill.name}`, checked=volunteer.skills.includes(skill._id))
+          hr
+          .skills-wrapper-expand-button#skills-wrapper-expand-button More skills
+          h2 Can't see your skill on the list?
+          div Please contact us to offer for new skills to be add to the list!
+          a(href="mailto:hkavas25@my.uaa.k12.tr").contact-us-button-skill Contact Us!
+          hr
       #profile-hover-wrapper.profile-hover-wrapper
         .hover-wrapper-credentials-wrapper
           a(href="/volunteer/edit-profile").volunteer-auth-block #{volunteer.name[0]}#{volunteer.surname[0]}
@@ -38,6 +59,7 @@ html(lang='tr')
           a(href="/calendar").each-hover-wrapper-link Stream
           a(href="/leaderboard").each-hover-wrapper-link My Portfolio
           a(href="/leaderboard").each-hover-wrapper-link My Certificates
+          .each-hover-wrapper-link#add-new-skills-button Add new skills
         hr
         .hover-wrapper-menu-wrapper 
           a(href="/help").each-hover-wrapper-link Help

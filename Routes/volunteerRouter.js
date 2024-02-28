@@ -28,6 +28,8 @@ const organizationGetController = require("../controllers/Volunteer/organization
 
 const organizationLikePostController = require("../controllers/Volunteer/organization/like/post");
 
+const skillEditPostController = require("../controllers/Volunteer/skills/post.js");
+
 router.use(express.json());
 
 router.get(
@@ -130,5 +132,13 @@ router.post(
   isAccountCompleted,
   organizationLikePostController
 );
+
+router.post(
+  "/skill/edit",
+  isVolunteerAuth,
+  isVolunteerEmailConfirmed,
+  isAccountCompleted,
+  skillEditPostController
+)
 
 module.exports = router;
