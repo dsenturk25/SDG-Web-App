@@ -296,10 +296,10 @@ volunteerSchema.statics.joinProject = function (body, callback) {
         // Example: Create an array containing 5 "false" values
         const attendance = createFalseArray(project.sessions.length);
 
-        volunteer.attendance = {
+        volunteer.attendance.push({
           project_id: project._id,
           sessions: attendance
-        }
+        });
 
         async.timesSeries(project.sessions.length, (i, next) => {
           const session = project.sessions[i];
