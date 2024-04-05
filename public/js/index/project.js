@@ -8,6 +8,7 @@ function clone(listToAppend, node) {
 window.onload = () => {
 
   searchBar();
+  signConditions();
 
   const volunteerId = document.getElementById("volunteer-id").innerHTML;
   const projectId = document.getElementById("project-id").innerHTML;

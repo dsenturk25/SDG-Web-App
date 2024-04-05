@@ -79,4 +79,12 @@ block content
                     input(type="checkbox", name="skills", value=`${skill._id}`, id=`${skill.name}`)
         hr
         .skills-expand-button#expand-skills-button More skills
+        .sign-conditions-wrapper
+          input.sign-conditions-check-box(id="isConditionsSigned" type="checkbox" name="isConditionsSigned" required)
+          .sign-conditions-helper-text
+            .sign-conditions-helper-text-content
+              span #{"I have read and agree to the "}
+              a(href="https://docs.google.com/document/d/13sp6ojIWQaZ4ZGGWrsG13Xu_yEBTrHYbIEHPii280lk/edit" target="_blank" style="text-decoration: underline") Terms & Conditions
+              span #{" agreement"}
+        hr
         button.profile-edit-button(type="submit") Proceed

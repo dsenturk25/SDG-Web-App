@@ -5,6 +5,8 @@ window.onload = () => {
   const likeStatus = document.getElementById("like-status")
   const volunteerId = document.getElementById("volunteer-id");
 
+  signConditions();
+
   document.addEventListener("click", (event) => {
     if (event.target == organizationLikeButton || event.target == organizationLikeButton.children[0]) {
 

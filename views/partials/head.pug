@@ -25,9 +25,20 @@ html(lang='tr')
           script(src=`/js/functions/hamburgerMenu.js`) 
           script(src=`/js/functions/profileHover.js`) 
           script(src=`/js/functions/addSkills.js`) 
+          script(src=`/js/functions/signConditions.js`)
         script(src="https://kit.fontawesome.com/e47420f551.js" crossorigin="anonymous")
   body
     if volunteer && volunteer.name && volunteer.surname
+      if volunteer.isConditionsSigned == false 
+        .sign-conditions-wrapper
+          .sign-conditions-content
+            .sign-conditions-texts-wrapper 
+              h1 Terms and conditions
+              .sign-conditions-texts-wrapper-description
+                p To continue reaching the wonderful project SustainabilityHub provides, please confirm that you have read and agree our Terms & Conditions agreement.
+              .sign-conditions-accept-wrapper 
+                a(href="https://docs.google.com/document/d/13sp6ojIWQaZ4ZGGWrsG13Xu_yEBTrHYbIEHPii280lk/edit" target="_blank" style="text-decoration: underline") Terms & Conditions 
+                .sign-conditions-sign-button#sign-conditions-sign-button I have read and accept to the terms and conditions
       if volunteerSkillsArray && volunteerSkillsArray.length > 0
         #add-new-skills-wrapper.add-new-skills-wrapper
           .skills-header-wrapper

@@ -2,6 +2,7 @@
 window.onload = () => {
 
   searchBar();
+  signConditions();
 
   const editGoalButton = document.getElementById("edit-goal-button");
 

@@ -7,6 +7,7 @@ window.onload = () => {
     addSkillsWrapper();
   }
 
+  signConditions();
   searchBar();
   handleHeaderMenu();
   profileHover();

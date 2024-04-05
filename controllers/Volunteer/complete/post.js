@@ -5,6 +5,12 @@ const async = require("async");
 
 module.exports = (req, res) => {
 
+  if (req.body.isConditionsSigned == "on") {
+    req.body.isConditionsSigned = true;
+  } else {
+    req.body.isConditionsSigned = false;
+  }
+  
   const args = {
     name: req.body.name,
     surname: req.body.surname,
@@ -17,8 +23,10 @@ module.exports = (req, res) => {
     gender: req.body.gender,
     phone_number: req.body.phone_number,
     skills: req.body.skills,
-    isAccountCompleted: true
-  }
+    isAccountCompleted: true,
+    isConditionsSigned: req.body.isConditionsSigned
+  };
+  
   Volunteer.findByIdAndUpdate(req.session.volunteer._id, args, (err, updatedVolunteer) => {
     if (err) return res.status(400).send("bad_request");
 

@@ -166,3 +166,21 @@ body {
   margin-top: -20px;
   cursor: pointer;
 }
+
+.sign-conditions-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.sign-conditions-helper-text {
+  font-size: 16px;
+  display: flex;
+}
+
+.sign-conditions-check-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+

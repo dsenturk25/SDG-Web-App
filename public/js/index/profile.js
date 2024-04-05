@@ -2,6 +2,7 @@
 window.onload = () => {
 
   searchBar();
+  signConditions();
 
   const logoutButton = document.getElementById("logout")
   logoutButton.addEventListener("click", () => {
